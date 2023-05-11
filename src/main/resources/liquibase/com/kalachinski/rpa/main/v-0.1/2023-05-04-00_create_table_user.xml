@@ -5,16 +5,16 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
-    <changeSet id="2023-05-04-02" author="Yury Kalachinski">
+    <changeSet id="2023-05-04-00" author="Yury Kalachinski">
         <comment>Creating table: user</comment>
 
         <createTable tableName="user" schemaName="main">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_id"/>
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_user"/>
             </column>
             <column name="email" type="varchar(255)">
                 <constraints nullable="false"
-                            uniqueConstraintName="UC_email"
+                            uniqueConstraintName="UCN_user_email"
                             unique="true"/>
             </column>
             <column name="first_name" type="varchar(255)"/>
@@ -22,7 +22,9 @@
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="role_id" type="bigint"/>
         </createTable>
 
     </changeSet>
+
 </databaseChangeLog>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="2023-05-10-01" author="Yury Kalachinski">
+        <comment>Insert data into table: role</comment>
+
+        <insert tableName="role" schemaName="main">
+            <column name="code" value="ROLE_ADMIN"/>
+            <column name="title" value="Role admin"/>
+        </insert>
+        <insert tableName="role" schemaName="main">
+            <column name="code" value="ROLE_VIEWER"/>
+            <column name="title" value="Role viewer"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
