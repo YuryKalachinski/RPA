@@ -1,5 +1,7 @@
 package com.kalachinski.rpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -25,14 +27,19 @@ public class Role extends BaseEntity {
     @Column(name = "code")
     private String code;
 
-    @OneToMany(mappedBy = "role")
-    private Set<User> user = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    private Set<User> users = new HashSet<>();
 
-    public Role(Long id, String title, String code) {
-        super(id);
-        this.title = title;
-        this.code = code;
-    }
+//    public void addUser(User user) {
+//        users.add(user);
+//        user.setRole(this);
+//    }
+//
+//    public void removeUser(User user) {
+//        users.remove(user);
+//        user.setRole(null);
+//    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,13 +27,16 @@ public class Substation extends BaseEntity {
     private String description;
 
     @OneToMany(mappedBy = "substation", cascade = CascadeType.ALL)
-    @Column(name = "bay")
     private Set<Bay> bays;
 
-    public Substation(Long id, String name, String description) {
-        super(id);
-        this.name = name;
-        this.description = description;
+    public void addBay(Bay bay) {
+        bays.add(bay);
+        bay.setSubstation(this);
+    }
+
+    public void removeBay(Bay bay) {
+        bays.remove(bay);
+        bay.setSubstation(null);
     }
 
     @Override

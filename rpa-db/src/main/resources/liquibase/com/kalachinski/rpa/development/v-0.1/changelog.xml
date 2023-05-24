@@ -12,5 +12,14 @@
     <include file="2023-05-11-00_encode_password.xml" relativeToChangelogFile="true"/>
     <include file="2023-05-11-01_create_table_substation.xml" relativeToChangelogFile="true"/>
     <include file="2023-05-11-02_create_table_bay.xml" relativeToChangelogFile="true"/>
+    <include file="2023-05-15-00_create_table_trip.xml" relativeToChangelogFile="true"/>
+    <include file="2023-05-15-02_create_table_type_fault.xml" relativeToChangelogFile="true"/>
+    <include file="2023-05-15-04_create_table_complex.xml" relativeToChangelogFile="true"/>
+    <include file="2023-05-15-06_create_table_protection.xml" relativeToChangelogFile="true"/>
+    <include file="2023-05-15-08_create_table_protection_trip.xml" relativeToChangelogFile="true"/>
+    <include file="2023-05-16-00_create_table_parameter_setting.xml" relativeToChangelogFile="true"/>
+
+
+    <include file="insert_default_values_01.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

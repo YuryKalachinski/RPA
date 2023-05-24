@@ -13,14 +13,14 @@
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_bay"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="false"
-                             uniqueConstraintName="UCN_bay_name"
-                             unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(255)"/>
             <column name="cell_number" type="smallint"/>
             <column name="substation_id" type="bigint"/>
-            <column name="voltage_level" type="varchar(255)"/>
+            <column name="voltage_level" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

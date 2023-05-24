@@ -18,6 +18,7 @@
             <artifactId>rpa-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

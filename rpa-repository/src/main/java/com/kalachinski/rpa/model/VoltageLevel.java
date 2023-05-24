@@ -1,20 +1,20 @@
 package com.kalachinski.rpa.model;
 
 public enum VoltageLevel {
-    THREE_HUNDRED_THIRTY(330),
-    TWO_HUNDRED_TWENTY(220),
-    ONE_HUNDRED_TEN(110),
-    THIRTY_FIVE(35),
-    TEN(10),
-    SIX(6);
+    THREE_HUNDRED_THIRTY("330 kV"),
+    TWO_HUNDRED_TWENTY("220 kV"),
+    ONE_HUNDRED_TEN("110 kV"),
+    THIRTY_FIVE("35 kV"),
+    TEN("10 kV"),
+    SIX("6 kV");
 
-    private final int value;
+    private final String value;
 
-    VoltageLevel(int value) {
+    VoltageLevel(String value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 }

@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -34,15 +35,6 @@ public class User extends BaseEntity{
     @JoinColumn(name = "role_id")
     private Role role;
 
-    public User(Long id, String firstName, String lastName, String password, String email, Role role) {
-        super(id);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,13 +43,11 @@ public class User extends BaseEntity{
         User user = (User) o;
         return Objects.equals(firstName, user.firstName)
                 && Objects.equals(lastName, user.lastName)
-                && Objects.equals(password, user.password)
-                && Objects.equals(email, user.email)
-                && Objects.equals(role, user.role);
+                && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, password, email, role);
+        return Objects.hash(super.hashCode(), firstName, lastName, email);
     }
 }

@@ -1,18 +1,21 @@
 package com.kalachinski.rpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "Bay")
 @Table(name = "bay", schema = "main")
@@ -30,7 +33,8 @@ public class Bay extends BaseEntity {
     @Column(name = "cell_number")
     private Byte cellNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "substation_id")
     private Substation substation;
 
@@ -38,12 +42,32 @@ public class Bay extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private VoltageLevel voltageLevel;
 
-    public Bay(Long id, String name, String description, Substation substation) {
-        super(id);
-        this.name = name;
-        this.description = description;
-        this.substation = substation;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "bay", cascade = CascadeType.ALL)
+    private Set<Trip> trips;
+
+    @OneToMany(mappedBy = "bay", cascade = CascadeType.ALL)
+    private Set<Complex> complexes;
+
+//    public void addTrip(Trip trip) {
+//        trips.add(trip);
+//        trip.setBay(this);
+//    }
+
+//    public void removeTrip(Trip trip) {
+//        trips.remove(trip);
+//        trip.setBay(null);
+//    }
+
+//    public void addComplex(Complex complex) {
+//        complexes.add(complex);
+//        complex.setBay(this);
+//    }
+
+//    public void removeComplex(Complex complex) {
+//        complexes.remove(complex);
+//        complex.setBay(null);
+//    }
 
     @Override
     public boolean equals(Object o) {

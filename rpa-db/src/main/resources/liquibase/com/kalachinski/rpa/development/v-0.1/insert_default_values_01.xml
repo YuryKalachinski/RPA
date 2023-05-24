@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="insert_default_values_01" author="Yury Kalachinski">
+        <comment>Insert default values for development</comment>
+
+        <insert tableName="substation" schemaName="main">
+            <column name="name" value="Mogilev Vostochnaya 330"/>
+        </insert>
+
+        <insert tableName="bay" schemaName="main">
+            <column name="name" value="MTEC-2 #1"/>
+            <column name="substation_id" value="1"/>
+            <column name="voltage_level" value="ONE_HUNDRED_TEN"/>
+        </insert>
+
+        <insert tableName="bay" schemaName="main">
+            <column name="name" value="MTEC-2 #2"/>
+            <column name="substation_id" value="1"/>
+            <column name="voltage_level" value="ONE_HUNDRED_TEN"/>
+        </insert>
+
+        <insert tableName="complex" schemaName="main">
+            <column name="name" value="1 complex"/>
+            <column name="description" value="RED 670"/>
+            <column name="bay_id" value="1"/>
+        </insert>
+
+        <insert tableName="protection" schemaName="main">
+            <column name="complex_id" value="1"/>
+            <column name="name" value="differential protection"/>
+            <column name="action" value="TRIP"/>
+        </insert>
+
+        <insert tableName="parameter_setting" schemaName="main">
+            <column name="protection_id" value="1"/>
+            <column name="key" value="t"/>
+            <column name="value" value="0"/>
+        </insert>
+
+        <insert tableName="parameter_setting" schemaName="main">
+            <column name="protection_id" value="1"/>
+            <column name="key" value="I-Diff"/>
+            <column name="value" value="800"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

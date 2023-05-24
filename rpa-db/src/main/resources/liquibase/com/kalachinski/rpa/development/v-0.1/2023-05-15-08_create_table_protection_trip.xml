@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="2023-05-15-08" author="Yury Kalachinski">
+        <comment>Creating table: protection_trip</comment>
+
+        <createTable tableName="protection_trip" schemaName="main">
+            <column name="protection_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trip_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2023-05-15-09" author="Yury Kalachinski">
+        <comment>Add foreign key: protection_id</comment>
+
+        <addForeignKeyConstraint baseTableSchemaName="main"
+                                 baseTableName="protection_trip"
+                                 baseColumnNames="protection_id"
+                                 constraintName="fk_protection_trip_protection"
+                                 referencedTableSchemaName="main"
+                                 referencedTableName="protection"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2023-05-15-10" author="Yury Kalachinski">
+        <comment>Add foreign key: trip_id</comment>
+
+        <addForeignKeyConstraint baseTableSchemaName="main"
+                                 baseTableName="protection_trip"
+                                 baseColumnNames="trip_id"
+                                 constraintName="fk_protection_trip_trip"
+                                 referencedTableSchemaName="main"
+                                 referencedTableName="trip"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
