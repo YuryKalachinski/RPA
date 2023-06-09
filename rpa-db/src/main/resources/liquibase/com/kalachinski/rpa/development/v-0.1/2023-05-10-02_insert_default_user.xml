@@ -12,6 +12,7 @@
             <column name="email" value="admin@mail.com"/>
             <column name="password" value="123"/>
             <column name="role_id" value="1"/>
+            <column name="status" value="ACTIVE"/>
         </insert>
     </changeSet>
 

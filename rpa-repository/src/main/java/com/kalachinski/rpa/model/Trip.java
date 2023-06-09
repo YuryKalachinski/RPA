@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -42,14 +43,14 @@ public class Trip extends BaseEntity {
             joinColumns = @JoinColumn(name = "trip_id"))
     @Enumerated(value = EnumType.STRING)
     @Column(name = "typeFault")
-    private Set<TypeFault> typesFault;
+    private Set<TypeFault> typesFault = new HashSet<>();
 
     @ManyToOne()
     @JoinColumn(name = "bay_id")
     private Bay bay;
 
     @ManyToMany(mappedBy = "trips")
-    private Set<Protection> protections;
+    private Set<Protection> protections = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

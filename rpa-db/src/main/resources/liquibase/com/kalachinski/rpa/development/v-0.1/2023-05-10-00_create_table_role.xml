@@ -13,7 +13,7 @@
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_role"/>
             </column>
             <column name="title" type="varchar(255)"/>
-            <column name="code" type="varchar(255)"/>
+            <column name="code" type="varchar(64)"/>
         </createTable>
     </changeSet>
 

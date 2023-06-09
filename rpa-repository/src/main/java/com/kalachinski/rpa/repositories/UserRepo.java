@@ -6,10 +6,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepo extends CrudRepository<User, Long> {
 
-    @Query("SELECT u, r FROM User u INNER JOIN Role r ON r.id = u.role")
+    @Query("SELECT u FROM User u JOIN FETCH u.role r JOIN FETCH r.permissions")
     List<User> findAll();
+
+    @Query("SELECT u FROM User u JOIN FETCH u.role r JOIN FETCH r.permissions WHERE u.email= :email")
+    Optional<User> findByEmail(String email);
 }

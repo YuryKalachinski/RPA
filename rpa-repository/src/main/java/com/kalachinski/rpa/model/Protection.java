@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Protection")
@@ -44,7 +45,7 @@ public class Protection extends BaseEntity {
     @JoinTable(name = "protection_trip", schema = "main",
             joinColumns = @JoinColumn(name = "protection_id"),
             inverseJoinColumns = @JoinColumn(name = "trip_id"))
-    private Set<Trip> trips;
+    private Set<Trip> trips = new HashSet<>();
 
     @OneToMany(mappedBy = "protection", cascade = CascadeType.ALL)
     private Set<ParameterSetting> parameterSettings;

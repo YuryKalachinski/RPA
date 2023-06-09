@@ -4,8 +4,12 @@ import com.kalachinski.rpa.dto.SubstationDto;
 import com.kalachinski.rpa.service.SubstationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,11 +35,13 @@ public class SubstationController {
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Get all available substations",
+//            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = SubstationDto.class))),
             responses = {
-                    @ApiResponse(description = "Success",
-                            responseCode = "200"),
-                    @ApiResponse(description = "Unauthorized/Invalid token",
-                            responseCode = "403")
+                    @ApiResponse(description = "Success", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = SubstationDto.class),
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE)),
+                    @ApiResponse(description = "Unauthorized/Invalid token", responseCode = "403", content = @Content),
+                    @ApiResponse(description = "Substations not found", responseCode = "404", content = @Content)
             })
     public ResponseEntity<List<SubstationDto>> getAllSubstation() {
         return ResponseEntity.of(Optional.of(Collections.emptyList()));

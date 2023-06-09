@@ -12,13 +12,13 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_bay"/>
             </column>
-            <column name="name" type="varchar(255)">
+            <column name="name" type="varchar(64)">
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(255)"/>
             <column name="cell_number" type="smallint"/>
             <column name="substation_id" type="bigint"/>
-            <column name="voltage_level" type="varchar(255)">
+            <column name="voltage_level" type="varchar(64)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

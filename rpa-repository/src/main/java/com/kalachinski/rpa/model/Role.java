@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,6 +23,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@Accessors(chain = true)
 public class Role extends BaseEntity {
 
     @Column(name = "title")
@@ -31,15 +36,12 @@ public class Role extends BaseEntity {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<>();
 
-//    public void addUser(User user) {
-//        users.add(user);
-//        user.setRole(this);
-//    }
-//
-//    public void removeUser(User user) {
-//        users.remove(user);
-//        user.setRole(null);
-//    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "role_permission", schema = "main",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permission> permissions = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

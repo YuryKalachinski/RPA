@@ -12,7 +12,7 @@
             <column name="trip_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="type_fault" type="varchar(255)"/>
+            <column name="type_fault" type="varchar(64)"/>
         </createTable>
     </changeSet>
 
