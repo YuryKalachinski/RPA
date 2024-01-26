@@ -1,6 +1,5 @@
 package com.kalachinski.rpa.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +31,6 @@ public class User extends BaseEntity{
     @Column(name = "lastName")
     private String lastName;
 
-    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -48,9 +46,9 @@ public class User extends BaseEntity{
     private Status status;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Token> tokens;
 
+    //todo unused method
     public void addToken(Token token) {
         tokens.add(token);
         token.setUser(this);

@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class TokenResponseDto {
+public class TokenDto {
 
     @JsonProperty(value = "access_token")
     private String accessToken;

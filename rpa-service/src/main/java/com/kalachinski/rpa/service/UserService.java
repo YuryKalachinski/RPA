@@ -2,13 +2,12 @@ package com.kalachinski.rpa.service;
 
 import com.kalachinski.rpa.model.User;
 
-import java.util.List;
-
 public interface UserService {
 
     User register(User user);
 
-    List<User> findAllUsers();
+    //todo unused method
+//    List<UserDto> findAll();
 
     User findByEmail(String email);
 

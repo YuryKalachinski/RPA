@@ -7,10 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PermissionDto {
+public class ParameterSettingDto {
 
-    //todo unused fields
     private Long id;
-    private String code;
-    private String title;
+    private String key;
+    private String value;
+    private String comment;
+    private String description;
 }

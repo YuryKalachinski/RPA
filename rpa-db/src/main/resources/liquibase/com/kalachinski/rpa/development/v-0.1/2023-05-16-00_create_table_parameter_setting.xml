@@ -19,6 +19,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(255)"/>
+            <column name="comment" type="varchar(255)"/>
             <column name="protection_id" type="bigint"/>
         </createTable>
     </changeSet>

@@ -11,7 +11,9 @@ import java.util.Set;
 @NoArgsConstructor
 public class RoleDto {
 
-    private String title;
-    private String code;
-    private Set<PermissionDto> permissions;
+    //todo unused fields
+//    private Long id;
+//    private String title;
+//    private String code;
+//    private Set<PermissionDto> permissions;
 }

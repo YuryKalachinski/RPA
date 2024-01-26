@@ -9,7 +9,8 @@
         <comment>Insert default values for development</comment>
 
         <insert tableName="substation" schemaName="main">
-            <column name="name" value="Mogilev Vostochnaya 330"/>
+            <column name="name" value="Могилев 330 Восточная"/>
+            <column name="branch" value="МЭС"/>
         </insert>
 
         <insert tableName="bay" schemaName="main">
@@ -30,6 +31,24 @@
             <column name="bay_id" value="1"/>
         </insert>
 
+        <insert tableName="complex" schemaName="main">
+            <column name="name" value="2 complex"/>
+            <column name="description" value="RED 670"/>
+            <column name="bay_id" value="1"/>
+        </insert>
+
+        <insert tableName="complex" schemaName="main">
+            <column name="name" value="1 complex"/>
+            <column name="description" value="RED 670"/>
+            <column name="bay_id" value="2"/>
+        </insert>
+
+        <insert tableName="complex" schemaName="main">
+            <column name="name" value="2 complex"/>
+            <column name="description" value="RED 670"/>
+            <column name="bay_id" value="2"/>
+        </insert>
+
         <insert tableName="protection" schemaName="main">
             <column name="complex_id" value="1"/>
             <column name="name" value="differential protection"/>
@@ -46,6 +65,24 @@
             <column name="protection_id" value="1"/>
             <column name="key" value="I-Diff"/>
             <column name="value" value="800"/>
+        </insert>
+
+        <insert tableName="user" schemaName="main">
+            <column name="first_name" value="admin_test"/>
+            <column name="last_name" value="admin_test"/>
+            <column name="email" value="1"/>
+            <column name="password" value="$2a$10$4HMz1OOr1GIZXBvi/GCf/OHilDKMFMAbrkqFIW/SBM8LVysYRQWOa"/>
+            <column name="role_id" value="1"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <insert tableName="user" schemaName="main">
+            <column name="first_name" value="viewer_test"/>
+            <column name="last_name" value="viewer_test"/>
+            <column name="email" value="2"/>
+            <column name="password" value="$2a$10$/VpXLqJqzMn87CRGkFZOzOTfiNfDGVe.KXNTycJuYoCvJjUgjF2Xu"/>
+            <column name="role_id" value="2"/>
+            <column name="status" value="ACTIVE"/>
         </insert>
 
     </changeSet>

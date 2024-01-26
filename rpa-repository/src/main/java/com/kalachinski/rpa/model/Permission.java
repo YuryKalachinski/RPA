@@ -1,6 +1,5 @@
 package com.kalachinski.rpa.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -28,6 +27,5 @@ public class Permission extends BaseEntity {
     private String title;
 
     @ManyToMany(mappedBy = "permissions")
-    @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 }

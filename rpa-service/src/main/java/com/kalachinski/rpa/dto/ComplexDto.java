@@ -4,13 +4,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class PermissionDto {
+public class ComplexDto {
 
-    //todo unused fields
     private Long id;
-    private String code;
-    private String title;
+    private String name;
+    private String description;
+    private Set<ProtectionDto> protections;
 }

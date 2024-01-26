@@ -1,6 +1,5 @@
 package com.kalachinski.rpa.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,7 +35,6 @@ public class Protection extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private ProtectionAction protectionAction;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "complex_id")
     private Complex complex;

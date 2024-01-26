@@ -2,7 +2,7 @@ package com.kalachinski.rpa.service.impl;
 
 import com.kalachinski.rpa.dto.AuthenticationRequestDto;
 import com.kalachinski.rpa.dto.RegisterRequestDto;
-import com.kalachinski.rpa.dto.TokenResponseDto;
+import com.kalachinski.rpa.dto.TokenDto;
 import com.kalachinski.rpa.model.Token;
 import com.kalachinski.rpa.model.TokenType;
 import com.kalachinski.rpa.model.User;
@@ -41,7 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public TokenResponseDto register(RegisterRequestDto requestDto) {
+    public TokenDto register(RegisterRequestDto requestDto) {
         log.info("Register new user.");
         User user = new User()
                 .setFirstName(requestDto.getFirstname())
@@ -50,17 +50,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .setPassword(requestDto.getPassword());
         User savedUser = userService.register(user);
         log.info("User: {} has been registered successfully", user.getEmail());
-        String jwtToken = provider.generateToken(savedUser);
+        String jwtToken = provider.generateAccessToken(savedUser);
         String refreshJwtToken = provider.generateRefreshToken(savedUser);
         log.info("Save access and refresh tokens for user {} to database", savedUser.getEmail());
         saveTokensToDb(savedUser, jwtToken, refreshJwtToken);
-        return new TokenResponseDto()
+        return new TokenDto()
                 .setAccessToken(jwtToken)
                 .setRefreshToken(refreshJwtToken);
     }
 
     @Override
-    public TokenResponseDto authenticate(AuthenticationRequestDto requestDto) {
+    public TokenDto authenticate(AuthenticationRequestDto requestDto) {
         log.info("Try to authenticate user with email: {}", requestDto.getEmail());
 
         //todo handle AuthenticationException
@@ -72,27 +72,27 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         );
         User user = ((JwtUserDetails) authenticate.getPrincipal()).getUser();
         log.info("User has been authenticated successfully");
-        String jwtToken = provider.generateToken(user);
+        String jwtToken = provider.generateAccessToken(user);
         String refreshJwtToken = provider.generateRefreshToken(user);
         log.info("Revoke all valid tokens for user {}", user.getEmail());
         revokeAllValidTokensForUser(user);
         log.info("Save access and refresh tokens for user {} to database", user.getEmail());
         saveTokensToDb(user, jwtToken, refreshJwtToken);
-        return new TokenResponseDto()
+        return new TokenDto()
                 .setAccessToken(jwtToken)
                 .setRefreshToken(refreshJwtToken);
     }
 
     @Override
-    public TokenResponseDto refreshToken() {
+    public TokenDto refreshToken() {
         User user = getUserFromContext();
-        String newAccessToken = provider.generateToken(user);
+        String newAccessToken = provider.generateAccessToken(user);
         String newRefreshToken = provider.generateRefreshToken(user);
         log.info("Revoke all valid tokens for user {}", user.getEmail());
         revokeAllValidTokensForUser(user);
         log.info("Save access and refresh tokens for user {} to database", user.getEmail());
         saveTokensToDb(user, newAccessToken, newRefreshToken);
-        return new TokenResponseDto(newAccessToken, newRefreshToken);
+        return new TokenDto(newAccessToken, newRefreshToken);
     }
 
     private static User getUserFromContext() {

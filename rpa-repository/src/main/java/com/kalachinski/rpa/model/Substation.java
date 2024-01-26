@@ -1,6 +1,5 @@
 package com.kalachinski.rpa.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +8,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@Accessors(chain = true)
 public class Substation extends BaseEntity {
 
     @Column(name = "name", nullable = false, unique = true)
@@ -26,18 +28,11 @@ public class Substation extends BaseEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "branch")
+    private String branch;
+
     @OneToMany(mappedBy = "substation", cascade = CascadeType.ALL)
-    private Set<Bay> bays;
-
-    public void addBay(Bay bay) {
-        bays.add(bay);
-        bay.setSubstation(this);
-    }
-
-    public void removeBay(Bay bay) {
-        bays.remove(bay);
-        bay.setSubstation(null);
-    }
+    private Set<Bay> bays = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

@@ -45,7 +45,7 @@ public class JwtProvider {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
-    public String generateToken(User user) {
+    public String generateAccessToken(User user) {
         log.info("Generate access token for user: {}", user.getEmail());
         Map<String, Object> extraClaims = getExtraClaims(user);
         return buildToken(extraClaims, user.getEmail(), jwtExpiration);
@@ -101,11 +101,14 @@ public class JwtProvider {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
     }
 
+    //todo choose role and permissions in token or make @JsonIgnore in permission and role entities
     private Map<String, Object> getExtraClaims(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("First Name", user.getFirstName());
-        claims.put("Last Name", user.getLastName());
-        claims.put("Email", user.getEmail());
+        claims.put("first_name", user.getFirstName());
+        claims.put("last_name", user.getLastName());
+        claims.put("email", user.getEmail());
+//        claims.put("role", user.getRole();
+        claims.put("role", user.getRole().getCode());
         return claims;
     }
 }

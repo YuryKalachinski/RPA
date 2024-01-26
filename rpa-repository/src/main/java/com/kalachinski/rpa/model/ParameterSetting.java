@@ -1,6 +1,5 @@
 package com.kalachinski.rpa.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -23,10 +22,12 @@ public class ParameterSetting extends BaseEntity {
     @Column(name = "value")
     private String value;
 
+    @Column(name = "comment")
+    private String comment;
+
     @Column(name = "description")
     private String description;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "protection_id")
     private Protection protection;

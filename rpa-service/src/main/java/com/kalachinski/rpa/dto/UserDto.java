@@ -10,9 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserDto {
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private RoleDto role;
-    private Status status;
+    //todo unused fields
+//    private Long id;
+//    private String firstName;
+//    private String lastName;
+//    private String email;
+//    private RoleDto role;
+//    private Status status;
 }

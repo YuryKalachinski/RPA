@@ -1,6 +1,8 @@
 server:
   port: ${BACKEND_SERVER_PORT}
 
+
+
 application:
   values:
     authorization-header: authorization
@@ -12,7 +14,8 @@ spring:
     password: ${DATABASE_PASSWORD}
     driver-class-name: ${DATABASE_DRIVER}
   jpa:
-#    generate-ddl: true
+    open-in-view: false
+    #    generate-ddl: true
 #    show-sql: true
 #    hibernate:
 #      ddl-auto: create

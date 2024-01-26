@@ -6,11 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Accessors(chain = true)
 public class RegisterRequestDto {
 
     private String firstname;

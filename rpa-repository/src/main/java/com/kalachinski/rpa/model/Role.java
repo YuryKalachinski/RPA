@@ -1,6 +1,5 @@
 package com.kalachinski.rpa.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +31,6 @@ public class Role extends BaseEntity {
     @Column(name = "code")
     private String code;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<>();
 

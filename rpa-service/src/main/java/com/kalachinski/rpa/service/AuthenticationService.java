@@ -2,15 +2,13 @@ package com.kalachinski.rpa.service;
 
 import com.kalachinski.rpa.dto.AuthenticationRequestDto;
 import com.kalachinski.rpa.dto.RegisterRequestDto;
-import com.kalachinski.rpa.dto.TokenResponseDto;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.kalachinski.rpa.dto.TokenDto;
 
 public interface AuthenticationService {
 
-    TokenResponseDto register(RegisterRequestDto requestDto);
+    TokenDto register(RegisterRequestDto requestDto);
 
-    TokenResponseDto authenticate(AuthenticationRequestDto requestDto);
+    TokenDto authenticate(AuthenticationRequestDto requestDto);
 
-    TokenResponseDto refreshToken();
+    TokenDto refreshToken();
 }
