@@ -4,6 +4,7 @@ export const LOGIN_ROUTE = '/login';
 export const MAIN_ROUTE = '/main';
 export const SUBSTATIONS_ROUTE = '/substations';
 export const SUBSTATION_ROUTE = '/substations/:id';
+export const BAY_ROUTE = '/substations/:sub_id/bay/:bay_id';
 export const NEW_SUBSTATION_ROUTE = '/substations/new';
 export const ACCESS_TOKEN = 'access_token';
 export const REFRESH_TOKEN = 'refresh_token';
