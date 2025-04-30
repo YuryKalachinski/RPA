@@ -7,4 +7,5 @@
 
     <include file="liquibase/com/kalachinski/rpa/development/schema_init.xml"/>
     <include file="liquibase/com/kalachinski/rpa/development/v-0.1/changelog.xml"/>
+
 </databaseChangeLog>

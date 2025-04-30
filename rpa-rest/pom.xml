@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
+        <groupId>com.kalachinski.rpa</groupId>
         <artifactId>rpa</artifactId>
-        <groupId>com.kalachinski</groupId>
-        <version>${rpa.version}</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>rpa-rest</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.kalachinski</groupId>
+            <groupId>com.kalachinski.rpa</groupId>
             <artifactId>rpa-service</artifactId>
-            <version>${project.version}</version>
+            <version>0.0.1</version>
         </dependency>
 
     </dependencies>

@@ -9,20 +9,22 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "User")
-@Table(name = "user", schema = "main")
 @Getter
 @Setter
 @Accessors(chain = true)
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user", schema = "main")
+@Entity(name = "User")
 public class User extends BaseEntity{
 
     @Column(name = "firstName")
@@ -31,11 +33,21 @@ public class User extends BaseEntity{
     @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", unique = true)
     private String email;
+
+    @CreationTimestamp
+    @Column(name = "first_login_date")
+    private LocalDateTime firstLoginDate;
+
+    @Column(name = "user_name")
+    private String userName;
+
+    @Column(name = "telegram_user_id", unique = true)
+    private Long telegramUserId;
+
+    @Column(name = "password")
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
@@ -44,6 +56,12 @@ public class User extends BaseEntity{
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Column(name = "is_telegram_user")
+    private Boolean isTelegramUser;
+
+    @Column(name = "is_web_user")
+    private Boolean isWebUser;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Token> tokens;
@@ -54,6 +72,8 @@ public class User extends BaseEntity{
         token.setUser(this);
     }
 
+    //todo redefine equals and hashCode
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,14 +82,30 @@ public class User extends BaseEntity{
         User user = (User) o;
         return Objects.equals(firstName, user.firstName)
                 && Objects.equals(lastName, user.lastName)
-                && Objects.equals(password, user.password)
-                && Objects.equals(email, user.email)
-                && Objects.equals(role, user.role)
-                && status == user.status;
+                && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, password, email, role, status);
+        return Objects.hash(super.hashCode(), firstName, lastName, email);
+    }
+
+    //todo only for testing
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", firstLoginDate=" + firstLoginDate +
+                ", userName='" + userName + '\'' +
+                ", telegramUserId=" + telegramUserId +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", status=" + status +
+                ", isTelegramUser=" + isTelegramUser +
+                ", isWebUser=" + isWebUser +
+                '}';
     }
 }

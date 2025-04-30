@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getSubstationById } from '../http/substationAPI';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import BayItem from '../components/BayItem';
 
 const Substation = () => {
     const { id } = useParams();
     const [sub, setSub] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getSubstation(id);
@@ -33,6 +35,14 @@ const Substation = () => {
                     </div>
                 </div>
             )}
+            <hr />
+            <div
+                onClick={() => {
+                    navigate(-1);
+                }}
+            >
+                Назад
+            </div>
         </div>
     );
 };

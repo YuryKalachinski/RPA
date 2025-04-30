@@ -21,6 +21,8 @@ import java.util.Objects;
 @Accessors(chain = true)
 public abstract class BaseEntity implements Serializable {
 
+    //todo exclude upstairs annotations
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

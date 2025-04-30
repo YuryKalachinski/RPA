@@ -1,4 +1,4 @@
-package com.kalachinski.rpa.configuration.openApi;
+package com.kalachinski.rpa.configuration;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;

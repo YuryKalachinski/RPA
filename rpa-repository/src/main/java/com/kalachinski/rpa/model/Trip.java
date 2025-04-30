@@ -38,9 +38,9 @@ public class Trip extends BaseEntity {
     @ElementCollection
     @CollectionTable(name = "type_fault", schema = "main",
             joinColumns = @JoinColumn(name = "trip_id"))
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "typeFault")
-    private Set<TypeFault> typesFault = new HashSet<>();
+    private Set<FaultType> faultTypes = new HashSet<>();
 
     @ManyToOne()
     @JoinColumn(name = "bay_id")

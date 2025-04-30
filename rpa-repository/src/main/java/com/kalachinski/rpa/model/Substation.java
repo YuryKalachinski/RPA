@@ -3,6 +3,8 @@ package com.kalachinski.rpa.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -29,7 +31,8 @@ public class Substation extends BaseEntity {
     private String description;
 
     @Column(name = "branch")
-    private String branch;
+    @Enumerated(EnumType.STRING)
+    private Branch branch;
 
     @OneToMany(mappedBy = "substation", cascade = CascadeType.ALL)
     private Set<Bay> bays = new HashSet<>();

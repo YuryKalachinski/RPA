@@ -27,6 +27,8 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtProvider {
 
+    //todo resolve deprecated methods
+
     private static final Logger log = LoggerFactory.getLogger(JwtProvider.class);
 
     @Value("${security.jwt.token.secret-key}")
@@ -80,7 +82,7 @@ public class JwtProvider {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
+        return Jwts.parser()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)

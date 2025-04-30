@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="insert_default_user" author="Yury Kalachinski">
+        <comment>Insert default user with email: admin@mail.com, password: 123 </comment>
+
+        <insert tableName="user" schemaName="main">
+            <column name="first_name" value="admin_test"/>
+            <column name="last_name" value="admin_test"/>
+            <column name="email" value="1"/>
+            <column name="password" value="1"/>
+            <column name="role_id" value="1"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="first_login_date" value="2024-11-22 13:15:00"/>
+            <column name="is_web_user" value="true"/>
+            <column name="is_telegram_user" value="false"/>
+        </insert>
+
+        <insert tableName="user" schemaName="main">
+            <column name="first_name" value="viewer_test"/>
+            <column name="last_name" value="viewer_test"/>
+            <column name="email" value="2"/>
+            <column name="password" value="2"/>
+            <column name="role_id" value="2"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="first_login_date" value="2024-11-22 13:15:00"/>
+            <column name="is_web_user" value="true"/>
+            <column name="is_telegram_user" value="false"/>
+        </insert>
+
+        <sql dbms="postgresql" endDelimiter=";" splitStatements="true" stripComments="true">
+            CREATE EXTENSION IF NOT EXISTS pgcrypto;
+            UPDATE main.user SET password = crypt(password, gen_salt('bf', 8));
+        </sql>
+
+<!--        <insert tableName="user" schemaName="main">-->
+<!--            <column name="email" value="admin@mail.com"/>-->
+<!--            <column name="role_id" value="2"/>-->
+<!--            <column name="status" value="ACTIVE"/>-->
+<!--            <column name="first_login_date" value="2024-11-22 13:15:00"/>-->
+<!--            <column name="is_web_user" value="false"/>-->
+<!--            <column name="is_telegram_user" value="true"/>-->
+<!--            <column name="telegram_user_id" value="1336729618"/>-->
+<!--            <column name="user_name" value="user"/>-->
+<!--            <column name="first_name" value="first_name"/>-->
+<!--            <column name="last_name" value="last_name"/>-->
+<!--        </insert>-->
+
+    </changeSet>
+
+</databaseChangeLog>

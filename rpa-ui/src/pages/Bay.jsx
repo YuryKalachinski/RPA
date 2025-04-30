@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getSubstationBySubstationIdAndBayId } from '../http/substationAPI';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Bay = () => {
     const { sub_id, bay_id } = useParams();
     const [sub, setSub] = useState(null);
     const [complexes, setComplexes] = useState([]);
     const [currentComplex, setCurrentComplex] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getSubstation(sub_id, bay_id);
@@ -61,6 +62,14 @@ const Bay = () => {
                     ))}
                 </div>
             )}
+            <hr />
+            <div
+                onClick={() => {
+                    navigate(-1);
+                }}
+            >
+                Назад
+            </div>
         </div>
     );
 };

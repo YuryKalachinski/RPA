@@ -46,8 +46,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User()
                 .setFirstName(requestDto.getFirstname())
                 .setLastName(requestDto.getLastname())
-                .setEmail(requestDto.getEmail())
-                .setPassword(requestDto.getPassword());
+//                .setPassword(requestDto.getPassword())
+                .setEmail(requestDto.getEmail());
         User savedUser = userService.register(user);
         log.info("User: {} has been registered successfully", user.getEmail());
         String jwtToken = provider.generateAccessToken(savedUser);

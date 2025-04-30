@@ -8,7 +8,7 @@ const BayItem = ({ bay }) => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const viewBay = () => {
+    const navigateToBay = () => {
         const path = generatePath(BAY_ROUTE, {
             sub_id: id,
             bay_id: bay.id,
@@ -16,21 +16,19 @@ const BayItem = ({ bay }) => {
         navigate(path);
     };
 
+    const setVisibleBay = () => {
+        setVisible(!visible);
+    };
+
     return (
         <div>
-            <div
-                onClick={() => {
-                    setVisible(!visible);
-                }}
-            >
-                {bay.name}
-            </div>
+            <h3 onClick={setVisibleBay}>{bay.name}</h3>
             {visible && (
                 <div>
                     {bay.complexes.map((el) => (
                         <ComplexItem key={el.id} complex={el} bay_id={bay.id} />
                     ))}
-                    <button onClick={() => viewBay()}>Уставки</button>
+                    <button onClick={navigateToBay}>Уставки</button>
                 </div>
             )}
         </div>

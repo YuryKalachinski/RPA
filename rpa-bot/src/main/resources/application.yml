@@ -1,0 +1,21 @@
+server:
+  port: ${SERVER_PORT}
+  ssl:
+    enabled: false
+
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    queues:
+      answer-message: ${ANSWER_MESSAGE}
+      text-message: ${TEXT_MESSAGE}
+      mail-service-message: ${MAIL_SERVICE_MESSAGE}
+
+telegram:
+  bot:
+    token: ${BOT_TOKEN}
+    name: ${BOT_NAME}
+    uri: https://bf10-76-9-201-202.ngrok-free.app

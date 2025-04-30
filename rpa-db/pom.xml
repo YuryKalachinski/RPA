@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.kalachinski</groupId>
+        <groupId>com.kalachinski.rpa</groupId>
         <artifactId>rpa</artifactId>
-        <version>${rpa.version}</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>rpa-db</artifactId>

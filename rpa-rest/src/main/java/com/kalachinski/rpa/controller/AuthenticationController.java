@@ -19,30 +19,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
-
-    private final AuthenticationService authenticationService;
-
-    @PostMapping("/register")
-    public ResponseEntity<TokenDto> register(
-            @RequestBody RegisterRequestDto requestDto
-    ) {
-        log.info("Register new user with email: {}", requestDto.getEmail());
-        return ResponseEntity.ok(authenticationService.register(requestDto));
-    }
-
-    @PostMapping("/authenticate")
-    public ResponseEntity<TokenDto> authenticate(
-            @RequestBody AuthenticationRequestDto requestDto
-    ) {
-        log.info("Authenticate user with email: {}", requestDto.getEmail());
-        return ResponseEntity.ok(authenticationService.authenticate(requestDto));
-    }
-
-    @PostMapping("/refresh-token")
-    @PreAuthorize("hasAuthority('VIEWER')")
-    public ResponseEntity<TokenDto> refreshToken() {
-        log.info("Get new access and refresh token");
-        return ResponseEntity.ok(authenticationService.refreshToken());
-    }
+//    private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
+//
+//    private final AuthenticationService authenticationService;
+//
+//    @PostMapping("/register")
+//    public ResponseEntity<TokenDto> register(
+//            @RequestBody RegisterRequestDto requestDto
+//    ) {
+//        log.info("Register new user with email: {}", requestDto.getEmail());
+//        return ResponseEntity.ok(authenticationService.register(requestDto));
+//    }
+//
+//    @PostMapping("/authenticate")
+//    public ResponseEntity<TokenDto> authenticate(
+//            @RequestBody AuthenticationRequestDto requestDto
+//    ) {
+//        log.info("Authenticate user with email: {}", requestDto.getEmail());
+//        return ResponseEntity.ok(authenticationService.authenticate(requestDto));
+//    }
+//
+//    @PostMapping("/refresh-token")
+//    @PreAuthorize("hasAuthority('VIEWER')")
+//    public ResponseEntity<TokenDto> refreshToken() {
+//        log.info("Get new access and refresh token");
+//        return ResponseEntity.ok(authenticationService.refreshToken());
+//    }
 }

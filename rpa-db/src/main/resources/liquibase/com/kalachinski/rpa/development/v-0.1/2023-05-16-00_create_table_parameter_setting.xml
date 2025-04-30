@@ -18,6 +18,7 @@
             <column name="value" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="unit" type="varchar(255)"/>
             <column name="description" type="varchar(255)"/>
             <column name="comment" type="varchar(255)"/>
             <column name="protection_id" type="bigint"/>

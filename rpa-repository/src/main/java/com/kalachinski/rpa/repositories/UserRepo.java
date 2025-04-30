@@ -12,10 +12,18 @@ import java.util.Optional;
 @Repository
 public interface UserRepo extends CrudRepository<User, Long> {
 
-    @Query("SELECT u FROM User u LEFT JOIN FETCH u.role r LEFT JOIN FETCH r.permissions")
+    //todo disabled sql-show in properties after all
+
     @Override
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.role r LEFT JOIN FETCH r.permissions")
     List<User> findAll();
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.role r LEFT JOIN FETCH r.permissions WHERE u.email= :email")
     Optional<User> findByEmail(String email);
+
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.role r WHERE u.isTelegramUser=true")
+    List<User> findAllTelegramBotUser();
+
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.role r LEFT JOIN FETCH r.permissions WHERE u.telegramUserId= :id")
+    Optional<User> findByTelegramBotUserId(Long id);
 }

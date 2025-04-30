@@ -29,6 +29,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    //todo resolve deprecated methods
+
     private final JwtAuthFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -55,7 +57,8 @@ public class SecurityConfig {
                 .cors().and()
                 .authorizeHttpRequests()
                 .requestMatchers("/authentication/register",
-                        "/authentication/authenticate")
+                        "/authentication/authenticate",
+                        "/user/activation")
                 .permitAll()
                 .requestMatchers("/actuator/swagger-ui/**",
                         "/actuator/openapi/**")

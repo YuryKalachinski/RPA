@@ -13,19 +13,24 @@
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_user"/>
             </column>
             <column name="email" type="varchar(64)">
-                <constraints nullable="false"
-                            uniqueConstraintName="UCN_user_email"
-                            unique="true"/>
+                <constraints uniqueConstraintName="UCN_user_email"
+                             unique="true"/>
             </column>
             <column name="first_name" type="varchar(64)"/>
             <column name="last_name" type="varchar(64)"/>
-            <column name="password" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="role_id" type="bigint"/>
             <column name="status" type="varchar(32)">
                 <constraints nullable="false"/>
             </column>
+            <column name="first_login_date" type="timestamp"/>
+            <column name="is_web_user" type="boolean"/>
+            <column name="password" type="varchar(255)"/>
+            <column name="is_telegram_user" type="boolean"/>
+            <column name="telegram_user_id" type="bigint">
+                <constraints uniqueConstraintName="UCN_telegram_user_id"
+                             unique="true"/>
+            </column>
+            <column name="user_name" type="varchar(64)"/>
         </createTable>
 
     </changeSet>

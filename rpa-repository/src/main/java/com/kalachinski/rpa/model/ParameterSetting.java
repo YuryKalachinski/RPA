@@ -22,6 +22,9 @@ public class ParameterSetting extends BaseEntity {
     @Column(name = "value")
     private String value;
 
+    @Column(name = "unit")
+    private String unit;
+
     @Column(name = "comment")
     private String comment;
 
