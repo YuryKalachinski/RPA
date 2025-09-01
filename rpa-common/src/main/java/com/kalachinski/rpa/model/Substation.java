@@ -37,6 +37,9 @@ public class Substation extends BaseEntity {
     @OneToMany(mappedBy = "substation", cascade = CascadeType.ALL)
     private Set<Bay> bays = new HashSet<>();
 
+    @OneToMany(mappedBy = "substation", cascade = CascadeType.ALL)
+    private Set<Crap> craps = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

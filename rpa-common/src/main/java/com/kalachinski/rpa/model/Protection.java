@@ -33,7 +33,7 @@ public class Protection extends BaseEntity {
 
     @Column(name = "action")
     @Enumerated(value = EnumType.STRING)
-    private ProtectionAction protectionAction;
+    private ProtAction protAction;
 
     @ManyToOne
     @JoinColumn(name = "complex_id")

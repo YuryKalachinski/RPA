@@ -13,8 +13,8 @@ spring:
     driver-class-name: ${DATABASE_DRIVER}
   jpa:
     open-in-view: false
-#    generate-ddl: true
-    generate-ddl: false
+    generate-ddl: true
+#    generate-ddl: false
     show-sql: true
 #    show-sql: false
     hibernate:
@@ -42,6 +42,8 @@ spring:
       answer-message: ${ANSWER_MESSAGE}
       text-message: ${TEXT_MESSAGE}
       mail-service-message: ${MAIL_SERVICE_MESSAGE}
+      req-list-connections: ${REQ_LIST_CONNECTIONS}
+      resp-list-connections: ${RESP_LIST_CONNECTIONS}
 
 bot:
   token: ${BOT_TOKEN}

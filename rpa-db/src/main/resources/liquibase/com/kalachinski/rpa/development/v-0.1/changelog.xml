@@ -20,8 +20,11 @@
     <include file="2023-05-15-08_create_table_protection_trip.xml" relativeToChangelogFile="true"/>
     <include file="2023-05-16-00_create_table_parameter_setting.xml" relativeToChangelogFile="true"/>
     <include file="2023-06-02-00_create_table_token.xml" relativeToChangelogFile="true"/>
+    <include file="2025-08-21-00_create_table_crap.xml" relativeToChangelogFile="true"/>
+    <include file="2025-08-21-02_create_table_error_connection.xml" relativeToChangelogFile="true"/>
 
     <include file="insert_default_user.xml" relativeToChangelogFile="true"/>
     <include file="insert_default_values.xml" relativeToChangelogFile="true"/>
+    <include file="insert_default_table_event.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

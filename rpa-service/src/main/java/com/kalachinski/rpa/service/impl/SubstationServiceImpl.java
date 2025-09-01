@@ -1,19 +1,8 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.dto.SubstationDto;
-import com.kalachinski.rpa.mapper.SubstationMapper;
 import com.kalachinski.rpa.model.Substation;
-import com.kalachinski.rpa.repositories.SubstationRepo;
-import com.kalachinski.rpa.service.SubstationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

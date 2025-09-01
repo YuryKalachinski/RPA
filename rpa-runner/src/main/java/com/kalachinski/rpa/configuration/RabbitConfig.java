@@ -22,6 +22,12 @@ public class RabbitConfig {
     @Value("${spring.rabbitmq.queues.mail-service-message}")
     private String mailServiceMessageQueue;
 
+    @Value("${spring.rabbitmq.queues.req-list-connections}")
+    private String reqListConnections;
+
+    @Value("${spring.rabbitmq.queues.resp-list-connections}")
+    private String respListConnections;
+
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
@@ -46,4 +52,15 @@ public class RabbitConfig {
     public Queue getMailServiceMessageQueue() {
         return new Queue(mailServiceMessageQueue);
     }
+
+    @Bean
+    public Queue getReqListConnectionsQueue() {
+        return new Queue(reqListConnections);
+    }
+
+    @Bean
+    public Queue getRespListConnectionsQueue() {
+        return new Queue(respListConnections);
+    }
+
 }

@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT}
+
+spring:
+  datasource:
+    url: jdbc:${DATABASE}://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    generate-ddl: false
+#    generate-ddl: false
+    show-sql: false
+#    show-sql: false
+    hibernate:
+      ddl-auto: none
+#      ddl-auto: validate

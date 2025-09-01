@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="2025-08-21-02" author="Yury Kalachinski">
+        <comment>Creating table: error_connection</comment>
+
+        <createTable tableName="error_connection" schemaName="main">
+
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_error_connection"/>
+            </column>
+
+            <column name="crap_id" type="bigint"/>
+
+            <column name="error_desc" type="varchar(512)"/>
+
+            <column name="error_time" type="timestamp"/>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2025-08-21-03" author="Yury Kalachinski">
+        <comment>Add foreign key: substation_id</comment>
+
+        <addForeignKeyConstraint baseTableSchemaName="main"
+                                 baseTableName="error_connection"
+                                 baseColumnNames="crap_id"
+                                 constraintName="fk_crap_error_connection"
+                                 referencedTableSchemaName="main"
+                                 referencedTableName="crap"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
