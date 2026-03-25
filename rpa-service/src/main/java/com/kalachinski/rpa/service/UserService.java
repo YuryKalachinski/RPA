@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.service;
 
+import com.kalachinski.rpa.dto.UserDto;
 import com.kalachinski.rpa.model.User;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public interface UserService {
     //todo unused method
 //    List<UserDto> findAll();
 
+    //todo research User -> UserDto
     User findByEmail(String email);
 
     List<User> findAllTelegramBotUser();
@@ -21,4 +23,6 @@ public interface UserService {
     User save(User user);
 
     void activate(String id, String email);
+
+    UserDto getCurrentUser();
 }

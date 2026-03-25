@@ -51,7 +51,7 @@
 
         <insert tableName="protection" schemaName="main">
             <column name="complex_id" value="1"/>
-            <column name="name" value="differential protection"/>
+            <column name="name" value="ДЗЛ"/>
             <column name="action" value="TRIP"/>
         </insert>
 
@@ -87,7 +87,7 @@
 
         <insert tableName="protection" schemaName="main">
             <column name="complex_id" value="2"/>
-            <column name="name" value="differential protection"/>
+            <column name="name" value="ДЗЛ"/>
             <column name="action" value="TRIP"/>
         </insert>
 

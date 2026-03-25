@@ -61,7 +61,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     private boolean isTokenValid(Token token, String userEmail, HttpServletRequest request) {
-        if (request.getRequestURI().equals("/auth/refresh-token")) {
+        if (request.getRequestURI().equals("/authentication/refresh-token")) {
             return provider.validateToken(token, userEmail, TokenType.REFRESH);
         }
         return provider.validateToken(token, userEmail, TokenType.ACCESS);

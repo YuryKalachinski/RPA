@@ -1,12 +1,16 @@
 package com.kalachinski.rpa.service.impl;
 
+import com.kalachinski.rpa.dto.UserDto;
+import com.kalachinski.rpa.mapper.UserMapper;
 import com.kalachinski.rpa.model.Status;
 import com.kalachinski.rpa.model.User;
 import com.kalachinski.rpa.repositories.UserRepo;
+import com.kalachinski.rpa.security.JwtUserDetails;
 import com.kalachinski.rpa.service.RoleService;
 import com.kalachinski.rpa.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +32,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final RoleService roleService;
     private final BCryptPasswordEncoder passwordEncoder;
-//    private final UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     public User register(User user) {
@@ -76,6 +80,16 @@ public class UserServiceImpl implements UserService {
 
             userRepo.save(user);
         }
+    }
+
+    @Override
+    public UserDto getCurrentUser() {
+        var user = getUserFromContext();
+        return userMapper.userToDto(user);
+    }
+
+    private static User getUserFromContext() {
+        return ((JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
     }
 
     private String decode(String string) {

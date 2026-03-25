@@ -46,6 +46,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User()
                 .setFirstName(requestDto.getFirstname())
                 .setLastName(requestDto.getLastname())
+
+//              todo research setPassword() !!!
+
 //                .setPassword(requestDto.getPassword())
                 .setEmail(requestDto.getEmail());
         User savedUser = userService.register(user);
@@ -64,6 +67,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         log.info("Try to authenticate user with email: {}", requestDto.getEmail());
 
         //todo handle AuthenticationException
+
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         requestDto.getEmail(),

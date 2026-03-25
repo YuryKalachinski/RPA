@@ -1,20 +1,17 @@
-import React, { useState } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import AppRouter from './components/AppRouter'
-import Navbar from './components/ui/navbar/Navbar'
-import { AuthContext } from './context'
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./routers/appRouter";
+import Navbar from "./components/navbar/navbar";
+import AuthProvider from "./context/authProvider";
 
 function App() {
-  const [host, setHost] = useState(null)
-
-  return (
-    <AuthContext.Provider value={{ host, setHost }}>
-      <BrowserRouter>
-        <Navbar />
-        <AppRouter />
-      </BrowserRouter>
-    </AuthContext.Provider>
-  )
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Navbar />
+                <AppRouter />
+            </BrowserRouter>
+        </AuthProvider>
+    );
 }
 
-export default App
+export default App;

@@ -12,8 +12,8 @@ import java.util.Set;
 public class RoleDto {
 
     //todo unused fields
-//    private Long id;
-//    private String title;
-//    private String code;
+    private Long id;
+    private String title;
+    private String code;
 //    private Set<PermissionDto> permissions;
 }

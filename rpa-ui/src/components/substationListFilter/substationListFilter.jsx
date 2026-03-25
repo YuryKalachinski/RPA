@@ -1,8 +1,8 @@
-import React from 'react';
+import { FilterContainer } from "./styled";
 
-const SubstationsFilter = ({ filter, setFilter }) => {
+const SubstationListFilter = ({ filter, setFilter }) => {
     return (
-        <div>
+        <FilterContainer>
             <input
                 placeholder="Поиск..."
                 value={filter.query}
@@ -10,8 +10,8 @@ const SubstationsFilter = ({ filter, setFilter }) => {
                     setFilter({ ...filter, query: e.target.value })
                 }
             />
-        </div>
+        </FilterContainer>
     );
 };
 
-export default SubstationsFilter;
+export default SubstationListFilter;

@@ -50,12 +50,20 @@ public class JwtProvider {
     public String generateAccessToken(User user) {
         log.info("Generate access token for user: {}", user.getEmail());
         Map<String, Object> extraClaims = getExtraClaims(user);
+
+        //todo
+//        return buildToken(extraClaims, user.getUserName(), jwtExpiration);
+
         return buildToken(extraClaims, user.getEmail(), jwtExpiration);
     }
 
     public String generateRefreshToken(User user) {
         log.info("Generate refresh token for user: {}", user.getEmail());
         Map<String, Object> extraClaims = getExtraClaims(user);
+
+        //todo
+//        return buildToken(extraClaims, user.getUserName(), refreshJwtExpiration);
+
         return buildToken(extraClaims, user.getEmail(), refreshJwtExpiration);
     }
 
@@ -108,8 +116,7 @@ public class JwtProvider {
         Map<String, Object> claims = new HashMap<>();
         claims.put("first_name", user.getFirstName());
         claims.put("last_name", user.getLastName());
-        claims.put("email", user.getEmail());
-//        claims.put("role", user.getRole();
+//        claims.put("email", user.getEmail());    // is present as userName in JWT
         claims.put("role", user.getRole().getCode());
         return claims;
     }

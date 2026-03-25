@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../context';
+import { useAuth } from "../context/authProvider";
 
 const Main = () => {
-    const { host } = useContext(AuthContext);
+    const { currentUser } = useAuth();
 
     return (
         <div>
             <div>Main page</div>
-            <div>{host.firstName} entered the system!!!</div>
+            <div>{currentUser.firstName} entered the system!!!</div>
         </div>
     );
 };

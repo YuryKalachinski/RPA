@@ -32,8 +32,7 @@ public class JwtUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
-//        return user.getPassword();
+        return user.getPassword();
     }
 
     @Override
