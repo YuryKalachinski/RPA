@@ -39,7 +39,7 @@ const ProtectionItem = ({ prot }) => {
                                 </thead>
                                 <tbody>
                                     {prot.parameterSettings.map((setting) => (
-                                        <tr>
+                                        <tr key={setting.id}>
                                             <td>{setting.key}</td>
                                             <td>{setting.value}</td>
                                         </tr>

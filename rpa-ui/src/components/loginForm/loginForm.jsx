@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authProvider";
-import TextField from "../textField/textField";
 import { MAIN_ROUTE } from "../../utils/constants";
 import {
     LoginContainer,
@@ -12,6 +11,7 @@ import {
 } from "./styled";
 import emailLogo from "./images/email.svg";
 import passwordLogo from "./images/password.svg";
+import TextField from "../form/textField/textField";
 
 const LoginForm = ({ toggleFormType }) => {
     const { logIn } = useAuth();

@@ -17,6 +17,7 @@ export const NewSubstatioWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid var(--color-bg);
     border-radius: 20px;
     margin: 24px 0;
     width: 100%;
@@ -31,7 +32,6 @@ export const NewSubstationHeader = styled.div`
         background-color: var(--color-primary);
         border-radius: 10px;
         width: 100%;
-        margin-bottom: 12px;
         padding: 10px 25px;
         color: var(--color-text);
         font-size: 20px;
@@ -42,5 +42,42 @@ export const NewSubstationHeader = styled.div`
 `;
 
 export const NewSubstationBody = styled.div`
-    padding: 0 48px;
+    padding: 0 48px 24px 48px;
+
+    & button {
+        background-color: var(--color-primary);
+        color: var(--color-text);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-size: 18px;
+        line-height: 120%;
+        text-align: center;
+        width: 100%;
+        cursor: pointer;
+    }
+`;
+
+export const NewSubstationButtons = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+
+    & button {
+        background-color: var(--color-primary);
+        color: var(--color-text);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-size: 18px;
+        line-height: 120%;
+        text-align: center;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    & .closeButton {
+        background-color: var(--color-stroke);
+    }
 `;

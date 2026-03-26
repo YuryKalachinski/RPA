@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.dto;
 
+import com.kalachinski.rpa.model.Branch;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class SubstationDto {
     private String description;
 
     @Schema(description = "Branch of the substation")
-    private String branch;
+    private Branch branch;
 
     @Schema(description = "Bays of the substation")
     private Set<BayDto> bays;

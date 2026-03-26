@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import localStorageServive from "../utils/localStorageService";
 import userApi from "../http/userAPI";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_ROUTE } from "../utils/constants";
 
 const AuthContext = createContext();
 
@@ -10,6 +12,7 @@ export const useAuth = () => {
 
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
+    const navigate = useNavigate();
 
     const getUserData = async () => {
         try {
@@ -31,6 +34,12 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const logOut = () => {
+        setCurrentUser(null);
+        localStorageServive.logOut();
+        navigate(LOGIN_ROUTE, { replace: true });
+    };
+
     useEffect(() => {
         if (localStorageServive.getAccessToken()) {
             getUserData();
@@ -38,9 +47,7 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider
-            value={{ currentUser, setCurrentUser, getUserData, logIn }}
-        >
+        <AuthContext.Provider value={{ currentUser, logIn, logOut }}>
             {children}
         </AuthContext.Provider>
     );

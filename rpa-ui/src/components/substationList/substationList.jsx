@@ -1,6 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import SubstationListFilter from "../substationListFilter/substationListFilter";
-import { getAllSubstations } from "../../http/substationAPI";
 import {
     SubstationListContainer,
     SubstationListHeader,
@@ -11,25 +10,14 @@ import { useNavigate, generatePath } from "react-router-dom";
 import { SUBSTATION_ROUTE } from "../../utils/constants";
 import NewSubstation from "../modal/newSubstation/newSubstation";
 import plus from "./images/plus.svg";
+import { useSubList } from "../../context/subListProvider";
 
 const SubstationList = () => {
-    const [subs, setSubs] = useState([]);
-    const [visibleNewSub, setVisibleNewSub] = useState(false);
+    const { subs } = useSubList();
+    const [isNewSubOpen, setNewSubOpen] = useState(false);
     // const [filter, setFilter] = useState({ sort: '', query: '' });
     const [filter, setFilter] = useState({ query: "" });
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const getSubstations = async () => {
-            try {
-                const response = await getAllSubstations();
-                setSubs(response.data);
-            } catch (e) {
-                alert(e.response.data.message);
-            }
-        };
-        getSubstations();
-    }, []);
 
     const searchedSub = useMemo(() => {
         return subs.filter((s) =>
@@ -45,31 +33,36 @@ const SubstationList = () => {
     };
 
     return (
-        <SubstationListContainer>
-            <SubstationListWrapper>
-                <SubstationListHeader>
-                    <h3>Список подстанций:</h3>
-                </SubstationListHeader>
-                <SubstationListFilter filter={filter} setFilter={setFilter} />
-                <SubstationListItem>
-                    <button onClick={() => setVisibleNewSub(true)}>
-                        <p>Добавить новую подстанцию</p>
-                        <img src={plus} alt="Expland group" />
-                    </button>
-                </SubstationListItem>
-                {searchedSub.map((sub) => (
-                    <SubstationListItem key={sub.id}>
-                        <button onClick={() => navigateToSubstation(sub)}>
-                            {sub.name}
+        <>
+            <SubstationListContainer>
+                <SubstationListWrapper>
+                    <SubstationListHeader>
+                        <h3>Список подстанций:</h3>
+                    </SubstationListHeader>
+                    <SubstationListFilter
+                        filter={filter}
+                        setFilter={setFilter}
+                    />
+                    <SubstationListItem>
+                        <button onClick={() => setNewSubOpen(true)}>
+                            <p>Добавить новую подстанцию</p>
+                            <img src={plus} alt="Expland group" />
                         </button>
                     </SubstationListItem>
-                ))}
-            </SubstationListWrapper>
+                    {searchedSub.map((sub) => (
+                        <SubstationListItem key={sub.id}>
+                            <button onClick={() => navigateToSubstation(sub)}>
+                                {sub.name}
+                            </button>
+                        </SubstationListItem>
+                    ))}
+                </SubstationListWrapper>
+            </SubstationListContainer>
             <NewSubstation
-                isOpen={visibleNewSub}
-                onClose={() => setVisibleNewSub(false)}
+                isOpen={isNewSubOpen}
+                onClose={() => setNewSubOpen(false)}
             />
-        </SubstationListContainer>
+        </>
     );
 };
 

@@ -5,9 +5,7 @@ import {
     USERS_ROUTE,
     MAIN_ROUTE,
     SUBSTATIONS_ROUTE,
-    LOGIN_ROUTE,
 } from "../../utils/constants";
-import localStorageServive from "../../utils/localStorageService";
 import {
     NavbarContainer,
     NavbarWrapper,
@@ -19,14 +17,8 @@ import rzaLogo from "./images/logo.svg";
 import userIcon from "./images/user.svg";
 
 const Navbar = () => {
-    const { currentUser, setCurrentUser } = useAuth();
+    const { currentUser, logOut } = useAuth();
     const navigate = useNavigate();
-
-    const logout = () => {
-        setCurrentUser(null);
-        localStorageServive.logOut();
-        navigate(LOGIN_ROUTE, { replace: true });
-    };
 
     return (
         <NavbarContainer>
@@ -54,7 +46,7 @@ const Navbar = () => {
                     <NavbarUser>
                         <img src={userIcon} alt="User icon" />
                         <p>{currentUser.firstName}</p>
-                        <button onClick={logout}>Выйти</button>
+                        <button onClick={logOut}>Выйти</button>
                     </NavbarUser>
                 </NavbarWrapper>
             )}

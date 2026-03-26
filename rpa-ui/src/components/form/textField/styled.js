@@ -9,7 +9,6 @@ export const TextFieldStyle = styled.div`
         position: absolute;
         top: 12px;
         left: 40px;
-        font-weight: 400;
         font-size: 12px;
         line-height: 120%;
     }
@@ -17,7 +16,6 @@ export const TextFieldStyle = styled.div`
     & input {
         background-color: var(--color-bg-light);
         color: var(--color-text);
-        font-weight: 400;
         font-size: 16px;
         line-height: 120%;
         font-family: sans-serif;
@@ -30,18 +28,6 @@ export const TextFieldStyle = styled.div`
     & input::placeholder {
         color: var(--color-stroke);
         font-size: 16px;
-    }
-
-    & button {
-        background-color: var(--color-primary);
-        color: var(--color-text);
-        border: none;
-        border-radius: 10px;
-        padding: 12px 24px;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 120%;
-        text-align: center;
     }
 
     & .img_label {

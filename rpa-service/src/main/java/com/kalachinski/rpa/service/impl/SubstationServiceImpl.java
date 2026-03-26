@@ -2,6 +2,7 @@ package com.kalachinski.rpa.service.impl;
 
 import com.kalachinski.rpa.dto.SubstationDto;
 import com.kalachinski.rpa.mapper.SubstationMapper;
+import com.kalachinski.rpa.model.Branch;
 import com.kalachinski.rpa.model.Substation;
 import com.kalachinski.rpa.repositories.SubstationRepo;
 import com.kalachinski.rpa.service.SubstationService;
@@ -50,5 +51,20 @@ public class SubstationServiceImpl implements SubstationService {
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                         String.format("Unable to find resource with requested Substation id=%d and Bay id=%d",
                                 substationId, bayId))));
+    }
+
+    @Override
+    @Transactional
+    public SubstationDto addNewSubstation(SubstationDto substationDto) {
+        return substationMapper.toDtoWithoutBays(substationRepo.save(new Substation()
+                .setName(substationDto.getName())
+//                .setBranch(Branch.fromField(substationDto.getBranch()))
+                .setBranch(substationDto.getBranch()))
+                .setDescription(substationDto.getDescription()));
+    }
+
+    @Override
+    public List<Branch> getAllBranches() {
+        return List.of(Branch.values());
     }
 }
