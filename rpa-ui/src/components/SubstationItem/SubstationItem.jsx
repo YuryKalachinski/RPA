@@ -7,33 +7,17 @@ import {
     BayList,
     BayListItem,
 } from "./styled";
-import { useEffect, useState } from "react";
-import { getSubstationById } from "../../http/substationAPI";
-import { useParams, useNavigate, generatePath } from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
 import { BAY_ROUTE } from "../../utils/constants";
+import { useSub } from "../../context/subProvider";
 
 const SubstationItem = () => {
-    const { id } = useParams();
-    const [sub, setSub] = useState(null);
-
+    const { sub } = useSub();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        getSubstation(id);
-    }, [id]);
-
-    const getSubstation = async (subId) => {
-        try {
-            const response = await getSubstationById(subId);
-            setSub(response.data);
-        } catch (e) {
-            alert(e.response.data.message);
-        }
-    };
 
     const navigateToBay = (bay) => {
         const path = generatePath(BAY_ROUTE, {
-            sub_id: id,
+            sub_id: sub.id,
             bay_id: bay.id,
         });
         navigate(path);

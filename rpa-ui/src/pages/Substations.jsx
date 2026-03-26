@@ -1,7 +1,12 @@
 import SubstationList from "../components/substationList/substationList";
+import SubListProvider from "../context/subListProvider";
 
 const Substations = () => {
-    return <SubstationList />;
+    return (
+        <SubListProvider>
+            <SubstationList />
+        </SubListProvider>
+    );
 };
 
 export default Substations;
