@@ -64,6 +64,18 @@ export const BayListItem = styled.div`
         font-weight: 400;
         text-align: center;
         cursor: pointer;
+        position: relative;
+    }
+
+    & img {
+        width: 24px;
+        position: absolute;
+        top: 0%;
+        left: 10px;
+    }
+
+    & p {
+        padding-left: 30px;
     }
 `;
 
