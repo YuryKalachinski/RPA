@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.controller;
 
+import com.kalachinski.rpa.dto.BayDto;
 import com.kalachinski.rpa.dto.SubstationDto;
 import com.kalachinski.rpa.model.Branch;
 import com.kalachinski.rpa.service.SubstationService;
@@ -79,10 +80,10 @@ public class SubstationController {
     @PreAuthorize("hasAuthority('VIEWER')")
     public ResponseEntity<SubstationDto> getBayBySubstationIdAndBayId(
             @Parameter(description = "Substation id", example = "1")
-            @PathVariable("substationId") Long substationId,
+            @PathVariable("subId") Long subId,
             @Parameter(description = "Bay id", example = "1")
             @PathVariable("bayId") Long bayId) {
-        return ResponseEntity.ok().body(substationService.getBayBySubstationIdAndBayId(substationId, bayId));
+        return ResponseEntity.ok().body(substationService.getBayBySubstationIdAndBayId(subId, bayId));
     }
 
     @PostMapping("/")
@@ -97,5 +98,15 @@ public class SubstationController {
     @PreAuthorize("hasAuthority('VIEWER')")
     public ResponseEntity<List<Branch>> getAllBranch() {
         return ResponseEntity.ok().body(substationService.getAllBranches());
+    }
+
+    @PostMapping("/{subId}/bay/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<SubstationDto> addBay(
+            @Parameter(description = "Substation id", example = "1")
+            @PathVariable("subId") Long subId,
+            @RequestBody BayDto bayDto
+    ) {
+        return ResponseEntity.ok().body(substationService.addNewBay(subId, bayDto));
     }
 }

@@ -1,7 +1,9 @@
 package com.kalachinski.rpa.service.impl;
 
+import com.kalachinski.rpa.dto.BayDto;
 import com.kalachinski.rpa.dto.SubstationDto;
 import com.kalachinski.rpa.mapper.SubstationMapper;
+import com.kalachinski.rpa.model.Bay;
 import com.kalachinski.rpa.model.Branch;
 import com.kalachinski.rpa.model.Substation;
 import com.kalachinski.rpa.repositories.SubstationRepo;
@@ -42,15 +44,15 @@ public class SubstationServiceImpl implements SubstationService {
 
     @Override
     @Transactional
-    public SubstationDto getBayBySubstationIdAndBayId(Long substationId, Long bayId) {
+    public SubstationDto getBayBySubstationIdAndBayId(Long subId, Long bayId) {
 
         //todo handle ResponseStatusException
 
         return substationMapper.substationBySubstationIdAndBayIdToDto(substationRepo
-                .getBayBySubstationIdAndBayId(substationId, bayId)
+                .getBayBySubstationIdAndBayId(subId, bayId)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                         String.format("Unable to find resource with requested Substation id=%d and Bay id=%d",
-                                substationId, bayId))));
+                                subId, bayId))));
     }
 
     @Override
@@ -66,5 +68,22 @@ public class SubstationServiceImpl implements SubstationService {
     @Override
     public List<Branch> getAllBranches() {
         return List.of(Branch.values());
+    }
+
+    @Override
+    @Transactional
+    public SubstationDto addNewBay(Long id, BayDto bayDto) {
+        Substation current = substationRepo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
+                        String.format("Unable to find resource with requested id=%d", id)));
+        current.getBays().add(new Bay()
+                .setName(bayDto.getName())
+                .setDescription(bayDto.getDescription())
+                .setCellNumber(bayDto.getCellNumber())
+                .setSubstation(current)
+                .setVoltageLevel(bayDto.getVoltageLevel())
+        );
+
+        return substationMapper.substationByIdToDto(substationRepo.save(current));
     }
 }

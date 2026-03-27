@@ -1,23 +1,26 @@
 import { useState } from "react";
 import {
-    NewSubstationContainer,
-    NewSubstationHeader,
-    NewSubstatioWrapper,
-    NewSubstationBody,
-    NewSubstationButtons,
+    NewBayContainer,
+    NewBayHeader,
+    NewBayWrapper,
+    NewBayBody,
+    NewBayButtons,
 } from "./styled";
-import { useSubList } from "../../../context/subListProvider";
 import TextField from "../../form/textField/textField";
-import SelectField from "../../form/selectField/selectField";
-import TextAreaField from "../../form/textAreaField/textAreaField";
+import { useSub } from "../../../context/subProvider";
 
-const NewSubstation = ({ isOpen, onClose }) => {
-    const current = { name: "", branch: "", description: "" };
-    const [newSub, setNewSub] = useState(current);
-    const { addNewSub, branches } = useSubList();
+const NewBay = ({ isOpen, onClose }) => {
+    const current = {
+        name: "",
+        description: "",
+        voltageLevel: "ONE_HUNDRED_TEN",
+        cellNumber: "",
+    };
+    const [newBay, setNewBay] = useState(current);
+    const { addNewBay } = useSub();
 
     const handleChange = ({ target }) => {
-        setNewSub((prevState) => ({
+        setNewBay((prevState) => ({
             ...prevState,
             [target.name]: target.value,
         }));
@@ -25,34 +28,35 @@ const NewSubstation = ({ isOpen, onClose }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        addNewSub(newSub);
-        setNewSub(current);
+        addNewBay(newBay);
+        setNewBay(current);
         onClose();
     };
 
     const closeForm = async (event) => {
         event.preventDefault();
-        setNewSub(current);
+        setNewBay(current);
         onClose();
     };
 
     return (
         <>
             {isOpen && (
-                <NewSubstationContainer>
-                    <NewSubstatioWrapper>
-                        <NewSubstationHeader>
-                            <h3> Добавить новую подстанцию</h3>
-                        </NewSubstationHeader>
-                        <NewSubstationBody>
+                <NewBayContainer>
+                    <NewBayWrapper>
+                        <NewBayHeader>
+                            <h3> Добавить новое присоединение</h3>
+                        </NewBayHeader>
+                        <NewBayBody>
                             <form onSubmit={handleSubmit}>
                                 <TextField
-                                    label="Имя подстанции"
+                                    label="Название присоединения"
                                     name="name"
-                                    value={newSub.name}
+                                    value={newBay.name}
                                     onChange={handleChange}
                                 />
-                                <SelectField
+
+                                {/* <SelectField
                                     optionsArray={branches}
                                     defaultOption="Выберете филиал"
                                     label="Филиал"
@@ -65,8 +69,8 @@ const NewSubstation = ({ isOpen, onClose }) => {
                                     name="description"
                                     value={newSub.description}
                                     onChange={handleChange}
-                                />
-                                <NewSubstationButtons>
+                                /> */}
+                                <NewBayButtons>
                                     <button
                                         className="closeButton"
                                         onClick={closeForm}
@@ -74,14 +78,14 @@ const NewSubstation = ({ isOpen, onClose }) => {
                                         Закрыть
                                     </button>
                                     <button>Добавить</button>
-                                </NewSubstationButtons>
+                                </NewBayButtons>
                             </form>
-                        </NewSubstationBody>
-                    </NewSubstatioWrapper>
-                </NewSubstationContainer>
+                        </NewBayBody>
+                    </NewBayWrapper>
+                </NewBayContainer>
             )}
         </>
     );
 };
 
-export default NewSubstation;
+export default NewBay;

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getSubstationById } from "../http/substationAPI";
+import { addBay, getSubstationById } from "../http/substationAPI";
 import { useParams } from "react-router-dom";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 
@@ -28,8 +28,17 @@ const SubProvider = ({ children }) => {
         }
     };
 
+    const addNewBay = async (bay) => {
+        try {
+            const response = await addBay(id, bay);
+            setSub(response.data);
+        } catch (e) {
+            alert(e.response.data.message);
+        }
+    };
+
     return (
-        <SubContext.Provider value={{ sub }}>
+        <SubContext.Provider value={{ sub, addNewBay }}>
             {!isLoading ? children : <LoadingAnimation />}
         </SubContext.Provider>
     );

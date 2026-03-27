@@ -46,7 +46,7 @@ const SubstationList = () => {
                     <SubstationListItem>
                         <button onClick={() => setNewSubOpen(true)}>
                             <p>Добавить новую подстанцию</p>
-                            <img src={plus} alt="Expland group" />
+                            <img src={plus} alt="add new substation" />
                         </button>
                     </SubstationListItem>
                     {searchedSub.map((sub) => (

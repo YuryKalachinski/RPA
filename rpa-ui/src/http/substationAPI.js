@@ -12,7 +12,11 @@ export const getSubstationBySubstationIdAndBayId = async (sub_id, bay_id) => {
     return await http.get(`/substation/${sub_id}/bay/${bay_id}`);
 };
 
-export const addNewSubstation = async (substation) => {
+export const addBay = async (sub_id, bay) => {
+    return await http.post(`/substation/${sub_id}/bay/`, bay);
+};
+
+export const addSubstation = async (substation) => {
     return await http.post("/substation/", substation);
 };
 

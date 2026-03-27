@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
     getAllSubstations,
-    addNewSubstation,
+    addSubstation,
     getAllBranches,
 } from "../http/substationAPI";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
@@ -32,9 +32,9 @@ const SubListProvider = ({ children }) => {
         }
     };
 
-    const addSubstation = async (substation) => {
+    const addNewSub = async (substation) => {
         try {
-            const response = await addNewSubstation(substation);
+            const response = await addSubstation(substation);
             setSubs((prev) => [...prev, response.data]);
         } catch (e) {
             alert(e.response.data.message);
@@ -51,7 +51,7 @@ const SubListProvider = ({ children }) => {
     };
 
     return (
-        <SubListContext.Provider value={{ subs, branches, addSubstation }}>
+        <SubListContext.Provider value={{ subs, branches, addNewSub }}>
             {!isLoading ? children : <LoadingAnimation />}
         </SubListContext.Provider>
     );
