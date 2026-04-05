@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.dto;
 
-import com.kalachinski.rpa.model.Status;
+import com.kalachinski.rpa.model.user.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

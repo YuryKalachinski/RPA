@@ -6,7 +6,7 @@
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <changeSet id="2023-05-15-08" author="Yury Kalachinski">
-        <comment>Creating table: protection_trip</comment>
+        <comment>Creating table: protection_node_trip</comment>
 
         <createTable tableName="protection_trip" schemaName="main">
             <column name="protection_id" type="bigint">

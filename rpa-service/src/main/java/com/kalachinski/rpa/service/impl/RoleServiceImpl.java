@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.model.Role;
+import com.kalachinski.rpa.model.user.Role;
 import com.kalachinski.rpa.repositories.RoleRepo;
 import com.kalachinski.rpa.service.RoleService;
 import org.springframework.stereotype.Service;

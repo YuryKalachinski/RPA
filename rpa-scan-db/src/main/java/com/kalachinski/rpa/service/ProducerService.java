@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.service;
 
-import com.kalachinski.rpa.model.Event;
+import com.kalachinski.rpa.model.substation.Event;
 
 public interface ProducerService {
 

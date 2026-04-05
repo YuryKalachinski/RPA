@@ -1,7 +1,7 @@
 package com.kalachinski.rpa.service;
 
-import com.kalachinski.rpa.model.Token;
-import com.kalachinski.rpa.model.User;
+import com.kalachinski.rpa.model.user.Token;
+import com.kalachinski.rpa.model.user.User;
 
 import java.util.List;
 import java.util.Optional;

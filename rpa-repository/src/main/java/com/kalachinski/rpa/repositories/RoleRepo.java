@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.repositories;
 
-import com.kalachinski.rpa.model.Role;
+import com.kalachinski.rpa.model.user.Role;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package com.kalachinski.rpa.security;
 
-import com.kalachinski.rpa.model.Permission;
-import com.kalachinski.rpa.model.Status;
-import com.kalachinski.rpa.model.User;
+import com.kalachinski.rpa.model.user.Permission;
+import com.kalachinski.rpa.model.user.Status;
+import com.kalachinski.rpa.model.user.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;

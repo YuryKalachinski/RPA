@@ -12,6 +12,8 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_protection"/>
             </column>
+            <column name="is_root" type="boolean"/>
+            <column name="parent_id" type="bigint"/>
             <column name="description" type="varchar(255)"/>
             <column name="name" type="varchar(64)">
                 <constraints nullable="false"/>
@@ -22,7 +24,7 @@
     </changeSet>
 
     <changeSet id="2023-05-15-07" author="Yury Kalachinski">
-        <comment>Add foreign key: complex_id</comment>
+        <comment>Add foreign keys: complex_id and parent_id</comment>
 
         <addForeignKeyConstraint baseTableSchemaName="main"
                                  baseTableName="protection"
@@ -30,6 +32,14 @@
                                  constraintName="fk_protection_complex"
                                  referencedTableSchemaName="main"
                                  referencedTableName="complex"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableSchemaName="main"
+                                 baseTableName="protection"
+                                 baseColumnNames="parent_id"
+                                 constraintName="fk_protection_parent"
+                                 referencedTableSchemaName="main"
+                                 referencedTableName="protection"
                                  referencedColumnNames="id"/>
     </changeSet>
 

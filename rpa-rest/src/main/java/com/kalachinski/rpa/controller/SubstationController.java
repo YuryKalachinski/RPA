@@ -1,8 +1,8 @@
 package com.kalachinski.rpa.controller;
 
-import com.kalachinski.rpa.dto.BayDto;
-import com.kalachinski.rpa.dto.SubstationDto;
-import com.kalachinski.rpa.model.Branch;
+import com.kalachinski.rpa.dto.bay.BayDto;
+import com.kalachinski.rpa.dto.substation.SubstationDto;
+import com.kalachinski.rpa.model.substation.Branch;
 import com.kalachinski.rpa.service.SubstationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,6 +34,8 @@ public class SubstationController {
     //todo make swagger annotations
     //todo make logging
 
+    private static final Logger log = LoggerFactory.getLogger(SubstationController.class);
+
     private final SubstationService substationService;
 
     public SubstationController(SubstationService substationService) {
@@ -49,7 +53,7 @@ public class SubstationController {
             })
     @PreAuthorize("hasAuthority('VIEWER')")
     public ResponseEntity<List<SubstationDto>> getAllSubstations() {
-        return ResponseEntity.ok().body(substationService.getAllSubstations());
+        return ResponseEntity.ok().body(substationService.getAll());
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE, value = "/{id}")
@@ -65,25 +69,7 @@ public class SubstationController {
     public ResponseEntity<SubstationDto> getSubstationById(
             @Parameter(description = "Substation id", example = "1")
             @PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(substationService.getSubstationById(id));
-    }
-
-    @GetMapping(produces = APPLICATION_JSON_VALUE, value = "/{substationId}/bay/{bayId}")
-    @Operation(summary = "Get information about bay by substation and bay id.",
-            responses = {
-                    @ApiResponse(description = "Success", responseCode = "200",
-                            content = @Content(schema = @Schema(implementation = SubstationDto.class),
-                                    mediaType = MediaType.APPLICATION_JSON_VALUE)),
-                    @ApiResponse(description = "Unauthorized/Invalid token", responseCode = "403", content = @Content),
-                    @ApiResponse(description = "Substations not found", responseCode = "404", content = @Content)
-            })
-    @PreAuthorize("hasAuthority('VIEWER')")
-    public ResponseEntity<SubstationDto> getBayBySubstationIdAndBayId(
-            @Parameter(description = "Substation id", example = "1")
-            @PathVariable("subId") Long subId,
-            @Parameter(description = "Bay id", example = "1")
-            @PathVariable("bayId") Long bayId) {
-        return ResponseEntity.ok().body(substationService.getBayBySubstationIdAndBayId(subId, bayId));
+        return ResponseEntity.ok().body(substationService.getById(id));
     }
 
     @PostMapping("/")
@@ -107,6 +93,6 @@ public class SubstationController {
             @PathVariable("subId") Long subId,
             @RequestBody BayDto bayDto
     ) {
-        return ResponseEntity.ok().body(substationService.addNewBay(subId, bayDto));
+        return ResponseEntity.ok().body(substationService.addBay(subId, bayDto));
     }
 }

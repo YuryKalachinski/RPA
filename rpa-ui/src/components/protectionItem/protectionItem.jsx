@@ -9,6 +9,7 @@ import {
 } from "./styled";
 import minus from "./images/minus.svg";
 import plus from "./images/plus.svg";
+import ParameterSettingsList from "../parameterSettingsList/parameterSettingsList";
 
 const ProtectionItem = ({ prot }) => {
     const [visible, setVisible] = useState(false);
@@ -21,42 +22,24 @@ const ProtectionItem = ({ prot }) => {
         <ProtectionItemConteiner>
             <ProtectionItemWrapper>
                 <ProtectionItemBody>
-                    {/* <ProtActionItemTitle>{prot.protAction}</ProtActionItemTitle> */}
-                    {visible ? (
+                    <SettingsButton onClick={changeComplexForm}>
+                        <img
+                            src={visible ? minus : plus}
+                            alt={visible ? "Collapse group" : "Expland group"}
+                        />
+                        <ProtectionItemTitle>{prot.name}</ProtectionItemTitle>
+                    </SettingsButton>
+                    {visible && (
                         <>
-                            <SettingsButton onClick={changeComplexForm}>
-                                <img src={minus} alt="Collapse group" />
-                                <ProtectionItemTitle>
-                                    {prot.name}
-                                </ProtectionItemTitle>
-                            </SettingsButton>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Параметр</th>
-                                        <th>Значение</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {prot.parameterSettings.map((setting) => (
-                                        <tr key={setting.id}>
-                                            <td>{setting.key}</td>
-                                            <td>{setting.value}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </>
-                    ) : (
-                        <>
-                            <SettingsButton onClick={changeComplexForm}>
-                                <img src={plus} alt="Expland group" />
-                                <ProtectionItemTitle>
-                                    {prot.name}
-                                </ProtectionItemTitle>
-                            </SettingsButton>
+                            {prot.children?.map((el) => (
+                                <ProtectionItem key={el.id} prot={el} />
+                            ))}
+                            <ParameterSettingsList
+                                psl={prot.parameterSettings}
+                            />
                         </>
                     )}
+                    {/* <ProtActionItemTitle>{prot.protAction}</ProtActionItemTitle> */}
                 </ProtectionItemBody>
             </ProtectionItemWrapper>
         </ProtectionItemConteiner>

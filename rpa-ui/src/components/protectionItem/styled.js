@@ -13,23 +13,6 @@ export const ProtectionItemBody = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
-
-    & table {
-        margin-left: 20px;
-        border-collapse: collapse;
-        width: 80%;
-    }
-
-    & th,
-    td {
-        border: 1px solid;
-        padding: 5px 10px;
-        font-size: 14px;
-        line-height: 120%;
-        text-align: left;
-        color: var(--color-link-hover);
-        font-weight: 400;
-    }
 `;
 
 export const SettingsButton = styled.button`

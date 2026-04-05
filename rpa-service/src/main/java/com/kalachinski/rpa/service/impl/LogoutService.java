@@ -1,8 +1,8 @@
 package com.kalachinski.rpa.service.impl;
 
 import com.kalachinski.rpa.exception.LogoutException;
-import com.kalachinski.rpa.model.Token;
-import com.kalachinski.rpa.model.TokenType;
+import com.kalachinski.rpa.model.user.Token;
+import com.kalachinski.rpa.model.user.TokenType;
 import com.kalachinski.rpa.security.JwtProvider;
 import com.kalachinski.rpa.service.TokenService;
 import jakarta.servlet.http.HttpServletRequest;

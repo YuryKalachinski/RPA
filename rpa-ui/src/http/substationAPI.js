@@ -8,8 +8,8 @@ export const getSubstationById = async (id) => {
     return await http.get("/substation/" + id);
 };
 
-export const getSubstationBySubstationIdAndBayId = async (sub_id, bay_id) => {
-    return await http.get(`/substation/${sub_id}/bay/${bay_id}`);
+export const getBayById = async (id) => {
+    return await http.get("/bay/" + id);
 };
 
 export const addBay = async (sub_id, bay) => {
@@ -22,4 +22,8 @@ export const addSubstation = async (substation) => {
 
 export const getAllBranches = async () => {
     return await http.get("/substation/branch");
+};
+
+export const getComplexById = async (id) => {
+    return await http.get("/complex/" + id);
 };

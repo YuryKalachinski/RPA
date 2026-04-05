@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 import { useParams } from "react-router-dom";
-import { getSubstationBySubstationIdAndBayId } from "../http/substationAPI";
+import { getBayById } from "../http/substationAPI";
 
 const BayContext = createContext();
 
@@ -10,23 +10,18 @@ export const useBay = () => {
 };
 
 const BayProvider = ({ children }) => {
-    const { sub_id, bay_id } = useParams();
-    const [sub, setSub] = useState();
-    const [complexes, setComplexes] = useState([]);
+    const { bay_id } = useParams();
+    const [bay, setBay] = useState();
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        getSubstation(sub_id, bay_id);
-    }, [sub_id, bay_id]);
+        getBay(bay_id);
+    }, [bay_id]);
 
-    const getSubstation = async (sub_id, bay_id) => {
+    const getBay = async (bayId) => {
         try {
-            const response = await getSubstationBySubstationIdAndBayId(
-                sub_id,
-                bay_id,
-            );
-            setSub(response.data);
-            setComplexes(response.data.bays[0].complexes);
+            const response = await getBayById(bayId);
+            setBay(response.data);
             setLoading(false);
         } catch (e) {
             alert(e.response.data.message);
@@ -34,7 +29,7 @@ const BayProvider = ({ children }) => {
     };
 
     return (
-        <BayContext.Provider value={{ sub, complexes }}>
+        <BayContext.Provider value={{ bay }}>
             {!isLoading ? children : <LoadingAnimation />}
         </BayContext.Provider>
     );

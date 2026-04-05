@@ -1,7 +1,7 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.model.Crap;
-import com.kalachinski.rpa.model.ErrorConnection;
+import com.kalachinski.rpa.model.crap.Crap;
+import com.kalachinski.rpa.model.crap.ErrorConnection;
 import com.kalachinski.rpa.repositories.CrapRepo;
 import com.kalachinski.rpa.repositories.ErrorConnectionRepo;
 import com.kalachinski.rpa.service.CheckConnectionService;

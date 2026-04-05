@@ -1,7 +1,7 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.model.Token;
-import com.kalachinski.rpa.model.User;
+import com.kalachinski.rpa.model.user.Token;
+import com.kalachinski.rpa.model.user.User;
 import com.kalachinski.rpa.repositories.TokenRepo;
 import com.kalachinski.rpa.service.TokenService;
 import lombok.RequiredArgsConstructor;

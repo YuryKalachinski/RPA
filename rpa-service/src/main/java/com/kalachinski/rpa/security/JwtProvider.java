@@ -1,8 +1,8 @@
 package com.kalachinski.rpa.security;
 
-import com.kalachinski.rpa.model.Token;
-import com.kalachinski.rpa.model.TokenType;
-import com.kalachinski.rpa.model.User;
+import com.kalachinski.rpa.model.user.Token;
+import com.kalachinski.rpa.model.user.TokenType;
+import com.kalachinski.rpa.model.user.User;
 import com.kalachinski.rpa.service.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

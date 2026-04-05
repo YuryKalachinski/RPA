@@ -24,22 +24,18 @@ const ComplexItem = ({ complex }) => {
                 <ComplexItemBody>
                     <ComplexItemTitle>{complex.name}</ComplexItemTitle>
                     <ComplexItemType>{complex.description}</ComplexItemType>
-                    {visible ? (
+                    <SettingsButton onClick={changeComplexForm}>
+                        <img
+                            src={visible ? minus : plus}
+                            alt={visible ? "Collapse group" : "Expland group"}
+                        />
+                        <p>Уставки</p>
+                    </SettingsButton>
+                    {visible && (
                         <>
-                            <SettingsButton onClick={changeComplexForm}>
-                                <img src={minus} alt="Collapse group" />
-                                <p>Уставки</p>
-                            </SettingsButton>
-                            {complex.protections.map((prot) => (
+                            {complex.protections?.map((prot) => (
                                 <ProtectionItem key={prot.id} prot={prot} />
                             ))}
-                        </>
-                    ) : (
-                        <>
-                            <SettingsButton onClick={changeComplexForm}>
-                                <img src={plus} alt="Expland group" />
-                                <p>Уставки</p>
-                            </SettingsButton>
                         </>
                     )}
                 </ComplexItemBody>

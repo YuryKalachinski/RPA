@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.service;
 
-import com.kalachinski.rpa.model.Role;
+import com.kalachinski.rpa.model.user.Role;
 
 public interface RoleService {
 

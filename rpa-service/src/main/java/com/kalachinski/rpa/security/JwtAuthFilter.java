@@ -1,7 +1,7 @@
 package com.kalachinski.rpa.security;
 
-import com.kalachinski.rpa.model.Token;
-import com.kalachinski.rpa.model.TokenType;
+import com.kalachinski.rpa.model.user.Token;
+import com.kalachinski.rpa.model.user.TokenType;
 import com.kalachinski.rpa.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

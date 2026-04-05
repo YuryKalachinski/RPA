@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.repositories;
 
-import com.kalachinski.rpa.model.Token;
+import com.kalachinski.rpa.model.user.Token;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

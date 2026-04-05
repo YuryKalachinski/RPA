@@ -2,8 +2,8 @@ package com.kalachinski.rpa.service.impl;
 
 import com.kalachinski.rpa.dto.UserDto;
 import com.kalachinski.rpa.mapper.UserMapper;
-import com.kalachinski.rpa.model.Status;
-import com.kalachinski.rpa.model.User;
+import com.kalachinski.rpa.model.user.Status;
+import com.kalachinski.rpa.model.user.User;
 import com.kalachinski.rpa.repositories.UserRepo;
 import com.kalachinski.rpa.security.JwtUserDetails;
 import com.kalachinski.rpa.service.RoleService;

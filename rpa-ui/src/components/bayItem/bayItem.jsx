@@ -11,7 +11,7 @@ import ComplexItem from "../complexItem/complexItem";
 import { useBay } from "../../context/bayProvider";
 
 const BayItem = () => {
-    const { sub, complexes } = useBay();
+    const { bay } = useBay();
     const navigate = useNavigate();
 
     return (
@@ -19,11 +19,11 @@ const BayItem = () => {
             <BayItemWrapper>
                 <BayItemTop>
                     <BayItemHeader>
-                        <h3>{sub?.name}</h3>
-                        <p>{sub?.bays[0]?.name}:</p>
+                        <h3>{bay?.substation?.name}</h3>
+                        <p>{bay?.name}:</p>
                     </BayItemHeader>
                     <ComplexList>
-                        {complexes.map((el) => (
+                        {bay.complexes.map((el) => (
                             <ComplexItem key={el.id} complex={el} />
                         ))}
                     </ComplexList>

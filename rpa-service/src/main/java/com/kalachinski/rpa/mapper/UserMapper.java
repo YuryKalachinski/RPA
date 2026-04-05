@@ -1,12 +1,10 @@
 package com.kalachinski.rpa.mapper;
 
 import com.kalachinski.rpa.dto.UserDto;
-import com.kalachinski.rpa.model.User;
+import com.kalachinski.rpa.model.user.User;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring",
-        uses = {RoleMapper.class}
-)
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
     //todo unused method

@@ -1,11 +1,11 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.dto.BayDto;
-import com.kalachinski.rpa.dto.SubstationDto;
+import com.kalachinski.rpa.dto.bay.BayDto;
+import com.kalachinski.rpa.dto.substation.SubstationDto;
 import com.kalachinski.rpa.mapper.SubstationMapper;
-import com.kalachinski.rpa.model.Bay;
-import com.kalachinski.rpa.model.Branch;
-import com.kalachinski.rpa.model.Substation;
+import com.kalachinski.rpa.model.substation.Bay;
+import com.kalachinski.rpa.model.substation.Branch;
+import com.kalachinski.rpa.model.substation.Substation;
 import com.kalachinski.rpa.repositories.SubstationRepo;
 import com.kalachinski.rpa.service.SubstationService;
 import lombok.RequiredArgsConstructor;
@@ -26,33 +26,19 @@ public class SubstationServiceImpl implements SubstationService {
 
     @Override
     @Transactional
-    public List<SubstationDto> getAllSubstations() {
-        List<Substation> substations = substationRepo.findAll();
-        return substationMapper.listToDtoListWithoutBays(substations);
+    public List<SubstationDto> getAll() {
+        return substationMapper.toDtoList(substationRepo.findAll());
     }
 
     @Override
     @Transactional
-    public SubstationDto getSubstationById(Long id) {
+    public SubstationDto getById(Long id) {
 
         //todo handle ResponseStatusException
 
-        return substationMapper.substationByIdToDto(substationRepo.findById(id)
+        return substationMapper.toDtoWithBays(substationRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                         String.format("Unable to find resource with requested id=%d", id))));
-    }
-
-    @Override
-    @Transactional
-    public SubstationDto getBayBySubstationIdAndBayId(Long subId, Long bayId) {
-
-        //todo handle ResponseStatusException
-
-        return substationMapper.substationBySubstationIdAndBayIdToDto(substationRepo
-                .getBayBySubstationIdAndBayId(subId, bayId)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                        String.format("Unable to find resource with requested Substation id=%d and Bay id=%d",
-                                subId, bayId))));
     }
 
     @Override
@@ -72,7 +58,7 @@ public class SubstationServiceImpl implements SubstationService {
 
     @Override
     @Transactional
-    public SubstationDto addNewBay(Long id, BayDto bayDto) {
+    public SubstationDto addBay(Long id, BayDto bayDto) {
         Substation current = substationRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                         String.format("Unable to find resource with requested id=%d", id)));
@@ -83,7 +69,6 @@ public class SubstationServiceImpl implements SubstationService {
                 .setSubstation(current)
                 .setVoltageLevel(bayDto.getVoltageLevel())
         );
-
-        return substationMapper.substationByIdToDto(substationRepo.save(current));
+        return substationMapper.toDtoWithBays(substationRepo.save(current));
     }
 }

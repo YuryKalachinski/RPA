@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.model.Event;
+import com.kalachinski.rpa.model.substation.Event;
 import com.kalachinski.rpa.repositories.EventRepo;
 import com.kalachinski.rpa.service.ProducerService;
 import com.kalachinski.rpa.service.ScanDbService;

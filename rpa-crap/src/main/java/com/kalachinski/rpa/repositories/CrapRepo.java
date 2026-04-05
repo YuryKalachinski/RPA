@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.repositories;
 
-import com.kalachinski.rpa.model.Crap;
+import com.kalachinski.rpa.model.crap.Crap;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

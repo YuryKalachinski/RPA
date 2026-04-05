@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.controller;
 
-import com.kalachinski.rpa.dto.AuthenticationRequestDto;
+import com.kalachinski.rpa.dto.AuthRequestDto;
 import com.kalachinski.rpa.dto.RegisterRequestDto;
 import com.kalachinski.rpa.dto.TokenDto;
 import com.kalachinski.rpa.service.AuthenticationService;
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
+    //todo make swagger annotations
+
     private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
     private final AuthenticationService authenticationService;
@@ -33,7 +35,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<TokenDto> authenticate(
-            @RequestBody AuthenticationRequestDto requestDto
+            @RequestBody AuthRequestDto requestDto
     ) {
         log.info("Authenticate user with email: {}", requestDto.getEmail());
         return ResponseEntity.ok(authenticationService.authenticate(requestDto));

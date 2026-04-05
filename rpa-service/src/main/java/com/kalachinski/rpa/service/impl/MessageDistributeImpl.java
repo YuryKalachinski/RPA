@@ -1,10 +1,10 @@
 package com.kalachinski.rpa.service.impl;
 
 import com.kalachinski.rpa.dto.MailParams;
-import com.kalachinski.rpa.model.Event;
-import com.kalachinski.rpa.model.Role;
-import com.kalachinski.rpa.model.Status;
-import com.kalachinski.rpa.model.User;
+import com.kalachinski.rpa.model.substation.Event;
+import com.kalachinski.rpa.model.user.Role;
+import com.kalachinski.rpa.model.user.Status;
+import com.kalachinski.rpa.model.user.User;
 import com.kalachinski.rpa.service.MessageDistribute;
 import com.kalachinski.rpa.service.ProducerService;
 import com.kalachinski.rpa.service.RoleService;

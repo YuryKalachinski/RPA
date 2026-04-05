@@ -1,26 +1,36 @@
 package com.kalachinski.rpa.mapper;
 
-import com.kalachinski.rpa.dto.BayDto;
-import com.kalachinski.rpa.model.Bay;
+import com.kalachinski.rpa.dto.bay.BayDto;
+import com.kalachinski.rpa.model.substation.Bay;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        unmappedSourcePolicy = ReportingPolicy.IGNORE,
-        uses = {ComplexMapper.class}
+        unmappedSourcePolicy = ReportingPolicy.IGNORE
 )
 public interface BayMapper {
 
-    @Named("BayMapperSubstationByIdToDto")
-    @Mapping(target = "trips", ignore = true)
-    @Mapping(target = "complexes", qualifiedByName = "ComplexMapperSubstationByIdToDto")
-    BayDto substationByIdToDto(Bay bay);
+    //    from SubstationMapper
+    @Named("BayMapperSubstationWithBay")
+    @Mappings({
+            @Mapping(target = "complexes", ignore = true)})
+    BayDto toDtoWithoutComplexes(Bay bay);
 
-    @Named("BayMapperSubstationBySubstationIdAndBayIdToDto")
-    @Mapping(target = "trips", ignore = true)
-    @Mapping(target = "complexes", qualifiedByName = "ComplexMapperSubstationBySubstationIdAndBayIdToDto")
-    BayDto substationBySubstationIdAndBayIdToDto(Bay bay);
+    BayDto toDtoWithComplexes(Bay bay);
+
+    @AfterMapping
+    default void filterDtoWithComplexes(@MappingTarget BayDto dto) {
+        if (dto.getComplexes() != null)
+            dto.getComplexes()
+                    .forEach(complex -> {
+                        complex.getProtections()
+                                .removeIf(protection -> !protection.isRoot());
+                    });
+    }
 }

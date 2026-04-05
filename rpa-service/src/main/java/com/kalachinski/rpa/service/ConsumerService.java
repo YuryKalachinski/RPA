@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.service;
 
-import com.kalachinski.rpa.model.Event;
+import com.kalachinski.rpa.model.substation.Event;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public interface ConsumerService {
