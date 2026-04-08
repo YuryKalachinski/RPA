@@ -18,6 +18,7 @@ export const ProtectionItemBody = styled.div`
 export const SettingsButton = styled.button`
     background: transparent;
     color: var(--color-link-hover);
+    border-radius: 10px;
     border: none;
     outline: none;
     font-size: 14px;
@@ -27,8 +28,7 @@ export const SettingsButton = styled.button`
     position: relative;
 
     &:hover {
-        background-color: var(--color-primary-hover);
-        border-radius: 10px;
+        background-color: var(--color-bg-light);
     }
 
     &:focus:not(:focus-visible) {

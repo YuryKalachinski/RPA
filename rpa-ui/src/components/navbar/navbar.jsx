@@ -13,8 +13,7 @@ import {
     NavbarUser,
     NavbarMenu,
 } from "./styled";
-import rzaLogo from "./images/logo.svg";
-import userIcon from "./images/user.svg";
+import { AppLogo, UserLogo } from "../common/images/";
 
 const Navbar = () => {
     const { currentUser, logOut } = useAuth();
@@ -25,7 +24,7 @@ const Navbar = () => {
             {currentUser && (
                 <NavbarWrapper>
                     <NavbarLogo>
-                        <img src={rzaLogo} alt="Logo is here" />
+                        <img src={AppLogo} alt="Logo is here" />
                     </NavbarLogo>
 
                     <NavbarMenu>
@@ -44,13 +43,12 @@ const Navbar = () => {
                     </NavbarMenu>
 
                     <NavbarUser>
-                        <img src={userIcon} alt="User icon" />
+                        <img src={UserLogo} alt="User icon" />
                         <p>{currentUser.firstName}</p>
                         <button onClick={logOut}>Выйти</button>
                     </NavbarUser>
                 </NavbarWrapper>
             )}
-            ;
         </NavbarContainer>
     );
 };

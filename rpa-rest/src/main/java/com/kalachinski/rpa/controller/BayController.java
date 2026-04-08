@@ -1,6 +1,7 @@
 package com.kalachinski.rpa.controller;
 
 import com.kalachinski.rpa.dto.bay.BayDto;
+import com.kalachinski.rpa.dto.complex.ComplexDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
 import com.kalachinski.rpa.service.BayService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,5 +50,15 @@ public class BayController {
             @Parameter(description = "Bay id", example = "1")
             @PathVariable("id") Long id) {
         return ResponseEntity.ok().body(bayService.getById(id));
+    }
+
+    @PostMapping("/{bayId}/complex/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<BayDto> addBay(
+            @Parameter(description = "Bay id", example = "1")
+            @PathVariable("bayId") Long bayId,
+            @RequestBody ComplexDto complexDto
+    ) {
+        return ResponseEntity.ok().body(bayService.addComplex(bayId, complexDto));
     }
 }

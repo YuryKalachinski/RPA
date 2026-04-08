@@ -1,10 +1,10 @@
-import SubstationItem from "../components/substationItem/substationItem";
-import SubProvider from "../context/subProvider";
+import { SubstationItem } from "../components/substationItem";
+import { SubProvider } from "../context";
 
 const Substation = () => {
     return (
         <SubProvider>
-            <SubstationItem />;
+            <SubstationItem />
         </SubProvider>
     );
 };

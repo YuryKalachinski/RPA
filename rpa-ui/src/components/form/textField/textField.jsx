@@ -1,8 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { TextFieldStyle } from "./styled";
-import viewOn from "./images/viewOn.svg";
-import viewOff from "./images/viewOff.svg";
+import { ViewOnLogo, ViewOffLogo } from "../../common/images";
 
 const TextField = ({ label, type, name, value, onChange, imgSrc, imgAlt }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +25,7 @@ const TextField = ({ label, type, name, value, onChange, imgSrc, imgAlt }) => {
             {type === "password" && (
                 <img
                     className="img_visible"
-                    src={showPassword ? viewOff : viewOn}
+                    src={showPassword ? ViewOnLogo : ViewOffLogo}
                     alt="set password visible"
                     onClick={toggleShowPassword}
                 />
@@ -45,6 +44,8 @@ TextField.propsTypes = {
     name: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
+    imgSrc: PropTypes.elementType,
+    imgAlt: PropTypes.string,
 };
 
 export default TextField;

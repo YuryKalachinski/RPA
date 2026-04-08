@@ -1,5 +1,5 @@
-import BayItem from "../components/bayItem/bayItem";
-import BayProvider from "../context/bayProvider";
+import { BayItem } from "../components/bayItem";
+import { BayProvider } from "../context";
 
 const Bay = () => {
     return (

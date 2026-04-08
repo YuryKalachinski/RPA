@@ -7,9 +7,8 @@ import {
     SettingsButton,
     // ProtActionItemTitle,
 } from "./styled";
-import minus from "./images/minus.svg";
-import plus from "./images/plus.svg";
-import ParameterSettingsList from "../parameterSettingsList/parameterSettingsList";
+import { MinusLogo, PlusLogo } from "../common/images/";
+import { ParameterSettingsList } from "../parameterSettingsList";
 
 const ProtectionItem = ({ prot }) => {
     const [visible, setVisible] = useState(false);
@@ -24,7 +23,7 @@ const ProtectionItem = ({ prot }) => {
                 <ProtectionItemBody>
                     <SettingsButton onClick={changeComplexForm}>
                         <img
-                            src={visible ? minus : plus}
+                            src={visible ? MinusLogo : PlusLogo}
                             alt={visible ? "Collapse group" : "Expland group"}
                         />
                         <ProtectionItemTitle>{prot.name}</ProtectionItemTitle>

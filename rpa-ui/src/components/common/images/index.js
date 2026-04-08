@@ -1,0 +1,10 @@
+export { default as EmailLogo } from "./email.svg";
+export { default as MinusLogo } from "./minus.svg";
+export { default as PasswordLogo } from "./password.svg";
+export { default as PlusLogo } from "./plus.svg";
+export { default as ViewOffLogo } from "./viewOff.svg";
+export { default as ViewOnLogo } from "./viewOn.svg";
+export { default as AppLogo } from "./appLogo.svg";
+export { default as UserLogo } from "./userLogo.svg";
+export { default as EditLogo } from "./edit.svg";
+export { default as DeleteLogo } from "./delete.svg";

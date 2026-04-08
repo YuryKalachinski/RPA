@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const LoadingAnimationContainer = styled.div`
-    height: 100vh;
-    width: 100vw;
+    height: 10vh;
+    width: 10vw;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 45vh;
+    left: 45vw;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 `;

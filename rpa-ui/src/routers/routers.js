@@ -1,10 +1,12 @@
-import About from "../pages/about";
-import Login from "../pages/login";
-import Users from "../pages/users";
-import Main from "../pages/main";
-import Substations from "../pages/substations";
-import Substation from "../pages/substation";
-import Bay from "../pages/bay";
+import {
+    About,
+    Bay,
+    Login,
+    Main,
+    Substation,
+    Substations,
+    Users,
+} from "../pages";
 import {
     ABOUT_ROUTE,
     LOGIN_ROUTE,

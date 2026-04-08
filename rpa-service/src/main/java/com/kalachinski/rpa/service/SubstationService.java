@@ -12,7 +12,7 @@ public interface SubstationService {
 
     SubstationDto getById(Long id);
 
-    SubstationDto addNewSubstation(SubstationDto substationDto);
+    SubstationDto addSubstation(SubstationDto substationDto);
 
     SubstationDto addBay(Long subId, BayDto bayDto);
 

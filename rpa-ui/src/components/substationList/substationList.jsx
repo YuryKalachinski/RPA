@@ -1,20 +1,28 @@
 import { useState, useMemo } from "react";
-import SubstationListFilter from "../substationListFilter/substationListFilter";
+import { SubstationListFilter } from "../substationListFilter";
 import {
     SubstationListContainer,
     SubstationListHeader,
     SubstationListItem,
     SubstationListWrapper,
+    NewSubstationListItem,
+    SubstationListBody,
+    SubstationListTop,
+    SubstationListBottom,
+    SubstationListItemButton,
+    SubstationListRow,
 } from "./styled";
 import { useNavigate, generatePath } from "react-router-dom";
 import { SUBSTATION_ROUTE } from "../../utils/constants";
-import NewSubstation from "../modal/newSubstation/newSubstation";
-import plus from "./images/plus.svg";
+import { ModalSubstation } from "../modal";
+import { DeleteLogo, EditLogo, PlusLogo } from "../common/images";
 import { useSubList } from "../../context/subListProvider";
 
 const SubstationList = () => {
     const { subs } = useSubList();
-    const [isNewSubOpen, setNewSubOpen] = useState(false);
+    const emptySub = { name: "", branch: "", description: "" };
+    const [isModalSubOpen, setModalSubOpen] = useState(false);
+    const [selectedSub, setSelectedSub] = useState(null);
     // const [filter, setFilter] = useState({ sort: '', query: '' });
     const [filter, setFilter] = useState({ query: "" });
     const navigate = useNavigate();
@@ -32,36 +40,72 @@ const SubstationList = () => {
         navigate(path);
     };
 
+    const editSubstation = (current) => {
+        setSelectedSub(current);
+        setModalSubOpen(true);
+    };
+
+    const deleteSubstation = (substation) => {
+        console.log("Delete");
+        console.log(substation);
+    };
+
     return (
         <>
             <SubstationListContainer>
                 <SubstationListWrapper>
-                    <SubstationListHeader>
-                        <h3>Список подстанций:</h3>
-                    </SubstationListHeader>
-                    <SubstationListFilter
-                        filter={filter}
-                        setFilter={setFilter}
-                    />
-                    <SubstationListItem>
-                        <button onClick={() => setNewSubOpen(true)}>
-                            <p>Добавить новую подстанцию</p>
-                            <img src={plus} alt="add new substation" />
-                        </button>
-                    </SubstationListItem>
-                    {searchedSub.map((sub) => (
-                        <SubstationListItem key={sub.id}>
-                            <button onClick={() => navigateToSubstation(sub)}>
-                                {sub.name}
+                    <SubstationListTop>
+                        <SubstationListHeader>
+                            <h3>Список подстанций:</h3>
+                        </SubstationListHeader>
+                        <SubstationListFilter
+                            filter={filter}
+                            setFilter={setFilter}
+                        />
+                        <NewSubstationListItem>
+                            {/* <button onClick={() => setNewSubOpen(true)}> */}
+                            <button onClick={() => editSubstation(emptySub)}>
+                                <p>Добавить новую подстанцию</p>
+                                <img src={PlusLogo} alt="add new substation" />
                             </button>
-                        </SubstationListItem>
-                    ))}
+                        </NewSubstationListItem>
+                    </SubstationListTop>
+                    <SubstationListBody>
+                        {searchedSub.map((sub) => (
+                            <SubstationListRow key={sub.id}>
+                                <SubstationListItem
+                                    onClick={() => navigateToSubstation(sub)}
+                                >
+                                    <p>{sub.name},</p> <p>{sub.branch}</p>
+                                </SubstationListItem>
+                                <SubstationListItemButton
+                                    onClick={() => editSubstation(sub)}
+                                >
+                                    <img
+                                        src={EditLogo}
+                                        alt="Edit current substation"
+                                    />
+                                </SubstationListItemButton>
+                                <SubstationListItemButton
+                                    onClick={() => deleteSubstation(sub)}
+                                >
+                                    <img
+                                        src={DeleteLogo}
+                                        alt="Delete current substation"
+                                    />
+                                </SubstationListItemButton>
+                            </SubstationListRow>
+                        ))}
+                    </SubstationListBody>
+                    <SubstationListBottom></SubstationListBottom>
                 </SubstationListWrapper>
             </SubstationListContainer>
-            <NewSubstation
-                isOpen={isNewSubOpen}
-                onClose={() => setNewSubOpen(false)}
-            />
+            {isModalSubOpen && (
+                <ModalSubstation
+                    onClose={() => setModalSubOpen(false)}
+                    substation={selectedSub}
+                />
+            )}
         </>
     );
 };

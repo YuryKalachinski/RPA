@@ -16,6 +16,7 @@ export const BayItemTop = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+    gap: 8px;
 `;
 
 export const BayItemHeader = styled.div`
@@ -38,10 +39,10 @@ export const BayItemHeader = styled.div`
     }
 `;
 
-export const ComplexList = styled.div`
+export const BayItemBody = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 80px;
 `;
 
@@ -53,5 +54,34 @@ export const BayItemBottom = styled.div`
     & hr {
         background-color: var(--color-link-hover);
         width: 100%;
+    }
+`;
+
+export const NewComplexItem = styled.button`
+    background: var(--color-bg-medium);
+    border-radius: var(--border-10);
+    border: none;
+    outline: none;
+    margin: 0;
+    color: var(--color-text);
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-bg-light);
+        border-radius: 10px;
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    & img {
+        width: 32px;
+        position: absolute;
     }
 `;

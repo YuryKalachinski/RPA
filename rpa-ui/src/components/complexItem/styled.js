@@ -29,7 +29,7 @@ export const SettingsButton = styled.button`
     position: relative;
 
     &:hover {
-        background-color: var(--color-primary-hover);
+        background-color: var(--color-bg-light);
         border-radius: 10px;
     }
 

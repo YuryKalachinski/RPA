@@ -7,8 +7,7 @@ import {
     ComplexItemWrapper,
     SettingsButton,
 } from "./styled";
-import minus from "./images/minus.svg";
-import plus from "./images/plus.svg";
+import { MinusLogo, PlusLogo } from "../common/images/";
 import ProtectionItem from "../protectionItem/protectionItem";
 
 const ComplexItem = ({ complex }) => {
@@ -26,7 +25,7 @@ const ComplexItem = ({ complex }) => {
                     <ComplexItemType>{complex.description}</ComplexItemType>
                     <SettingsButton onClick={changeComplexForm}>
                         <img
-                            src={visible ? minus : plus}
+                            src={visible ? MinusLogo : PlusLogo}
                             alt={visible ? "Collapse group" : "Expland group"}
                         />
                         <p>Уставки</p>

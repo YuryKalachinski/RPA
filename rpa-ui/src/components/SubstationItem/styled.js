@@ -6,7 +6,7 @@ export const SubstationItemWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 12px 24px;
+    gap: 8px;
 `;
 
 export const SubstationItemTop = styled.div`
@@ -14,6 +14,7 @@ export const SubstationItemTop = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+    gap: 8px;
 `;
 
 export const SubstationItemHeader = styled.div`
@@ -28,27 +29,17 @@ export const SubstationItemHeader = styled.div`
     }
 
     & p {
-        margin-bottom: 12px;
+        margin: 0 48px;
         color: var(--color-text);
         font-size: 18px;
         font-weight: 400;
-        align-self: stretch;
     }
 `;
 
-export const BayList = styled.div`
+export const SubstationItemBody = styled.div`
     width: 100%;
     margin: 0 auto;
     padding-left: 12px;
-
-    & p {
-        margin-bottom: 12px;
-        color: var(--color-text);
-        font-size: 18px;
-        font-weight: 400;
-        align-self: stretch;
-        cursor: pointer;
-    }
 `;
 
 export const BayListItem = styled.div`
@@ -66,6 +57,29 @@ export const BayListItem = styled.div`
         cursor: pointer;
         position: relative;
     }
+`;
+
+export const NewBayListItem = styled.div`
+    height: 32px;
+    align-self: stretch;
+    padding: 0 24px;
+    margin-bottom: 8px;
+
+    & button {
+        background: transparent;
+        color: var(--color-link-hover);
+        border: none;
+        outline: none;
+        font-size: 18px;
+        font-weight: 400;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+            background-color: var(--color-bg-light);
+        }
+    }
 
     & img {
         width: 24px;
@@ -76,6 +90,7 @@ export const BayListItem = styled.div`
 
     & p {
         padding-left: 30px;
+        margin: 0;
     }
 `;
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NavbarContainer = styled.div`
     background-color: var(--color-bg-medium);
     width: 100%;
-    margin: 0;
+    margin-bottom: 24px;
 `;
 
 export const NavbarWrapper = styled.div`

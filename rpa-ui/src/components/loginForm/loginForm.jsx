@@ -9,9 +9,8 @@ import {
     LoginFormGroup,
     SignUpLink,
 } from "./styled";
-import emailLogo from "./images/email.svg";
-import passwordLogo from "./images/password.svg";
-import TextField from "../form/textField/textField";
+import { EmailLogo, PasswordLogo } from "../common/images/";
+import { TextField } from "../form/";
 
 const LoginForm = ({ toggleFormType }) => {
     const { logIn } = useAuth();
@@ -51,7 +50,7 @@ const LoginForm = ({ toggleFormType }) => {
                 <LoginFormGroup>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            imgSrc={emailLogo}
+                            imgSrc={EmailLogo}
                             imgAlt="email address"
                             label="Email"
                             name="email"
@@ -59,7 +58,7 @@ const LoginForm = ({ toggleFormType }) => {
                             onChange={handleChange}
                         />
                         <TextField
-                            imgSrc={passwordLogo}
+                            imgSrc={PasswordLogo}
                             imgAlt="password"
                             label="Password"
                             name="password"

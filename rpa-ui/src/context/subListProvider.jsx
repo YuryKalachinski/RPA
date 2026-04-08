@@ -3,6 +3,7 @@ import {
     getAllSubstations,
     addSubstation,
     getAllBranches,
+    updateSubstation,
 } from "../http/substationAPI";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 
@@ -32,10 +33,20 @@ const SubListProvider = ({ children }) => {
         }
     };
 
-    const addNewSub = async (substation) => {
+    const addSub = async (substation) => {
         try {
             const response = await addSubstation(substation);
             setSubs((prev) => [...prev, response.data]);
+        } catch (e) {
+            alert(e.response.data.message);
+        }
+    };
+
+    const updateSub = async (substation) => {
+        try {
+            const response = await updateSubstation(substation);
+            console.log(response);
+            // setSubs((prev) => [...prev, response.data]);
         } catch (e) {
             alert(e.response.data.message);
         }
@@ -51,7 +62,7 @@ const SubListProvider = ({ children }) => {
     };
 
     return (
-        <SubListContext.Provider value={{ subs, branches, addNewSub }}>
+        <SubListContext.Provider value={{ subs, branches, addSub, updateSub }}>
             {!isLoading ? children : <LoadingAnimation />}
         </SubListContext.Provider>
     );

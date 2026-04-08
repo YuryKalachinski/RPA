@@ -5,14 +5,15 @@ import {
     SubstationItemBottom,
     SubstationItemTop,
     SubstationItemHeader,
-    BayList,
     BayListItem,
+    SubstationItemBody,
+    NewBayListItem,
 } from "./styled";
 import { useNavigate, generatePath } from "react-router-dom";
 import { BAY_ROUTE } from "../../utils/constants";
 import { useSub } from "../../context/subProvider";
-import plus from "./images/plus.svg";
-import NewBay from "../modal/newBay/newBay";
+import { PlusLogo } from "../common/images/";
+import { NewBay } from "../modal/";
 
 const SubstationItem = () => {
     const { sub } = useSub();
@@ -31,31 +32,27 @@ const SubstationItem = () => {
         <>
             <SubstationItemContainer>
                 <SubstationItemWrapper>
-                    {sub && (
-                        <SubstationItemTop>
-                            <SubstationItemHeader>
-                                <h3>Подстанция: {sub.name} </h3>
-                                <p>Присоединения:</p>
-                            </SubstationItemHeader>
-                            <BayListItem>
-                                <button onClick={() => setNewBayOpen(true)}>
-                                    <p>Добавить новое присоединение</p>
-                                    <img src={plus} alt="add new bay" />
+                    <SubstationItemTop>
+                        <SubstationItemHeader>
+                            <h3>Подстанция: {sub.name} </h3>
+                            <p>Присоединения:</p>
+                        </SubstationItemHeader>
+                        <NewBayListItem>
+                            <button onClick={() => setNewBayOpen(true)}>
+                                <p>Добавить новое присоединение</p>
+                                <img src={PlusLogo} alt="add new bay" />
+                            </button>
+                        </NewBayListItem>
+                    </SubstationItemTop>
+                    <SubstationItemBody>
+                        {sub.bays.map((bay) => (
+                            <BayListItem key={bay.id}>
+                                <button onClick={() => navigateToBay(bay)}>
+                                    {bay.name}
                                 </button>
                             </BayListItem>
-                            <BayList>
-                                {sub.bays.map((bay) => (
-                                    <BayListItem key={bay.id}>
-                                        <button
-                                            onClick={() => navigateToBay(bay)}
-                                        >
-                                            {bay.name}
-                                        </button>
-                                    </BayListItem>
-                                ))}
-                            </BayList>
-                        </SubstationItemTop>
-                    )}
+                        ))}
+                    </SubstationItemBody>
                     <SubstationItemBottom>
                         <hr />
                         <button
@@ -68,10 +65,7 @@ const SubstationItem = () => {
                     </SubstationItemBottom>
                 </SubstationItemWrapper>
             </SubstationItemContainer>
-            <NewBay
-                isOpen={isNewBayOpen}
-                onClose={() => setNewBayOpen(false)}
-            />
+            {isNewBayOpen && <NewBay onClose={() => setNewBayOpen(false)} />}
         </>
     );
 };

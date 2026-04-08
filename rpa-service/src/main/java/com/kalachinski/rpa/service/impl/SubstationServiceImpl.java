@@ -43,7 +43,7 @@ public class SubstationServiceImpl implements SubstationService {
 
     @Override
     @Transactional
-    public SubstationDto addNewSubstation(SubstationDto substationDto) {
+    public SubstationDto addSubstation(SubstationDto substationDto) {
         return substationMapper.toDtoWithoutBays(substationRepo.save(new Substation()
                 .setName(substationDto.getName())
 //                .setBranch(Branch.fromField(substationDto.getBranch()))
