@@ -20,10 +20,6 @@ export const addSubstation = async (substation) => {
     return await http.post("/substation/", substation);
 };
 
-export const updateSubstation = async (substation) => {
-    return await http.put(`/substation/${substation.id}`, substation);
-};
-
 export const getAllBranches = async () => {
     return await http.get("/substation/branch");
 };

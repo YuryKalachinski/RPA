@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewSubstationContainer = styled.div`
+export const ModalSubstationContainer = styled.div`
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -12,7 +12,7 @@ export const NewSubstationContainer = styled.div`
     justify-content: center;
 `;
 
-export const NewSubstatioWrapper = styled.div`
+export const ModalSubstatioWrapper = styled.div`
     background-color: var(--color-bg-medium);
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@ export const NewSubstatioWrapper = styled.div`
     max-width: 480px;
 `;
 
-export const NewSubstationHeader = styled.div`
+export const ModalSubstationHeader = styled.div`
     width: 100%;
     padding: 18px;
 
@@ -41,7 +41,7 @@ export const NewSubstationHeader = styled.div`
     }
 `;
 
-export const NewSubstationBody = styled.div`
+export const ModalSubstationBody = styled.div`
     padding: 0 48px 24px 48px;
 
     & button {
@@ -58,7 +58,7 @@ export const NewSubstationBody = styled.div`
     }
 `;
 
-export const NewSubstationButtons = styled.div`
+export const ModalSubstationButtons = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;

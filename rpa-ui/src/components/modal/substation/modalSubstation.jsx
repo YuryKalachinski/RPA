@@ -1,10 +1,10 @@
 import { useState } from "react";
 import {
-    NewSubstationContainer,
-    NewSubstationHeader,
-    NewSubstatioWrapper,
-    NewSubstationBody,
-    NewSubstationButtons,
+    ModalSubstationContainer,
+    ModalSubstationHeader,
+    ModalSubstatioWrapper,
+    ModalSubstationBody,
+    ModalSubstationButtons,
 } from "./styled";
 import { useSubList } from "../../../context/subListProvider";
 import { TextAreaField, TextField, SelectField } from "../../form";
@@ -23,7 +23,7 @@ const ModalSubstation = ({ substation, onClose }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        addSub(getChangedValues());
+        addSub(isNewSub ? current : getChangedValues());
         onClose();
     };
 
@@ -42,16 +42,16 @@ const ModalSubstation = ({ substation, onClose }) => {
     };
 
     return (
-        <NewSubstationContainer>
-            <NewSubstatioWrapper>
-                <NewSubstationHeader>
+        <ModalSubstationContainer>
+            <ModalSubstatioWrapper>
+                <ModalSubstationHeader>
                     <h3>
                         {isNewSub
                             ? "Новая подстанция:"
                             : "Редактор подстанции:"}
                     </h3>
-                </NewSubstationHeader>
-                <NewSubstationBody>
+                </ModalSubstationHeader>
+                <ModalSubstationBody>
                     <form onSubmit={handleSubmit}>
                         <TextField
                             label="Имя подстанции"
@@ -73,18 +73,18 @@ const ModalSubstation = ({ substation, onClose }) => {
                             value={current.description}
                             onChange={handleChange}
                         />
-                        <NewSubstationButtons>
+                        <ModalSubstationButtons>
                             <button className="closeButton" onClick={closeForm}>
                                 Закрыть
                             </button>
                             <button>
                                 {isNewSub ? "Добавить" : "Изменить"}
                             </button>
-                        </NewSubstationButtons>
+                        </ModalSubstationButtons>
                     </form>
-                </NewSubstationBody>
-            </NewSubstatioWrapper>
-        </NewSubstationContainer>
+                </ModalSubstationBody>
+            </ModalSubstatioWrapper>
+        </ModalSubstationContainer>
     );
 };
 
