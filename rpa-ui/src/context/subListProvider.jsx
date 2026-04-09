@@ -18,40 +18,48 @@ const SubListProvider = ({ children }) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        getSubstations();
-        getBranches();
-        setLoading(false);
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                await Promise.all([getSubstations(), getBranches()]);
+            } catch (e) {
+                alert(e.response.data.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
     }, []);
 
     const getSubstations = async () => {
-        try {
-            const response = await getAllSubstations();
-            setSubs(response.data);
-        } catch (e) {
-            alert(e.response.data.message);
-        }
-    };
-
-    const addSub = async (substation) => {
-        try {
-            const response = await addSubstation(substation);
-            setSubs((prev) => [...prev, response.data]);
-        } catch (e) {
-            alert(e.response.data.message);
-        }
+        const { data } = await getAllSubstations();
+        setSubs(data);
     };
 
     const getBranches = async () => {
+        const { data } = await getAllBranches();
+        setBranches(data);
+    };
+
+    const addUpdateSub = async (substation) => {
         try {
-            const response = await getAllBranches();
-            setBranches(response.data);
+            const { data } = await addSubstation(substation);
+            setSubs((prev) => {
+                if (prev.some((item) => item.id === data.id)) {
+                    return prev.map((item) =>
+                        item.id === data.id ? data : item,
+                    );
+                } else {
+                    return [...prev, data];
+                }
+            });
         } catch (e) {
             alert(e.response.data.message);
         }
     };
 
     return (
-        <SubListContext.Provider value={{ subs, branches, addSub }}>
+        <SubListContext.Provider value={{ subs, branches, addUpdateSub }}>
             {!isLoading ? children : <LoadingAnimation />}
         </SubListContext.Provider>
     );

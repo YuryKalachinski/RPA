@@ -17,7 +17,7 @@ public class BayDto {
     private Long id;
     private String name;
     private String description;
-    private Byte cellNumber;
+    private String cellNumber;
     private SubstationSimpleDto substation;
     private VoltageLevel voltageLevel;
 //    private Set<TripDto> trips;

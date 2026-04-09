@@ -16,7 +16,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(255)"/>
-            <column name="cell_number" type="smallint"/>
+            <column name="cell_number" type="varchar(64)"/>
             <column name="substation_id" type="bigint"/>
             <column name="voltage_level" type="varchar(64)">
                 <constraints nullable="false"/>

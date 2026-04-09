@@ -31,6 +31,6 @@ public enum Branch {
                 return branch;
             }
         }
-        throw new IllegalArgumentException("Неизвестный поле: " + field);
+        throw new IllegalArgumentException("Неизвестное поле: " + field);
     }
 }

@@ -18,10 +18,4 @@ public class SubstationSimpleDto {
     @Schema(description = "Name of the substation")
     @NotNull
     private String name;
-
-//    @Schema(description = "Description of the substation")
-//    private String description;
-
-//    @Schema(description = "Branch of the substation")
-//    private Branch branch;
 }

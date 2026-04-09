@@ -16,9 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,25 +75,23 @@ public class SubstationController {
 
     @PostMapping("/")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<SubstationDto> addSubstation(
+    public ResponseEntity<SubstationDto> saveSubstation(
             @RequestBody SubstationDto substationDto
     ) {
-        return ResponseEntity.ok().body(substationService.addSubstation(substationDto));
+        return ResponseEntity.ok().body(substationService.saveOrUpdateSubstation(substationDto));
+    }
+
+    @PatchMapping("/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<SubstationDto> updateSubstation(
+            @RequestBody SubstationDto substationDto
+    ) {
+        return ResponseEntity.ok().body(substationService.saveOrUpdateSubstation(substationDto));
     }
 
     @GetMapping("/branch")
     @PreAuthorize("hasAuthority('VIEWER')")
     public ResponseEntity<List<Branch>> getAllBranch() {
         return ResponseEntity.ok().body(substationService.getAllBranches());
-    }
-
-    @PostMapping("/{subId}/bay/")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<SubstationDto> addBay(
-            @Parameter(description = "Substation id", example = "1")
-            @PathVariable("subId") Long subId,
-            @RequestBody BayDto bayDto
-    ) {
-        return ResponseEntity.ok().body(substationService.addBay(subId, bayDto));
     }
 }

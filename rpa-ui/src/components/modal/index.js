@@ -1,5 +1,5 @@
-import NewBay from "./bay/newBay";
+import Bay from "./bay/bay";
 import NewComplex from "./complex/newComplex";
-import ModalSubstation from "./substation/modalSubstation";
+import Substation from "./substation/substation";
 
-export { NewBay, NewComplex, ModalSubstation };
+export { Bay, NewComplex, Substation };

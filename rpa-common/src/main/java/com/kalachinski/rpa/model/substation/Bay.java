@@ -33,7 +33,7 @@ public class Bay extends BaseEntity {
     private String description;
 
     @Column(name = "cell_number")
-    private Byte cellNumber;
+    private String cellNumber;
 
     @ManyToOne
     @JoinColumn(name = "substation_id")

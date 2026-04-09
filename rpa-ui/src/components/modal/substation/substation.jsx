@@ -1,18 +1,18 @@
 import { useState } from "react";
 import {
-    ModalSubstationContainer,
-    ModalSubstationHeader,
-    ModalSubstatioWrapper,
-    ModalSubstationBody,
-    ModalSubstationButtons,
+    SubstationContainer,
+    SubstationHeader,
+    SubstationWrapper,
+    SubstationBody,
+    SubstationButtons,
 } from "./styled";
 import { useSubList } from "../../../context/subListProvider";
 import { TextAreaField, TextField, SelectField } from "../../form";
 
-const ModalSubstation = ({ substation, onClose }) => {
+const Substation = ({ substation, onClose }) => {
     const isNewSub = substation.id ? false : true;
     const [current, setCurrent] = useState(substation);
-    const { addSub, branches } = useSubList();
+    const { addUpdateSub, branches } = useSubList();
 
     const handleChange = ({ target }) => {
         setCurrent((prevState) => ({
@@ -23,7 +23,7 @@ const ModalSubstation = ({ substation, onClose }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        addSub(isNewSub ? current : getChangedValues());
+        addUpdateSub(isNewSub ? current : getChangedValues());
         onClose();
     };
 
@@ -33,25 +33,28 @@ const ModalSubstation = ({ substation, onClose }) => {
     };
 
     const getChangedValues = () => {
-        return Object.keys(current).reduce((acc, key) => {
-            if (current[key] !== substation[key]) {
-                acc[key] = current[key];
-            }
-            return acc;
-        }, {});
+        return Object.keys(current).reduce(
+            (acc, key) => {
+                if (current[key] !== substation[key]) {
+                    acc[key] = current[key];
+                }
+                return acc;
+            },
+            { id: current.id },
+        );
     };
 
     return (
-        <ModalSubstationContainer>
-            <ModalSubstatioWrapper>
-                <ModalSubstationHeader>
+        <SubstationContainer>
+            <SubstationWrapper>
+                <SubstationHeader>
                     <h3>
                         {isNewSub
                             ? "Новая подстанция:"
                             : "Редактор подстанции:"}
                     </h3>
-                </ModalSubstationHeader>
-                <ModalSubstationBody>
+                </SubstationHeader>
+                <SubstationBody>
                     <form onSubmit={handleSubmit}>
                         <TextField
                             label="Имя подстанции"
@@ -73,19 +76,19 @@ const ModalSubstation = ({ substation, onClose }) => {
                             value={current.description}
                             onChange={handleChange}
                         />
-                        <ModalSubstationButtons>
+                        <SubstationButtons>
                             <button className="closeButton" onClick={closeForm}>
                                 Закрыть
                             </button>
                             <button>
                                 {isNewSub ? "Добавить" : "Изменить"}
                             </button>
-                        </ModalSubstationButtons>
+                        </SubstationButtons>
                     </form>
-                </ModalSubstationBody>
-            </ModalSubstatioWrapper>
-        </ModalSubstationContainer>
+                </SubstationBody>
+            </SubstationWrapper>
+        </SubstationContainer>
     );
 };
 
-export default ModalSubstation;
+export default Substation;

@@ -5,14 +5,14 @@ import com.kalachinski.rpa.model.substation.Substation;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring",
-        unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         uses = {BayMapper.class}
 )
 public interface SubstationMapper {
@@ -26,4 +26,8 @@ public interface SubstationMapper {
 
     @Mapping(target = "bays", qualifiedByName = "BayMapperSubstationWithBay")
     SubstationDto toDtoWithBays(Substation substation);
+
+    void updateEntityFromDto(SubstationDto dto, @MappingTarget Substation substation);
+
+    Substation toEntity (SubstationDto dto);
 }

@@ -3,6 +3,7 @@ package com.kalachinski.rpa.controller;
 import com.kalachinski.rpa.dto.bay.BayDto;
 import com.kalachinski.rpa.dto.complex.ComplexDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
+import com.kalachinski.rpa.model.substation.VoltageLevel;
 import com.kalachinski.rpa.service.BayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,11 +15,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -60,5 +64,27 @@ public class BayController {
             @RequestBody ComplexDto complexDto
     ) {
         return ResponseEntity.ok().body(bayService.addComplex(bayId, complexDto));
+    }
+
+    @GetMapping("/voltage_level")
+    @PreAuthorize("hasAuthority('VIEWER')")
+    public ResponseEntity<List<VoltageLevel>> getAllVoltageLevel() {
+        return ResponseEntity.ok().body(bayService.getAllVoltageLevel());
+    }
+
+    @PostMapping("/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<BayDto> saveBay(
+            @RequestBody BayDto bayDto
+    ) {
+        return ResponseEntity.ok().body(bayService.saveOrUpdateBay(bayDto));
+    }
+
+    @PatchMapping("/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<BayDto> updateBay(
+            @RequestBody BayDto bayDto
+    ) {
+        return ResponseEntity.ok().body(bayService.saveOrUpdateBay(bayDto));
     }
 }

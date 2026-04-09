@@ -14,15 +14,15 @@ import {
 } from "./styled";
 import { useNavigate, generatePath } from "react-router-dom";
 import { SUBSTATION_ROUTE } from "../../utils/constants";
-import { ModalSubstation } from "../modal";
+import { Substation as SubstationModal } from "../modal";
 import { DeleteLogo, EditLogo, PlusLogo } from "../common/images";
 import { useSubList } from "../../context/subListProvider";
 
 const SubstationList = () => {
     const { subs } = useSubList();
     const emptySub = { name: "", branch: "", description: "" };
-    const [isModalSubOpen, setModalSubOpen] = useState(false);
-    const [selectedSub, setSelectedSub] = useState(null);
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedSub, setSelectedSub] = useState(emptySub);
     // const [filter, setFilter] = useState({ sort: '', query: '' });
     const [filter, setFilter] = useState({ query: "" });
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const SubstationList = () => {
 
     const editSubstation = (current) => {
         setSelectedSub(current);
-        setModalSubOpen(true);
+        setModalOpen(true);
     };
 
     const deleteSubstation = (substation) => {
@@ -63,7 +63,6 @@ const SubstationList = () => {
                             setFilter={setFilter}
                         />
                         <NewSubstationListItem>
-                            {/* <button onClick={() => setNewSubOpen(true)}> */}
                             <button onClick={() => editSubstation(emptySub)}>
                                 <p>Добавить новую подстанцию</p>
                                 <img src={PlusLogo} alt="add new substation" />
@@ -100,9 +99,9 @@ const SubstationList = () => {
                     <SubstationListBottom></SubstationListBottom>
                 </SubstationListWrapper>
             </SubstationListContainer>
-            {isModalSubOpen && (
-                <ModalSubstation
-                    onClose={() => setModalSubOpen(false)}
+            {isModalOpen && (
+                <SubstationModal
+                    onClose={() => setModalOpen(false)}
                     substation={selectedSub}
                 />
             )}

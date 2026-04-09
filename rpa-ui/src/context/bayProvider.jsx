@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 import { useParams } from "react-router-dom";
-import { addComplex, getBayById } from "../http/substationAPI";
+import { addComplex } from "../http/substationAPI";
+import { getBayById } from "../http/bayApi";
 
 const BayContext = createContext();
 

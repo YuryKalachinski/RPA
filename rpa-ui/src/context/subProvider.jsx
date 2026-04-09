@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { addBay, getSubstationById } from "../http/substationAPI";
+import { getSubstationById } from "../http/substationAPI";
+import { addBay, getAllVoltageLevels } from "../http/bayApi";
 import { useParams } from "react-router-dom";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 
@@ -11,34 +12,56 @@ export const useSub = () => {
 
 const SubProvider = ({ children }) => {
     const { id } = useParams();
-    const [sub, setSub] = useState();
+    const [sub, setSub] = useState([]);
+    const [voltageLevelList, setVoltageLevelList] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        getSubstation(id);
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                await Promise.all([getSubstation(id), getVoltageLevelList()]);
+            } catch (e) {
+                alert(e.response.data.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
     }, [id]);
 
-    const getSubstation = async (subId) => {
-        try {
-            const response = await getSubstationById(subId);
-            setSub(response.data);
-            setLoading(false);
-        } catch (e) {
-            alert(e.response.data.message);
-        }
+    const getSubstation = async (id) => {
+        const response = await getSubstationById(id);
+        setSub(response.data);
     };
 
-    const addNewBay = async (bay) => {
+    const getVoltageLevelList = async () => {
+        const { data } = await getAllVoltageLevels();
+        setVoltageLevelList(data);
+    };
+
+    const addUpdateBay = async (bay) => {
         try {
-            const response = await addBay(id, bay);
-            setSub(response.data);
+            const { data } = await addBay(bay);
+            setSub((prev) => {
+                const isExist = prev.bays.some((item) => item.id === data.id);
+                return {
+                    ...prev,
+                    bays: isExist
+                        ? prev.bays.map((item) =>
+                              item.id === data.id ? data : item,
+                          )
+                        : [...prev.bays, data],
+                };
+            });
         } catch (e) {
             alert(e.response.data.message);
         }
     };
 
     return (
-        <SubContext.Provider value={{ sub, addNewBay }}>
+        <SubContext.Provider value={{ sub, voltageLevelList, addUpdateBay }}>
             {!isLoading ? children : <LoadingAnimation />}
         </SubContext.Provider>
     );

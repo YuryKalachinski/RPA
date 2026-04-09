@@ -1,6 +1,5 @@
 package com.kalachinski.rpa.service;
 
-import com.kalachinski.rpa.dto.bay.BayDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
 import com.kalachinski.rpa.model.substation.Branch;
 
@@ -12,9 +11,7 @@ public interface SubstationService {
 
     SubstationDto getById(Long id);
 
-    SubstationDto addSubstation(SubstationDto substationDto);
-
-    SubstationDto addBay(Long subId, BayDto bayDto);
+    SubstationDto saveOrUpdateSubstation(SubstationDto substationDto);
 
     List<Branch> getAllBranches();
 }

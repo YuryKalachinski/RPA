@@ -82,6 +82,7 @@ export const SubstationListRow = styled.div`
         background-color: var(--color-bg-light);
     }
 `;
+
 export const SubstationListItem = styled.button`
     background: transparent;
     color: var(--color-link-hover);

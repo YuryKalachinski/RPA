@@ -1,9 +1,7 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.dto.bay.BayDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
 import com.kalachinski.rpa.mapper.SubstationMapper;
-import com.kalachinski.rpa.model.substation.Bay;
 import com.kalachinski.rpa.model.substation.Branch;
 import com.kalachinski.rpa.model.substation.Substation;
 import com.kalachinski.rpa.repositories.SubstationRepo;
@@ -21,13 +19,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequiredArgsConstructor
 public class SubstationServiceImpl implements SubstationService {
 
-    private final SubstationRepo substationRepo;
-    private final SubstationMapper substationMapper;
+    private final SubstationRepo repo;
+    private final SubstationMapper mapper;
 
     @Override
     @Transactional
     public List<SubstationDto> getAll() {
-        return substationMapper.toDtoList(substationRepo.findAll());
+        return mapper.toDtoList(repo.findAll());
     }
 
     @Override
@@ -36,39 +34,29 @@ public class SubstationServiceImpl implements SubstationService {
 
         //todo handle ResponseStatusException
 
-        return substationMapper.toDtoWithBays(substationRepo.findById(id)
+        return mapper.toDtoWithBays(repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                         String.format("Unable to find resource with requested id=%d", id))));
     }
 
     @Override
     @Transactional
-    public SubstationDto addSubstation(SubstationDto substationDto) {
-        return substationMapper.toDtoWithoutBays(substationRepo.save(new Substation()
-                .setName(substationDto.getName())
-//                .setBranch(Branch.fromField(substationDto.getBranch()))
-                .setBranch(substationDto.getBranch()))
-                .setDescription(substationDto.getDescription()));
+    public SubstationDto saveOrUpdateSubstation(SubstationDto dto) {
+        Substation current;
+        var id = dto.getId();
+        if (id != null) {
+            current = repo.findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
+                            String.format("Unable to find resource with requested id=%d", id)));
+            mapper.updateEntityFromDto(dto, current);
+        } else {
+            current = mapper.toEntity(dto);
+        }
+        return mapper.toDtoWithoutBays(repo.save(current));
     }
 
     @Override
     public List<Branch> getAllBranches() {
         return List.of(Branch.values());
-    }
-
-    @Override
-    @Transactional
-    public SubstationDto addBay(Long id, BayDto bayDto) {
-        Substation current = substationRepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                        String.format("Unable to find resource with requested id=%d", id)));
-        current.getBays().add(new Bay()
-                .setName(bayDto.getName())
-                .setDescription(bayDto.getDescription())
-                .setCellNumber(bayDto.getCellNumber())
-                .setSubstation(current)
-                .setVoltageLevel(bayDto.getVoltageLevel())
-        );
-        return substationMapper.toDtoWithBays(substationRepo.save(current));
     }
 }
