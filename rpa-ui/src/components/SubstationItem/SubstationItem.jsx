@@ -5,20 +5,30 @@ import {
     SubstationItemBottom,
     SubstationItemTop,
     SubstationItemHeader,
-    BayListItem,
+    NewBayItem,
     SubstationItemBody,
-    NewBayListItem,
+    BayListItem,
+    BayListItemRow,
+    BayListItemButton,
 } from "./styled";
 import { useNavigate, generatePath } from "react-router-dom";
 import { BAY_ROUTE } from "../../utils/constants";
 import { useSub } from "../../context/subProvider";
-import { PlusLogo } from "../common/images/";
-import { NewBay } from "../modal/";
+import { DeleteLogo, EditLogo, PlusLogo } from "../common/images/";
+import { Bay } from "../modal/";
 
 const SubstationItem = () => {
     const { sub } = useSub();
+    const emptyBay = {
+        name: "",
+        description: "",
+        voltageLevel: "",
+        cellNumber: "",
+        substation: { id: sub.id, name: sub.name },
+    };
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedBay, setSelectedBay] = useState(emptyBay);
     const navigate = useNavigate();
-    const [isNewBayOpen, setNewBayOpen] = useState(false);
 
     const navigateToBay = (bay) => {
         const path = generatePath(BAY_ROUTE, {
@@ -28,6 +38,16 @@ const SubstationItem = () => {
         navigate(path);
     };
 
+    const editBay = (current) => {
+        setSelectedBay(current);
+        setModalOpen(true);
+    };
+
+    const deleteBay = (current) => {
+        console.log("Delete");
+        console.log(current);
+    };
+
     return (
         <>
             <SubstationItemContainer>
@@ -35,22 +55,37 @@ const SubstationItem = () => {
                     <SubstationItemTop>
                         <SubstationItemHeader>
                             <h3>Подстанция: {sub.name} </h3>
+                            <h4>{sub.description}</h4>
                             <p>Присоединения:</p>
                         </SubstationItemHeader>
-                        <NewBayListItem>
-                            <button onClick={() => setNewBayOpen(true)}>
+                        <NewBayItem>
+                            <button onClick={() => editBay(emptyBay)}>
                                 <p>Добавить новое присоединение</p>
                                 <img src={PlusLogo} alt="add new bay" />
                             </button>
-                        </NewBayListItem>
+                        </NewBayItem>
                     </SubstationItemTop>
                     <SubstationItemBody>
                         {sub.bays.map((bay) => (
-                            <BayListItem key={bay.id}>
-                                <button onClick={() => navigateToBay(bay)}>
+                            <BayListItemRow key={bay.id}>
+                                <BayListItem onClick={() => navigateToBay(bay)}>
                                     {bay.name}
-                                </button>
-                            </BayListItem>
+                                </BayListItem>
+                                <BayListItemButton onClick={() => editBay(bay)}>
+                                    <img
+                                        src={EditLogo}
+                                        alt="Edit current substation"
+                                    />
+                                </BayListItemButton>
+                                <BayListItemButton
+                                    onClick={() => deleteBay(bay)}
+                                >
+                                    <img
+                                        src={DeleteLogo}
+                                        alt="Delete current substation"
+                                    />
+                                </BayListItemButton>
+                            </BayListItemRow>
                         ))}
                     </SubstationItemBody>
                     <SubstationItemBottom>
@@ -65,7 +100,9 @@ const SubstationItem = () => {
                     </SubstationItemBottom>
                 </SubstationItemWrapper>
             </SubstationItemContainer>
-            {isNewBayOpen && <NewBay onClose={() => setNewBayOpen(false)} />}
+            {isModalOpen && (
+                <Bay onClose={() => setModalOpen(false)} bay={selectedBay} />
+            )}
         </>
     );
 };
