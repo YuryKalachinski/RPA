@@ -8,11 +8,13 @@ import {
 } from "./styled";
 import { useSubList } from "../../../context/subListProvider";
 import { TextAreaField, TextField, SelectField } from "../../form";
+import { useUtility } from "../../../context/utilityProvider";
 
 const Substation = ({ substation, onClose }) => {
     const isNewSub = substation.id ? false : true;
     const [current, setCurrent] = useState(substation);
-    const { addUpdateSub, branches } = useSubList();
+    const { addUpdateSub } = useSubList();
+    const { branches } = useUtility();
 
     const handleChange = ({ target }) => {
         setCurrent((prevState) => ({

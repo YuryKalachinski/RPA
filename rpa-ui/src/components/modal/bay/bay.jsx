@@ -8,11 +8,13 @@ import {
 } from "./styled";
 import { SelectField, TextAreaField, TextField } from "../../form";
 import { useSub } from "../../../context/subProvider";
+import { useUtility } from "../../../context/utilityProvider";
 
 const Bay = ({ bay, onClose }) => {
     const isNewBay = bay.id ? false : true;
     const [current, setCurrent] = useState(bay);
-    const { addUpdateBay, voltageLevelList } = useSub();
+    const { addUpdateBay } = useSub();
+    const { voltageLevelList } = useUtility();
 
     const handleChange = ({ target }) => {
         setCurrent((prevState) => ({

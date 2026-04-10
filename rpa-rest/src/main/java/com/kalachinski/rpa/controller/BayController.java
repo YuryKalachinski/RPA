@@ -3,7 +3,6 @@ package com.kalachinski.rpa.controller;
 import com.kalachinski.rpa.dto.bay.BayDto;
 import com.kalachinski.rpa.dto.complex.ComplexDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
-import com.kalachinski.rpa.model.substation.VoltageLevel;
 import com.kalachinski.rpa.service.BayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -34,10 +31,10 @@ public class BayController {
     //todo make swagger annotations
     //todo make logging
 
-    private final BayService bayService;
+    private final BayService service;
 
     public BayController(BayService bayService) {
-        this.bayService = bayService;
+        this.service = bayService;
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE, value = "/{id}")
@@ -53,7 +50,7 @@ public class BayController {
     public ResponseEntity<BayDto> getBayById(
             @Parameter(description = "Bay id", example = "1")
             @PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(bayService.getById(id));
+        return ResponseEntity.ok().body(service.getById(id));
     }
 
     @PostMapping("/{bayId}/complex/")
@@ -63,13 +60,7 @@ public class BayController {
             @PathVariable("bayId") Long bayId,
             @RequestBody ComplexDto complexDto
     ) {
-        return ResponseEntity.ok().body(bayService.addComplex(bayId, complexDto));
-    }
-
-    @GetMapping("/voltage_level")
-    @PreAuthorize("hasAuthority('VIEWER')")
-    public ResponseEntity<List<VoltageLevel>> getAllVoltageLevel() {
-        return ResponseEntity.ok().body(bayService.getAllVoltageLevel());
+        return ResponseEntity.ok().body(service.addComplex(bayId, complexDto));
     }
 
     @PostMapping("/")
@@ -77,7 +68,7 @@ public class BayController {
     public ResponseEntity<BayDto> saveBay(
             @RequestBody BayDto bayDto
     ) {
-        return ResponseEntity.ok().body(bayService.saveOrUpdateBay(bayDto));
+        return ResponseEntity.ok().body(service.saveOrUpdateBay(bayDto));
     }
 
     @PatchMapping("/")
@@ -85,6 +76,6 @@ public class BayController {
     public ResponseEntity<BayDto> updateBay(
             @RequestBody BayDto bayDto
     ) {
-        return ResponseEntity.ok().body(bayService.saveOrUpdateBay(bayDto));
+        return ResponseEntity.ok().body(service.saveOrUpdateBay(bayDto));
     }
 }

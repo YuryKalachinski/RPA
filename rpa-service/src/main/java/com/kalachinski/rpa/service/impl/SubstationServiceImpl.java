@@ -2,7 +2,6 @@ package com.kalachinski.rpa.service.impl;
 
 import com.kalachinski.rpa.dto.substation.SubstationDto;
 import com.kalachinski.rpa.mapper.SubstationMapper;
-import com.kalachinski.rpa.model.substation.Branch;
 import com.kalachinski.rpa.model.substation.Substation;
 import com.kalachinski.rpa.repositories.SubstationRepo;
 import com.kalachinski.rpa.service.SubstationService;
@@ -53,10 +52,5 @@ public class SubstationServiceImpl implements SubstationService {
             current = mapper.toEntity(dto);
         }
         return mapper.toDtoWithoutBays(repo.save(current));
-    }
-
-    @Override
-    public List<Branch> getAllBranches() {
-        return List.of(Branch.values());
     }
 }

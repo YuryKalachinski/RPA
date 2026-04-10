@@ -1,9 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-    getAllSubstations,
-    addSubstation,
-    getAllBranches,
-} from "../http/substationAPI";
+import { getAllSubstations, addSubstation } from "../http/substationAPI";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 
 const SubListContext = createContext();
@@ -14,14 +10,13 @@ export const useSubList = () => {
 
 const SubListProvider = ({ children }) => {
     const [subs, setSubs] = useState([]);
-    const [branches, setBranches] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                await Promise.all([getSubstations(), getBranches()]);
+                await Promise.all([getSubstations()]);
             } catch (e) {
                 alert(e.response.data.message);
             } finally {
@@ -34,11 +29,6 @@ const SubListProvider = ({ children }) => {
     const getSubstations = async () => {
         const { data } = await getAllSubstations();
         setSubs(data);
-    };
-
-    const getBranches = async () => {
-        const { data } = await getAllBranches();
-        setBranches(data);
     };
 
     const addUpdateSub = async (substation) => {
@@ -59,7 +49,7 @@ const SubListProvider = ({ children }) => {
     };
 
     return (
-        <SubListContext.Provider value={{ subs, branches, addUpdateSub }}>
+        <SubListContext.Provider value={{ subs, addUpdateSub }}>
             {!isLoading ? children : <LoadingAnimation />}
         </SubListContext.Provider>
     );

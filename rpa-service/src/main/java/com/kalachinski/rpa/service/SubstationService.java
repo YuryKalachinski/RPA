@@ -1,7 +1,6 @@
 package com.kalachinski.rpa.service;
 
 import com.kalachinski.rpa.dto.substation.SubstationDto;
-import com.kalachinski.rpa.model.substation.Branch;
 
 import java.util.List;
 
@@ -12,6 +11,4 @@ public interface SubstationService {
     SubstationDto getById(Long id);
 
     SubstationDto saveOrUpdateSubstation(SubstationDto substationDto);
-
-    List<Branch> getAllBranches();
 }

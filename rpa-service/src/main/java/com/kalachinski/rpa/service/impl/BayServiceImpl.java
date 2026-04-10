@@ -5,15 +5,12 @@ import com.kalachinski.rpa.dto.complex.ComplexDto;
 import com.kalachinski.rpa.mapper.BayMapper;
 import com.kalachinski.rpa.model.substation.Bay;
 import com.kalachinski.rpa.model.substation.Complex;
-import com.kalachinski.rpa.model.substation.VoltageLevel;
 import com.kalachinski.rpa.repositories.BayRepo;
 import com.kalachinski.rpa.service.BayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -50,11 +47,6 @@ public class BayServiceImpl implements BayService {
                 .setBay(current)
         );
         return mapper.toDtoWithComplexes(current);
-    }
-
-    @Override
-    public List<VoltageLevel> getAllVoltageLevel() {
-        return List.of(VoltageLevel.values());
     }
 
     @Override

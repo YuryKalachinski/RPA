@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getSubstationById } from "../http/substationAPI";
-import { addBay, getAllVoltageLevels } from "../http/bayApi";
+import { addBay } from "../http/bayApi";
 import { useParams } from "react-router-dom";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 
@@ -13,14 +13,13 @@ export const useSub = () => {
 const SubProvider = ({ children }) => {
     const { id } = useParams();
     const [sub, setSub] = useState([]);
-    const [voltageLevelList, setVoltageLevelList] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                await Promise.all([getSubstation(id), getVoltageLevelList()]);
+                await Promise.all([getSubstation(id)]);
             } catch (e) {
                 alert(e.response.data.message);
             } finally {
@@ -34,11 +33,6 @@ const SubProvider = ({ children }) => {
     const getSubstation = async (id) => {
         const response = await getSubstationById(id);
         setSub(response.data);
-    };
-
-    const getVoltageLevelList = async () => {
-        const { data } = await getAllVoltageLevels();
-        setVoltageLevelList(data);
     };
 
     const addUpdateBay = async (bay) => {
@@ -61,7 +55,7 @@ const SubProvider = ({ children }) => {
     };
 
     return (
-        <SubContext.Provider value={{ sub, voltageLevelList, addUpdateBay }}>
+        <SubContext.Provider value={{ sub, addUpdateBay }}>
             {!isLoading ? children : <LoadingAnimation />}
         </SubContext.Provider>
     );

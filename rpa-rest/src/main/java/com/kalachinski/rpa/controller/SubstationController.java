@@ -1,8 +1,6 @@
 package com.kalachinski.rpa.controller;
 
-import com.kalachinski.rpa.dto.bay.BayDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
-import com.kalachinski.rpa.model.substation.Branch;
 import com.kalachinski.rpa.service.SubstationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -37,10 +35,10 @@ public class SubstationController {
 
     private static final Logger log = LoggerFactory.getLogger(SubstationController.class);
 
-    private final SubstationService substationService;
+    private final SubstationService service;
 
     public SubstationController(SubstationService substationService) {
-        this.substationService = substationService;
+        this.service = substationService;
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
@@ -54,7 +52,7 @@ public class SubstationController {
             })
     @PreAuthorize("hasAuthority('VIEWER')")
     public ResponseEntity<List<SubstationDto>> getAllSubstations() {
-        return ResponseEntity.ok().body(substationService.getAll());
+        return ResponseEntity.ok().body(service.getAll());
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE, value = "/{id}")
@@ -70,7 +68,7 @@ public class SubstationController {
     public ResponseEntity<SubstationDto> getSubstationById(
             @Parameter(description = "Substation id", example = "1")
             @PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(substationService.getById(id));
+        return ResponseEntity.ok().body(service.getById(id));
     }
 
     @PostMapping("/")
@@ -78,7 +76,7 @@ public class SubstationController {
     public ResponseEntity<SubstationDto> saveSubstation(
             @RequestBody SubstationDto substationDto
     ) {
-        return ResponseEntity.ok().body(substationService.saveOrUpdateSubstation(substationDto));
+        return ResponseEntity.ok().body(service.saveOrUpdateSubstation(substationDto));
     }
 
     @PatchMapping("/")
@@ -86,12 +84,6 @@ public class SubstationController {
     public ResponseEntity<SubstationDto> updateSubstation(
             @RequestBody SubstationDto substationDto
     ) {
-        return ResponseEntity.ok().body(substationService.saveOrUpdateSubstation(substationDto));
-    }
-
-    @GetMapping("/branch")
-    @PreAuthorize("hasAuthority('VIEWER')")
-    public ResponseEntity<List<Branch>> getAllBranch() {
-        return ResponseEntity.ok().body(substationService.getAllBranches());
+        return ResponseEntity.ok().body(service.saveOrUpdateSubstation(substationDto));
     }
 }
