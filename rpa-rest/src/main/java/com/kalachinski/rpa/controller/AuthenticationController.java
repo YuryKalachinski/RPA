@@ -4,6 +4,7 @@ import com.kalachinski.rpa.dto.AuthRequestDto;
 import com.kalachinski.rpa.dto.RegisterRequestDto;
 import com.kalachinski.rpa.dto.TokenDto;
 import com.kalachinski.rpa.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Tag(name = "Authentication", description = "Endpoints for working with User authentication")
 @RequestMapping("/authentication")
 @RequiredArgsConstructor
+@RestController
 public class AuthenticationController {
 
     //todo make swagger annotations

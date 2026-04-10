@@ -10,14 +10,30 @@ import {
 } from "./styled";
 import { ComplexItem } from "../complexItem";
 import { useBay } from "../../context/bayProvider";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { PlusLogo } from "../common/images";
-import { NewComplex } from "../modal";
+import { Complex as ComplexModal } from "../modal";
 
 const BayItem = () => {
     const { bay } = useBay();
+    const emptyComplex = {
+        name: "",
+        description: "",
+        bay: { id: bay.id, name: bay.name },
+        protections: [],
+    };
+    const [selectedComplex, setSelectedComplex] = useState(emptyComplex);
+    const [isModalOpen, setModalOpen] = useState(false);
     const navigate = useNavigate();
-    const [isNewComplexOpen, setNewComplexOpen] = useState(false);
+
+    const sortedComplexes = useMemo(() => {
+        return [...bay.complexes].sort((a, b) => a.name.localeCompare(b.name));
+    }, [bay]);
+
+    const editComplex = (complex) => {
+        setSelectedComplex(complex);
+        setModalOpen(true);
+    };
 
     return (
         <>
@@ -26,14 +42,22 @@ const BayItem = () => {
                     <BayItemTop>
                         <BayItemHeader>
                             <h3>{bay?.substation?.name}</h3>
-                            <p>{bay?.name}:</p>
+                            <p>
+                                {bay?.name} {bay?.description} :
+                            </p>
                         </BayItemHeader>
                     </BayItemTop>
                     <BayItemBody>
-                        {bay.complexes.map((el) => (
-                            <ComplexItem key={el.id} complex={el} />
+                        {sortedComplexes.map((el) => (
+                            <ComplexItem
+                                key={el.id}
+                                complex={el}
+                                editComplex={() => editComplex(el)}
+                            />
                         ))}
-                        <NewComplexItem onClick={() => setNewComplexOpen(true)}>
+                        <NewComplexItem
+                            onClick={() => editComplex(emptyComplex)}
+                        >
                             <img src={PlusLogo} alt="add new bay" />
                         </NewComplexItem>
                     </BayItemBody>
@@ -49,8 +73,11 @@ const BayItem = () => {
                     </BayItemBottom>
                 </BayItemWrapper>
             </BayItemContainer>
-            {isNewComplexOpen && (
-                <NewComplex onClose={() => setNewComplexOpen(false)} />
+            {isModalOpen && (
+                <ComplexModal
+                    onClose={() => setModalOpen(false)}
+                    complex={selectedComplex}
+                />
             )}
         </>
     );

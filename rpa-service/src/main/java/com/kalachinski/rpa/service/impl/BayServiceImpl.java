@@ -14,8 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class BayServiceImpl implements BayService {
 
     private final BayRepo repo;

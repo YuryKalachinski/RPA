@@ -57,6 +57,31 @@ export const ComplexItemTitle = styled.div`
     font-size: 16px;
     line-height: 120%;
     margin-bottom: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const ComplexItemEdit = styled.button`
+    background: transparent;
+    color: var(--color-link-hover);
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-bg-light);
+        border-radius: 10px;
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+    & img {
+        width: 20px;
+    }
 `;
 
 export const ComplexItemType = styled.div`

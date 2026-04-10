@@ -11,11 +11,3 @@ export const getSubstationById = async (id) => {
 export const addSubstation = async (substation) => {
     return await http.post("/substation/", substation);
 };
-
-export const getComplexById = async (id) => {
-    return await http.get("/complex/" + id);
-};
-
-export const addComplex = async (bay_id, complex) => {
-    return await http.post(`/bay/${bay_id}/complex/`, complex);
-};

@@ -1,5 +1,5 @@
 import Bay from "./bay/bay";
-import NewComplex from "./complex/newComplex";
+import Complex from "./complex/complex";
 import Substation from "./substation/substation";
 
-export { Bay, NewComplex, Substation };
+export { Bay, Complex, Substation };

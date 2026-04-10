@@ -2,15 +2,16 @@ import { useState } from "react";
 import {
     ComplexItemBody,
     ComplexItemConteiner,
+    ComplexItemEdit,
     ComplexItemTitle,
     ComplexItemType,
     ComplexItemWrapper,
     SettingsButton,
 } from "./styled";
-import { MinusLogo, PlusLogo } from "../common/images/";
+import { EditLogo, MinusLogo, PlusLogo } from "../common/images/";
 import ProtectionItem from "../protectionItem/protectionItem";
 
-const ComplexItem = ({ complex }) => {
+const ComplexItem = ({ complex, editComplex }) => {
     const [visible, setVisible] = useState(false);
 
     const changeComplexForm = () => {
@@ -21,7 +22,15 @@ const ComplexItem = ({ complex }) => {
         <ComplexItemConteiner>
             <ComplexItemWrapper>
                 <ComplexItemBody>
-                    <ComplexItemTitle>{complex.name}</ComplexItemTitle>
+                    <ComplexItemTitle>
+                        {complex.name}
+                        <ComplexItemEdit onClick={editComplex}>
+                            <img
+                                src={EditLogo}
+                                alt="Edit parameters of complex"
+                            />
+                        </ComplexItemEdit>
+                    </ComplexItemTitle>
                     <ComplexItemType>{complex.description}</ComplexItemType>
                     <SettingsButton onClick={changeComplexForm}>
                         <img

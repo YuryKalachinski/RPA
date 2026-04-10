@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
 import { useParams } from "react-router-dom";
-import { addComplex } from "../http/substationAPI";
+import { addComplex } from "../http/complexApi";
 import { getBayById } from "../http/bayApi";
 
 const BayContext = createContext();
@@ -29,10 +29,22 @@ const BayProvider = ({ children }) => {
         }
     };
 
-    const addNewComplex = async (complex) => {
+    const addUpdateComplex = async (complex) => {
         try {
-            const response = await addComplex(bay.id, complex);
-            setBay(response.data);
+            const { data } = await addComplex(complex);
+            setBay((prev) => {
+                const isExist = prev.complexes.some(
+                    (item) => item.id === data.id,
+                );
+                return {
+                    ...prev,
+                    complexes: isExist
+                        ? prev.complexes.map((item) =>
+                              item.id === data.id ? data : item,
+                          )
+                        : [...prev.complexes, data],
+                };
+            });
             setLoading(false);
         } catch (e) {
             alert(e.response.data.message);
@@ -40,7 +52,7 @@ const BayProvider = ({ children }) => {
     };
 
     return (
-        <BayContext.Provider value={{ bay, addNewComplex }}>
+        <BayContext.Provider value={{ bay, addUpdateComplex }}>
             {!isLoading ? children : <LoadingAnimation />}
         </BayContext.Provider>
     );

@@ -33,6 +33,10 @@ const SubstationList = () => {
         );
     }, [filter.query, subs]);
 
+    const sortedSearchedSub = useMemo(() => {
+        return [...searchedSub].sort((a, b) => a.name.localeCompare(b.name));
+    }, [searchedSub]);
+
     const navigateToSubstation = (substation) => {
         const path = generatePath(SUBSTATION_ROUTE, {
             id: substation.id,
@@ -70,7 +74,7 @@ const SubstationList = () => {
                         </NewSubstationListItem>
                     </SubstationListTop>
                     <SubstationListBody>
-                        {searchedSub.map((sub) => (
+                        {sortedSearchedSub.map((sub) => (
                             <SubstationListRow key={sub.id}>
                                 <SubstationListItem
                                     onClick={() => navigateToSubstation(sub)}

@@ -2,6 +2,7 @@ package com.kalachinski.rpa.controller;
 
 import com.kalachinski.rpa.dto.UserDto;
 import com.kalachinski.rpa.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Tag(name="User", description = "Endpoints for working with Users")
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@RestController
 public class UserController {
 
     //todo make swagger annotations

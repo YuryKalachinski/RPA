@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewComplexContainer = styled.div`
+export const ComplexContainer = styled.div`
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -12,7 +12,7 @@ export const NewComplexContainer = styled.div`
     justify-content: center;
 `;
 
-export const NewComplexWrapper = styled.div`
+export const ComplexWrapper = styled.div`
     background-color: var(--color-bg-medium);
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@ export const NewComplexWrapper = styled.div`
     max-width: 480px;
 `;
 
-export const NewComplexHeader = styled.div`
+export const ComplexHeader = styled.div`
     width: 100%;
     padding: 18px;
 
@@ -41,7 +41,7 @@ export const NewComplexHeader = styled.div`
     }
 `;
 
-export const NewComplexBody = styled.div`
+export const ComplexBody = styled.div`
     padding: 0 48px 24px 48px;
 
     & button {
@@ -58,7 +58,7 @@ export const NewComplexBody = styled.div`
     }
 `;
 
-export const NewComplexButtons = styled.div`
+export const ComplexButtons = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -79,5 +79,9 @@ export const NewComplexButtons = styled.div`
 
     & .closeButton {
         background-color: var(--color-stroke);
+    }
+
+    & .deleteButton {
+        background-color: var(--color-alarm);
     }
 `;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
     SubstationItemContainer,
     SubstationItemWrapper,
@@ -15,7 +15,7 @@ import { useNavigate, generatePath } from "react-router-dom";
 import { BAY_ROUTE } from "../../utils/constants";
 import { useSub } from "../../context/subProvider";
 import { DeleteLogo, EditLogo, PlusLogo } from "../common/images/";
-import { Bay } from "../modal/";
+import { Bay as BayModal } from "../modal/";
 
 const SubstationItem = () => {
     const { sub } = useSub();
@@ -29,6 +29,10 @@ const SubstationItem = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedBay, setSelectedBay] = useState(emptyBay);
     const navigate = useNavigate();
+
+    const sortedBays = useMemo(() => {
+        return [...sub.bays].sort((a, b) => a.name.localeCompare(b.name));
+    }, [sub]);
 
     const navigateToBay = (bay) => {
         const path = generatePath(BAY_ROUTE, {
@@ -66,7 +70,7 @@ const SubstationItem = () => {
                         </NewBayItem>
                     </SubstationItemTop>
                     <SubstationItemBody>
-                        {sub.bays.map((bay) => (
+                        {sortedBays.map((bay) => (
                             <BayListItemRow key={bay.id}>
                                 <BayListItem onClick={() => navigateToBay(bay)}>
                                     {bay.name}
@@ -101,7 +105,10 @@ const SubstationItem = () => {
                 </SubstationItemWrapper>
             </SubstationItemContainer>
             {isModalOpen && (
-                <Bay onClose={() => setModalOpen(false)} bay={selectedBay} />
+                <BayModal
+                    onClose={() => setModalOpen(false)}
+                    bay={selectedBay}
+                />
             )}
         </>
     );

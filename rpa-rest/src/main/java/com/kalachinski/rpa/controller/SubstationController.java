@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -25,9 +26,10 @@ import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-@RestController
+@Tag(name = "Substation", description = "Endpoints for working with Substations")
 @RequestMapping("/substation")
-@Tag(name = "Substation", description = "Methods for working with Substations")
+@RequiredArgsConstructor
+@RestController
 public class SubstationController {
 
     //todo make swagger annotations
@@ -36,10 +38,6 @@ public class SubstationController {
     private static final Logger log = LoggerFactory.getLogger(SubstationController.class);
 
     private final SubstationService service;
-
-    public SubstationController(SubstationService substationService) {
-        this.service = substationService;
-    }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Get all available substations",

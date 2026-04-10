@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/utility")
 @Tag(name = "Utility", description = "Utility methods.")
+@RequestMapping("/utility")
 @RequiredArgsConstructor
+@RestController
 public class UtilityController {
 
-    UtilityService service;
+    private final UtilityService service;
 
     @GetMapping("/branch")
     @PreAuthorize("hasAuthority('VIEWER')")

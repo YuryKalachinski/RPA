@@ -1,7 +1,6 @@
 package com.kalachinski.rpa.controller;
 
 import com.kalachinski.rpa.dto.bay.BayDto;
-import com.kalachinski.rpa.dto.complex.ComplexDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
 import com.kalachinski.rpa.service.BayService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,19 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-@RestController
+@Tag(name = "Bay", description = "Endpoints for working with Bays")
 @RequestMapping("/bay")
-@Tag(name = "Substation", description = "Methods for working with Substations")
+@RequiredArgsConstructor
+@RestController
 public class BayController {
 
     //todo make swagger annotations
     //todo make logging
 
     private final BayService service;
-
-    public BayController(BayService bayService) {
-        this.service = bayService;
-    }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE, value = "/{id}")
     @Operation(summary = "Get information about bay by id.",
@@ -51,16 +48,6 @@ public class BayController {
             @Parameter(description = "Bay id", example = "1")
             @PathVariable("id") Long id) {
         return ResponseEntity.ok().body(service.getById(id));
-    }
-
-    @PostMapping("/{bayId}/complex/")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<BayDto> addBay(
-            @Parameter(description = "Bay id", example = "1")
-            @PathVariable("bayId") Long bayId,
-            @RequestBody ComplexDto complexDto
-    ) {
-        return ResponseEntity.ok().body(service.addComplex(bayId, complexDto));
     }
 
     @PostMapping("/")
@@ -79,3 +66,5 @@ public class BayController {
         return ResponseEntity.ok().body(service.saveOrUpdateBay(bayDto));
     }
 }
+
+
