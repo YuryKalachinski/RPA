@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -41,6 +42,9 @@ public class Substation extends BaseEntity {
 
     @OneToMany(mappedBy = "substation", cascade = CascadeType.ALL)
     private Set<Crap> craps = new HashSet<>();
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {

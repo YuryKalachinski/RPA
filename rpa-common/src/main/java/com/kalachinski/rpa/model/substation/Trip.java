@@ -7,6 +7,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -43,7 +44,7 @@ public class Trip extends BaseEntity {
     @Column(name = "typeFault")
     private Set<FaultType> faultTypes = new HashSet<>();
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bay_id")
     private Bay bay;
 

@@ -1,9 +1,7 @@
 package com.kalachinski.rpa.mapper;
 
 import com.kalachinski.rpa.dto.bay.BayDto;
-import com.kalachinski.rpa.dto.substation.SubstationDto;
 import com.kalachinski.rpa.model.substation.Bay;
-import com.kalachinski.rpa.model.substation.Substation;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -34,7 +32,7 @@ public interface BayMapper {
             dto.getComplexes()
                     .forEach(complex -> {
                         complex.getProtections()
-                                .removeIf(protection -> !protection.isRoot());
+                                .removeIf(protection -> !protection.getIsRoot());
                     });
     }
 }

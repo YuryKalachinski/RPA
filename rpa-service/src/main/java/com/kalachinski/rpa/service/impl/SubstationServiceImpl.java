@@ -24,7 +24,7 @@ public class SubstationServiceImpl implements SubstationService {
     @Override
     @Transactional
     public List<SubstationDto> getAll() {
-        return mapper.toDtoList(repo.findAll());
+        return mapper.toDtoList(repo.getAll());
     }
 
     @Override
@@ -33,7 +33,7 @@ public class SubstationServiceImpl implements SubstationService {
 
         //todo handle ResponseStatusException
 
-        return mapper.toDtoWithBays(repo.findById(id)
+        return mapper.toDtoWithBays(repo.getById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                         String.format("Unable to find resource with requested id=%d", id))));
     }
@@ -44,7 +44,7 @@ public class SubstationServiceImpl implements SubstationService {
         Substation current;
         var id = dto.getId();
         if (id != null) {
-            current = repo.findById(id)
+            current = repo.getById(id)
                     .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                             String.format("Unable to find resource with requested id=%d", id)));
             mapper.updateEntityFromDto(dto, current);

@@ -12,24 +12,30 @@
             <column name="name" value="Могилев 330 Восточная"/>
             <column name="branch" value="MES"/>
             <column name="description" value=""/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="bay" schemaName="main">
-            <column name="name" value="MTEC-2"/>
+            <column name="name" value="МТЭЦ-2"/>
             <column name="substation_id" value="1"/>
             <column name="voltage_level" value="ONE_HUNDRED_TEN"/>
+            <column name="cell_number" value="" />
+            <column name="description" value="" />
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="complex" schemaName="main">
-            <column name="name" value="1 complex"/>
+            <column name="name" value="1 комплекс"/>
             <column name="description" value="RED 670"/>
             <column name="bay_id" value="1"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="complex" schemaName="main">
-            <column name="name" value="2 complex"/>
+            <column name="name" value="2 комплекс"/>
             <column name="description" value="RED 670"/>
             <column name="bay_id" value="1"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="protection" schemaName="main">
@@ -37,18 +43,21 @@
             <column name="complex_id" value="1"/>
             <column name="name" value="ДЗЛ"/>
             <column name="action" value="TRIP"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="parameter_setting" schemaName="main">
             <column name="protection_id" value="1"/>
             <column name="key" value="t"/>
             <column name="value" value="0"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="parameter_setting" schemaName="main">
             <column name="protection_id" value="1"/>
             <column name="key" value="I-Diff"/>
             <column name="value" value="800"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="protection" schemaName="main">
@@ -56,6 +65,7 @@
             <column name="complex_id" value="1"/>
             <column name="name" value="ДЗ"/>
             <column name="action" value="NONE"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="protection" schemaName="main">
@@ -64,24 +74,28 @@
             <column name="complex_id" value="1"/>
             <column name="name" value="1 ступень ДЗ"/>
             <column name="action" value="TRIP"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="parameter_setting" schemaName="main">
             <column name="protection_id" value="3"/>
             <column name="key" value="t"/>
             <column name="value" value="0"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="parameter_setting" schemaName="main">
             <column name="protection_id" value="3"/>
             <column name="key" value="X"/>
             <column name="value" value="4,25"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
         <insert tableName="parameter_setting" schemaName="main">
             <column name="protection_id" value="3"/>
             <column name="key" value="R"/>
             <column name="value" value="15,55"/>
+            <column name="is_deleted" value="false" />
         </insert>
 
     </changeSet>

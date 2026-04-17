@@ -25,13 +25,12 @@ public class ComplexServiceImpl implements ComplexService {
         Complex current;
         var id = dto.getId();
         if (id != null) {
-            current = repo.findById(id)
+            current = repo.getByIdWithChildren(id)
                     .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                             String.format("Unable to find resource with requested id=%d", id)));
-            mapper.updateEntityFromDto(dto, current);
-        } else {
-            current = mapper.toEntity(dto);
+            return mapper.toDto(mapper.toEntity(dto, current));
         }
+        current = mapper.toEntity(dto, new Complex());
         return mapper.toDto(repo.save(current));
     }
 }

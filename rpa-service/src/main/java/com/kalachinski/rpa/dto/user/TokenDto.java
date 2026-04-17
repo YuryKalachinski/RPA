@@ -1,4 +1,4 @@
-package com.kalachinski.rpa.dto;
+package com.kalachinski.rpa.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

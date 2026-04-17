@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.mapper;
 
-import com.kalachinski.rpa.dto.UserDto;
+import com.kalachinski.rpa.dto.user.UserDto;
 import com.kalachinski.rpa.model.user.User;
 import org.mapstruct.Mapper;
 

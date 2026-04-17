@@ -22,4 +22,5 @@ public class BayDto {
     private VoltageLevel voltageLevel;
 //    private Set<TripDto> trips;
     private Set<ComplexDto> complexes;
+    private Boolean isDeleted;
 }

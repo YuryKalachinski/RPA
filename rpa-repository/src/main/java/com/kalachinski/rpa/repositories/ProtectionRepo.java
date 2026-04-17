@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ProtectionRepo extends CrudRepository<Protection, Long> {
 
-    @EntityGraph(attributePaths = {"children"})
-    @Query("SELECT p FROM Protection p")
-    List<Protection> findAll();
+//    @EntityGraph(attributePaths = {"children"})
+//    @Query("SELECT p FROM Protection p")
+//    List<Protection> findAll();
 }

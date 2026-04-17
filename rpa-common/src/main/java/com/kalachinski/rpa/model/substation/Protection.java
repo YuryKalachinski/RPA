@@ -29,7 +29,7 @@ import java.util.Set;
 public class Protection extends BaseEntity {
 
     @Column(name = "is_root")
-    private boolean isRoot;
+    private Boolean isRoot;
 
     @Column(name = "name")
     private String name;
@@ -55,34 +55,24 @@ public class Protection extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "trip_id"))
     private Set<Trip> trips = new HashSet<>();
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Protection> children = new HashSet<>();
 
     @OneToMany(mappedBy = "protection", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ParameterSetting> parameterSettings = new HashSet<>();
 
-    //todo is it necessary?
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     public void addChild(Protection child) {
-        children.add(child);
+//        children.add(child);
         child.setParent(this);
     }
 
-    public void removeChild(Protection child) {
-        children.remove(child);
-        child.setParent(null);
-    }
-
-    public void addChild(ParameterSetting parameterSetting) {
-        parameterSettings.add(parameterSetting);
+    public void addParameterSetting(ParameterSetting parameterSetting) {
+//        parameterSettings.add(parameterSetting);
         parameterSetting.setProtection(this);
     }
-
-    public void removeChild(ParameterSetting parameterSetting) {
-        parameterSettings.remove(parameterSetting);
-        parameterSetting.setProtection(null);
-    }
-
 
     @Override
     public boolean equals(Object o) {

@@ -74,7 +74,6 @@ http.interceptors.response.use(
         }
 
         console.log("Error");
-        console.log(err);
 
         return Promise.reject(err);
     },

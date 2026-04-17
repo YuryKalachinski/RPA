@@ -4,6 +4,7 @@ import com.kalachinski.rpa.model.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -31,24 +32,19 @@ public class Complex extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "complex",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "complex", cascade = CascadeType.ALL)
     private Set<Protection> protections = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bay_id")
     private Bay bay;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
-    //todo is it necessary?
     public void addProtection(Protection protection) {
-        protections.add(protection);
+//        protections.add(protection);
         protection.setComplex(this);
-    }
-
-    public void remoteProtection(Protection protection) {
-        protections.remove(protection);
-        protection.setComplex(null);
     }
 
     @Override

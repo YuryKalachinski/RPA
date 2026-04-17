@@ -1,10 +1,8 @@
-package com.kalachinski.rpa.dto;
+package com.kalachinski.rpa.dto.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter

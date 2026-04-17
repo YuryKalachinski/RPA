@@ -30,6 +30,7 @@ const BayProvider = ({ children }) => {
     };
 
     const addUpdateComplex = async (complex) => {
+        console.log(complex);
         try {
             const { data } = await addComplex(complex);
             setBay((prev) => {

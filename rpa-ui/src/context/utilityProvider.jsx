@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAllBranches, getAllVoltageLevels } from "../http/utilityApi";
+import { useAuth } from "./authProvider";
 
 const UtilityContext = createContext();
 
@@ -10,18 +11,21 @@ export const useUtility = () => {
 const UtilityProvider = ({ children }) => {
     const [voltageLevelList, setVoltageLevelList] = useState([]);
     const [branches, setBranches] = useState([]);
+    const { currentUser } = useAuth();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await Promise.all([getVoltageLevelList(), getBranches()]);
-            } catch (e) {
-                alert(e.response.data.message);
-            }
-        };
+        if (currentUser != null) {
+            const fetchData = async () => {
+                try {
+                    await Promise.all([getVoltageLevelList(), getBranches()]);
+                } catch (e) {
+                    alert(e.response.data.message);
+                }
+            };
 
-        fetchData();
-    }, []);
+            fetchData();
+        }
+    }, [currentUser]);
 
     const getVoltageLevelList = async () => {
         const { data } = await getAllVoltageLevels();

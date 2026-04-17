@@ -3,6 +3,7 @@ package com.kalachinski.rpa.model.substation;
 import com.kalachinski.rpa.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -34,9 +35,12 @@ public class ParameterSetting extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "protection_id")
     private Protection protection;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {

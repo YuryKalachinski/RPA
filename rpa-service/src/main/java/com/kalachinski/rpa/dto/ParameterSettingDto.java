@@ -17,4 +17,5 @@ public class ParameterSettingDto {
     private String comment;
     private String description;
     private ProtectionSimpleDto protection;
+    private Boolean isDeleted;
 }

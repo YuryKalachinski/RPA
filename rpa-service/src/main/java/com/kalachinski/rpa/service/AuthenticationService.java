@@ -1,8 +1,8 @@
 package com.kalachinski.rpa.service;
 
-import com.kalachinski.rpa.dto.AuthRequestDto;
-import com.kalachinski.rpa.dto.RegisterRequestDto;
-import com.kalachinski.rpa.dto.TokenDto;
+import com.kalachinski.rpa.dto.user.AuthRequestDto;
+import com.kalachinski.rpa.dto.user.RegisterRequestDto;
+import com.kalachinski.rpa.dto.user.TokenDto;
 
 public interface AuthenticationService {
 

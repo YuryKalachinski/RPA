@@ -58,7 +58,7 @@ const BayItem = () => {
                         <NewComplexItem
                             onClick={() => editComplex(emptyComplex)}
                         >
-                            <img src={PlusLogo} alt="add new bay" />
+                            <img src={PlusLogo} alt="add new complex" />
                         </NewComplexItem>
                     </BayItemBody>
                     <BayItemBottom>

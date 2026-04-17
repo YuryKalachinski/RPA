@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -14,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Objects;
 import java.util.Set;
@@ -35,7 +37,7 @@ public class Bay extends BaseEntity {
     @Column(name = "cell_number")
     private String cellNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "substation_id")
     private Substation substation;
 
@@ -48,6 +50,9 @@ public class Bay extends BaseEntity {
 
     @OneToMany(mappedBy = "bay", cascade = CascadeType.ALL)
     private Set<Complex> complexes;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {

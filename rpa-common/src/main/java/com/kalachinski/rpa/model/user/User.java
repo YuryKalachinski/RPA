@@ -59,13 +59,16 @@ public class User extends BaseEntity {
     private Status status;
 
     @Column(name = "is_telegram_user")
-    private Boolean isTelegramUser;
+    private boolean isTelegramUser;
 
     @Column(name = "is_web_user")
-    private Boolean isWebUser;
+    private boolean isWebUser;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Token> tokens;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 
     //todo unused method
     public void addToken(Token token) {

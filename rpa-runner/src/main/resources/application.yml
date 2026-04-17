@@ -20,11 +20,12 @@ spring:
     hibernate:
       ddl-auto: validate
 #      ddl-auto: create
-      properties:
-        hibernate:
-          format_sql: true
       database: ${DATABASE}
       database-platform: ${DATABASE_PLATFORM}
+#    properties:
+#      hibernate:
+#        format_sql: true
+
   liquibase:
     enabled: true
 #    enabled: false
@@ -44,6 +45,11 @@ spring:
       mail-service-message: ${MAIL_SERVICE_MESSAGE}
       req-list-connections: ${REQ_LIST_CONNECTIONS}
       resp-list-connections: ${RESP_LIST_CONNECTIONS}
+
+#logging:
+#  level:
+#    org.hibernate.orm.results: TRACE
+#    org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl: TRACE
 
 bot:
   token: ${BOT_TOKEN}

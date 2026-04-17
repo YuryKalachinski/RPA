@@ -18,4 +18,5 @@ public class ComplexDto {
     private String description;
     private BaySimpleDto bay;
     private Set<ProtectionDto> protections;
+    private Boolean isDeleted;
 }

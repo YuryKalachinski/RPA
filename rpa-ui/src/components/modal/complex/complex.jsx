@@ -1,17 +1,22 @@
 import { useState } from "react";
 import {
     ComplexBody,
-    ComplexButtons,
+    ComplexBottom,
     ComplexContainer,
     ComplexHeader,
     ComplexWrapper,
+    SettingsButton,
 } from "./styled";
 import { TextAreaField, TextField } from "../../form";
 import { useBay } from "../../../context/bayProvider";
+import _ from "lodash";
+import { MinusLogo, PlusLogo } from "../../common/images/";
+import ProtectionItem from "../../protectionItem/protectionItem";
 
 const Complex = ({ complex, onClose }) => {
     const isNewComplex = complex.id ? false : true;
     const [current, setCurrent] = useState(complex);
+    const [visible, setVisible] = useState(false);
     const { addUpdateComplex } = useBay();
 
     const handleChange = ({ target }) => {
@@ -21,22 +26,66 @@ const Complex = ({ complex, onClose }) => {
         }));
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        addUpdateComplex(current);
+    const handleSubmit = async () => {
+        addUpdateComplex(isNewComplex ? current : getChangedValues());
         onClose();
     };
 
-    const closeForm = async (event) => {
-        event.preventDefault();
+    const closeForm = async () => {
         onClose();
     };
 
-    const deleteComplex = (event) => {
-        event.preventDefault();
+    const changeComplexForm = () => {
+        setVisible((prevState) => !prevState);
+    };
+
+    const deleteComplex = () => {
+        // setCurrent((prevState) => {
+        //     const newProtections = [...prevState.protections];
+        //     newProtections[0] = {
+        //         ...newProtections[0],
+        //         description: "1",
+        //     };
+        //     return {
+        //         ...prevState,
+        //         protections: newProtections,
+        //     };
+        // });
+
         console.log("Delete");
         console.log(complex);
     };
+
+    const getChangedValues = () => {
+        return {
+            id: current.id,
+            bay: current.bay,
+            ...getDiferencies(current, complex),
+        };
+    };
+
+    function getDiferencies(source, base) {
+        return _.transform(source, (result, value, key) => {
+            if (!_.isEqual(value, base[key])) {
+                if (
+                    (_.isPlainObject(value) && _.isPlainObject(base[key])) ||
+                    (_.isArray(value) && _.isArray(base[key]))
+                ) {
+                    const deepDiff = getDiferencies(value, base[key]);
+                    if (!_.isEmpty(deepDiff)) {
+                        console.log(value, " ", key);
+                        if (value.id) deepDiff.id = value.id;
+                        if (value.isRoot) deepDiff.isRoot = value.isRoot;
+                        result[key] = deepDiff;
+                    }
+                } else {
+                    // Если примитив  — берем новое значение
+                    result["id"] = source.id;
+                    result[key] = value;
+                }
+            }
+        });
+    }
 
     return (
         <ComplexContainer>
@@ -49,37 +98,49 @@ const Complex = ({ complex, onClose }) => {
                     </h3>
                 </ComplexHeader>
                 <ComplexBody>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
-                            label="Название комплекса"
-                            name="name"
-                            value={current.name}
-                            onChange={handleChange}
+                    <TextField
+                        label="Название комплекса"
+                        name="name"
+                        value={current.name}
+                        onChange={handleChange}
+                    />
+                    <TextAreaField
+                        label="Описание комплекса"
+                        name="description"
+                        value={current.description}
+                        onChange={handleChange}
+                    />
+                    <SettingsButton onClick={changeComplexForm}>
+                        <img
+                            src={visible ? MinusLogo : PlusLogo}
+                            alt={visible ? "Collapse group" : "Expland group"}
                         />
-                        <TextAreaField
-                            label="Описание комплекса"
-                            name="description"
-                            value={current.description}
-                            onChange={handleChange}
-                        />
-                        <ComplexButtons>
-                            <button className="closeButton" onClick={closeForm}>
-                                Закрыть
-                            </button>
-                            {!isNewComplex && (
-                                <button
-                                    className="deleteButton"
-                                    onClick={deleteComplex}
-                                >
-                                    Удалить
-                                </button>
-                            )}
-                            <button>
-                                {isNewComplex ? "Добавить" : "Изменить"}
-                            </button>
-                        </ComplexButtons>
-                    </form>
+                        <p>Уставки</p>
+                    </SettingsButton>
+                    {visible && (
+                        <>
+                            {complex.protections?.map((prot) => (
+                                <ProtectionItem key={prot.id} prot={prot} />
+                            ))}
+                        </>
+                    )}
                 </ComplexBody>
+                <ComplexBottom>
+                    <button className="closeButton" onClick={closeForm}>
+                        Закрыть
+                    </button>
+                    {!isNewComplex && (
+                        <button
+                            className="deleteButton"
+                            onClick={deleteComplex}
+                        >
+                            Удалить
+                        </button>
+                    )}
+                    <button onClick={handleSubmit}>
+                        {isNewComplex ? "Добавить" : "Изменить"}
+                    </button>
+                </ComplexBottom>
             </ComplexWrapper>
         </ComplexContainer>
     );

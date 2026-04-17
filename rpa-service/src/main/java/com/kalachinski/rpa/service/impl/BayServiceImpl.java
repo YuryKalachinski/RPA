@@ -1,10 +1,8 @@
 package com.kalachinski.rpa.service.impl;
 
 import com.kalachinski.rpa.dto.bay.BayDto;
-import com.kalachinski.rpa.dto.complex.ComplexDto;
 import com.kalachinski.rpa.mapper.BayMapper;
 import com.kalachinski.rpa.model.substation.Bay;
-import com.kalachinski.rpa.model.substation.Complex;
 import com.kalachinski.rpa.repositories.BayRepo;
 import com.kalachinski.rpa.service.BayService;
 import lombok.RequiredArgsConstructor;
@@ -37,30 +35,18 @@ public class BayServiceImpl implements BayService {
 
     @Override
     @Transactional
-    public BayDto addComplex(Long id, ComplexDto complexDto) {
-        Bay current = repo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                        String.format("Unable to find resource with requested id=%d", id)));
-        current.getComplexes().add(new Complex()
-                .setName(complexDto.getName())
-                .setDescription(complexDto.getDescription())
-                .setBay(current)
-        );
-        return mapper.toDtoWithComplexes(current);
-    }
-
-    @Override
     public BayDto saveOrUpdateBay(BayDto dto) {
         Bay current;
         var id = dto.getId();
         if (id != null) {
-            current = repo.findById(id)
+            current = repo
+                    .getById(id)
                     .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                             String.format("Unable to find resource with requested id=%d", id)));
             mapper.updateEntityFromDto(dto, current);
-        } else {
-            current = mapper.toEntity(dto);
+            return mapper.toDtoWithoutComplexes(current);
         }
-        return mapper.toDtoWithComplexes(repo.save(current));
+        current = mapper.toEntity(dto);
+        return mapper.toDtoWithoutComplexes(repo.save(current));
     }
 }

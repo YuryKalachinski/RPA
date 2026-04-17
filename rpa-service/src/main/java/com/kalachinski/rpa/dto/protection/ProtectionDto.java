@@ -15,7 +15,7 @@ import java.util.Set;
 public class ProtectionDto {
 
     private Long id;
-    private boolean isRoot;
+    private Boolean isRoot;
     private String name;
     private String description;
     private ProtAction protAction;
@@ -24,4 +24,5 @@ public class ProtectionDto {
     //    private Set<TripDto> trips;
     private Set<ProtectionDto> children;
     private Set<ParameterSettingDto> parameterSettings;
+    private Boolean isDeleted;
 }

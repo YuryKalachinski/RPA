@@ -1,8 +1,8 @@
 package com.kalachinski.rpa.controller;
 
-import com.kalachinski.rpa.dto.AuthRequestDto;
-import com.kalachinski.rpa.dto.RegisterRequestDto;
-import com.kalachinski.rpa.dto.TokenDto;
+import com.kalachinski.rpa.dto.user.AuthRequestDto;
+import com.kalachinski.rpa.dto.user.RegisterRequestDto;
+import com.kalachinski.rpa.dto.user.TokenDto;
 import com.kalachinski.rpa.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,8 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.dto.AuthRequestDto;
-import com.kalachinski.rpa.dto.RegisterRequestDto;
-import com.kalachinski.rpa.dto.TokenDto;
+import com.kalachinski.rpa.dto.user.AuthRequestDto;
+import com.kalachinski.rpa.dto.user.RegisterRequestDto;
+import com.kalachinski.rpa.dto.user.TokenDto;
 import com.kalachinski.rpa.model.user.Token;
 import com.kalachinski.rpa.model.user.TokenType;
 import com.kalachinski.rpa.model.user.User;

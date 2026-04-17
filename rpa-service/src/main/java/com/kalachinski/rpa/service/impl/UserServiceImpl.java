@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.service.impl;
 
-import com.kalachinski.rpa.dto.UserDto;
+import com.kalachinski.rpa.dto.user.UserDto;
 import com.kalachinski.rpa.mapper.UserMapper;
 import com.kalachinski.rpa.model.user.Status;
 import com.kalachinski.rpa.model.user.User;

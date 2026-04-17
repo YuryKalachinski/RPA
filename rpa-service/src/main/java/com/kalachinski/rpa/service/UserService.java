@@ -1,6 +1,6 @@
 package com.kalachinski.rpa.service;
 
-import com.kalachinski.rpa.dto.UserDto;
+import com.kalachinski.rpa.dto.user.UserDto;
 import com.kalachinski.rpa.model.user.User;
 
 import java.util.List;

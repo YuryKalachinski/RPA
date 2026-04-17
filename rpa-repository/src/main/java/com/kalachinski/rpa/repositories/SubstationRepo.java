@@ -14,12 +14,11 @@ import java.util.Optional;
 @Repository
 public interface SubstationRepo extends CrudRepository<Substation, Long> {
 
-    @Override
     @QueryHints({@QueryHint(name="org.hibernate.cacheable", value="true")})
-    List<Substation> findAll();
+    @Query("SELECT s FROM Substation s")
+    List<Substation> getAll();
 
-    @Override
     @QueryHints({@QueryHint(name="org.hibernate.cacheable", value="true")})
     @Query("SELECT s FROM Substation s LEFT JOIN FETCH s.bays b LEFT JOIN FETCH b.complexes WHERE s.id= :id")
-    Optional<Substation> findById(@Param("id") Long id);
+    Optional<Substation> getById(@Param("id") Long id);
 }
