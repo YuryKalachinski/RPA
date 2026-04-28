@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useImmer } from "use-immer";
+import set from "lodash/set";
 import {
     BayContainer,
     BayHeader,
@@ -12,15 +13,14 @@ import { useUtility } from "../../../context/utilityProvider";
 
 const Bay = ({ bay, onClose }) => {
     const isNewBay = bay.id ? false : true;
-    const [current, setCurrent] = useState(bay);
+    const [current, setCurrent] = useImmer(bay);
     const { addUpdateBay } = useSub();
     const { voltageLevelList } = useUtility();
 
-    const handleChange = ({ target }) => {
-        setCurrent((prevState) => ({
-            ...prevState,
-            [target.name]: target.value,
-        }));
+    const handleChange = (path, value) => {
+        setCurrent((draft) => {
+            set(draft, path, value);
+        });
     };
 
     const handleSubmit = async (event) => {

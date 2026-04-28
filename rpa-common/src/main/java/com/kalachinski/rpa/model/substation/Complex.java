@@ -40,7 +40,7 @@ public class Complex extends BaseEntity {
     private Bay bay;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private boolean isDeleted;
 
     public void addProtection(Protection protection) {
 //        protections.add(protection);

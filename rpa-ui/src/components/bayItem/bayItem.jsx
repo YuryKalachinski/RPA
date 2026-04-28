@@ -37,7 +37,7 @@ const BayItem = () => {
 
     return (
         <>
-            <BayItemContainer>
+            <BayItemContainer $isModalOpen={isModalOpen}>
                 <BayItemWrapper>
                     <BayItemTop>
                         <BayItemHeader>

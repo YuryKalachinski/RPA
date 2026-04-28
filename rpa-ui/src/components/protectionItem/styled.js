@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProtectionItemConteiner = styled.div``;
+export const ProtectionItemContainer = styled.div``;
 
 export const ProtectionItemWrapper = styled.div`
     background: var(--color-bg-medium);
@@ -9,10 +9,12 @@ export const ProtectionItemWrapper = styled.div`
 `;
 
 export const ProtectionItemBody = styled.div`
-    padding: 0 12px;
+    margin: ${({ $visible }) => ($visible ? "8px 0 0 0" : "0")};
+    padding: ${({ $visible }) => ($visible ? "8px 0 0 12px" : "0 0 0 12px")};
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    border: ${({ $visible }) => ($visible ? "solid 1px" : "none")};
+    border-radius: 10px;
 `;
 
 export const SettingsButton = styled.button`
@@ -44,13 +46,13 @@ export const SettingsButton = styled.button`
 `;
 
 export const ProtectionItemTitle = styled.div`
-    padding: 1px 0 1px 30px;
+    padding-left: 30px;
     text-align: left;
 `;
 
-export const ProtActionItemTitle = styled.div`
-    padding-top: 12px;
-    font-size: 14px;
-    line-height: 120%;
-    margin-bottom: 4px;
-`;
+// export const ProtActionItemTitle = styled.div`
+//     padding-top: 12px;
+//     font-size: 14px;
+//     line-height: 120%;
+//     margin-bottom: 4px;
+// `;

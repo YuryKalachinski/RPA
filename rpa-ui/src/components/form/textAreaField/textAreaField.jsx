@@ -9,7 +9,7 @@ const TextAreaField = ({ label, name, value, onChange }) => {
                 id={name}
                 name={name}
                 value={value}
-                onChange={onChange}
+                onChange={(e) => onChange([name], e.target.value)}
                 placeholder={label}
             />
         </TextAreaFieldStyle>

@@ -44,7 +44,7 @@ public class Substation extends BaseEntity {
     private Set<Crap> craps = new HashSet<>();
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {

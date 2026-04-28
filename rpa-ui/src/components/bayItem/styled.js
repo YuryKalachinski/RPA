@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const BayItemContainer = styled.div`
-    background-color: var(--color-bg);
+    filter: ${({ $isModalOpen }) =>
+        $isModalOpen ? "brightness(0.5) blur(2px)" : "none"};
+    transition: filter 0.3s ease;
 `;
 
 export const BayItemWrapper = styled.div`
@@ -42,7 +44,7 @@ export const BayItemHeader = styled.div`
 export const BayItemBody = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 80px;
 `;
 

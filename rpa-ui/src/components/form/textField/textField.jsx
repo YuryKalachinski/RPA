@@ -20,7 +20,7 @@ const TextField = ({ label, type, name, value, onChange, imgSrc, imgAlt }) => {
                 type={showPassword ? "text" : type}
                 placeholder={label}
                 value={value}
-                onChange={onChange}
+                onChange={(e) => onChange([name], e.target.value)}
             />
             {type === "password" && (
                 <img

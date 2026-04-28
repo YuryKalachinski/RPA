@@ -6,6 +6,7 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -17,17 +18,26 @@ import java.util.List;
 )
 public interface SubstationMapper {
 
+//    MAPPING to ENTITY
+
+    @Mapping(target = "deleted", source = "isDeleted")
+    Substation toEntity(SubstationDto dto, @MappingTarget Substation substation);
+
+//    MAPPING to DTO
+
     @IterableMapping(qualifiedByName = "withoutBays")
     List<SubstationDto> toDtoList(List<Substation> substations);
 
     @Named("withoutBays")
-    @Mapping(target = "bays", ignore = true)
+    @Mappings({
+            @Mapping(target = "bays", ignore = true),
+            @Mapping(target = "isDeleted", source = "deleted")
+    })
     SubstationDto toDtoWithoutBays(Substation substation);
 
-    @Mapping(target = "bays", qualifiedByName = "BayMapperSubstationWithBay")
+    @Mappings({
+            @Mapping(target = "bays", qualifiedByName = "BayMapperSubstationWithBay"),
+            @Mapping(target = "isDeleted", source = "deleted")
+    })
     SubstationDto toDtoWithBays(Substation substation);
-
-    void updateEntityFromDto(SubstationDto dto, @MappingTarget Substation substation);
-
-    Substation toEntity (SubstationDto dto);
 }

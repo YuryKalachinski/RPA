@@ -8,3 +8,5 @@ export { default as AppLogo } from "./appLogo.svg";
 export { default as UserLogo } from "./userLogo.svg";
 export { default as EditLogo } from "./edit.svg";
 export { default as DeleteLogo } from "./delete.svg";
+export { default as FolderPlusLogo } from "./folder-plus.svg";
+export { default as DocumentPlusLogo } from "./document-plus.svg";

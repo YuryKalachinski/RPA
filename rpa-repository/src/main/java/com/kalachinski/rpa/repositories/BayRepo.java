@@ -15,10 +15,10 @@ public interface BayRepo extends CrudRepository<Bay, Long> {
 
     @QueryHints({@QueryHint(name = "org.hibernate.cacheable", value = "true")})
     @Query("SELECT b FROM Bay b " +
-            "LEFT JOIN FETCH b.substation s" +
+            "LEFT JOIN FETCH b.substation s " +
             "LEFT JOIN FETCH b.complexes c " +
             "LEFT JOIN FETCH c.protections p " +
-            "LEFT JOIN FETCH p.parameterSettings " +
+            "LEFT JOIN FETCH p.parameterSettings ps " +
             "LEFT JOIN FETCH p.children ch " +
             "WHERE b.id= :bay_id ")
     Optional<Bay> getByIdWithChildren(@Param("bay_id") Long id);

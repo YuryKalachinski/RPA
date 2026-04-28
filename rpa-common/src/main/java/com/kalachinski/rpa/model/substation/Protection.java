@@ -29,7 +29,7 @@ import java.util.Set;
 public class Protection extends BaseEntity {
 
     @Column(name = "is_root")
-    private Boolean isRoot;
+    private boolean isRoot;
 
     @Column(name = "name")
     private String name;
@@ -62,7 +62,7 @@ public class Protection extends BaseEntity {
     private Set<ParameterSetting> parameterSettings = new HashSet<>();
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private boolean isDeleted;
 
     public void addChild(Protection child) {
 //        children.add(child);

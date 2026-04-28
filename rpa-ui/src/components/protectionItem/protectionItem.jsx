@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-    ProtectionItemConteiner,
+    ProtectionItemContainer,
     ProtectionItemWrapper,
     ProtectionItemBody,
     ProtectionItemTitle,
@@ -18,9 +18,9 @@ const ProtectionItem = ({ prot }) => {
     };
 
     return (
-        <ProtectionItemConteiner>
+        <ProtectionItemContainer>
             <ProtectionItemWrapper>
-                <ProtectionItemBody>
+                <ProtectionItemBody $visible={visible}>
                     <SettingsButton onClick={changeComplexForm}>
                         <img
                             src={visible ? MinusLogo : PlusLogo}
@@ -30,18 +30,21 @@ const ProtectionItem = ({ prot }) => {
                     </SettingsButton>
                     {visible && (
                         <>
+                            {prot.parameterSettings.length !== 0 && (
+                                <ParameterSettingsList
+                                    psl={prot.parameterSettings}
+                                />
+                            )}
                             {prot.children?.map((el) => (
                                 <ProtectionItem key={el.id} prot={el} />
                             ))}
-                            <ParameterSettingsList
-                                psl={prot.parameterSettings}
-                            />
                         </>
                     )}
+
                     {/* <ProtActionItemTitle>{prot.protAction}</ProtActionItemTitle> */}
                 </ProtectionItemBody>
             </ProtectionItemWrapper>
-        </ProtectionItemConteiner>
+        </ProtectionItemContainer>
     );
 };
 

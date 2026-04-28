@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const SubstationItemContainer = styled.div``;
+export const SubstationItemContainer = styled.div`
+    filter: ${({ $isModalOpen }) =>
+        $isModalOpen ? "brightness(0.5) blur(2px)" : "none"};
+    transition: filter 0.3s ease;
+`;
 
 export const SubstationItemWrapper = styled.div`
     display: flex;
@@ -77,6 +81,10 @@ export const BayListItem = styled.button`
 
     & p {
         margin: 0 16px 0 0;
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
     }
 `;
 

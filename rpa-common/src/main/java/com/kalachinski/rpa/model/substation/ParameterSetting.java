@@ -40,7 +40,7 @@ public class ParameterSetting extends BaseEntity {
     private Protection protection;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {

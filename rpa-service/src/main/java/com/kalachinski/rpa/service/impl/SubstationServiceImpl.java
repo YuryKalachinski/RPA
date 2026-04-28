@@ -47,10 +47,10 @@ public class SubstationServiceImpl implements SubstationService {
             current = repo.getById(id)
                     .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                             String.format("Unable to find resource with requested id=%d", id)));
-            mapper.updateEntityFromDto(dto, current);
-        } else {
-            current = mapper.toEntity(dto);
+            current = mapper.toEntity(dto, current);
+            return mapper.toDtoWithoutBays(current);
         }
+        current = mapper.toEntity(dto, new Substation());
         return mapper.toDtoWithoutBays(repo.save(current));
     }
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const BayContainer = styled.div`
+export const ParameterContainer = styled.div`
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -12,7 +12,7 @@ export const BayContainer = styled.div`
     justify-content: center;
 `;
 
-export const BayWrapper = styled.div`
+export const ParameterWrapper = styled.div`
     background-color: var(--color-bg-medium);
     display: flex;
     flex-direction: column;
@@ -21,10 +21,10 @@ export const BayWrapper = styled.div`
     border-radius: 20px;
     margin: 24px 0;
     width: 100%;
-    max-width: 480px;
+    max-width: 720px;
 `;
 
-export const BayHeader = styled.div`
+export const ParameterHeader = styled.div`
     width: 100%;
     padding: 18px;
 
@@ -41,8 +41,8 @@ export const BayHeader = styled.div`
     }
 `;
 
-export const BayBody = styled.div`
-    padding: 0 48px;
+export const ParameterBody = styled.div`
+    padding: 0 48px 24px 48px;
 
     & button {
         background-color: var(--color-primary);
@@ -58,8 +58,7 @@ export const BayBody = styled.div`
     }
 `;
 
-export const BayButtons = styled.div`
-    margin: 24px 0;
+export const ParameterButtons = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;

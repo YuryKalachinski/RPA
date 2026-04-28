@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ParameterSettingsListConteiner = styled.div``;
 
 export const ParameterSettingsListWrapper = styled.div`
-    margin-left: 20px;
+    margin: 8px;
     background: var(--color-bg-light);
 `;
 

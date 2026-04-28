@@ -56,7 +56,7 @@ const SubstationList = () => {
 
     return (
         <>
-            <SubstationListContainer>
+            <SubstationListContainer $isModalOpen={isModalOpen}>
                 <SubstationListWrapper>
                     <SubstationListTop>
                         <SubstationListHeader>

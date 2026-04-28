@@ -54,7 +54,7 @@ const SubstationItem = () => {
 
     return (
         <>
-            <SubstationItemContainer>
+            <SubstationItemContainer $isModalOpen={isModalOpen}>
                 <SubstationItemWrapper>
                     <SubstationItemTop>
                         <SubstationItemHeader>

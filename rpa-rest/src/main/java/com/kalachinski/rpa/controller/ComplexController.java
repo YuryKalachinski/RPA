@@ -21,7 +21,7 @@ public class ComplexController {
 
     @PostMapping("/")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<ComplexDto> addBay(
+    public ResponseEntity<ComplexDto> saveOrUpdate(
             @RequestBody ComplexDto complexDto
     ) {
         ComplexDto complexDto1 = service.saveOrUpdate(complexDto);

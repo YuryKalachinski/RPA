@@ -11,7 +11,12 @@ const SelectField = ({
     return (
         <SelectFieldStyle>
             <label htmlFor={name}>{label}</label>
-            <select name={name} id={name} value={value} onChange={onChange}>
+            <select
+                name={name}
+                id={name}
+                value={value}
+                onChange={(e) => onChange([name], e.target.value)}
+            >
                 <option disabled value="">
                     {defaultOption}
                 </option>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useImmer } from "use-immer";
+import set from "lodash/set";
 import {
     SubstationContainer,
     SubstationHeader,
@@ -12,15 +13,14 @@ import { useUtility } from "../../../context/utilityProvider";
 
 const Substation = ({ substation, onClose }) => {
     const isNewSub = substation.id ? false : true;
-    const [current, setCurrent] = useState(substation);
+    const [current, setCurrent] = useImmer(substation);
     const { addUpdateSub } = useSubList();
     const { branches } = useUtility();
 
-    const handleChange = ({ target }) => {
-        setCurrent((prevState) => ({
-            ...prevState,
-            [target.name]: target.value,
-        }));
+    const handleChange = (path, value) => {
+        setCurrent((draft) => {
+            set(draft, path, value);
+        });
     };
 
     const handleSubmit = async (event) => {

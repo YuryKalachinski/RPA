@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useImmer } from "use-immer";
 import {
     ComplexBody,
     ComplexBottom,
@@ -6,24 +7,48 @@ import {
     ComplexHeader,
     ComplexWrapper,
     SettingsButton,
+    SettingsEdit,
+    SettingsRow,
 } from "./styled";
 import { TextAreaField, TextField } from "../../form";
 import { useBay } from "../../../context/bayProvider";
-import _ from "lodash";
-import { MinusLogo, PlusLogo } from "../../common/images/";
-import ProtectionItem from "../../protectionItem/protectionItem";
+import { isEmpty, isEqual, isObject, set, transform } from "lodash";
+import { FolderPlusLogo, MinusLogo, PlusLogo } from "../../common/images/";
+import {
+    Protection as ProtectionModal,
+    Parameter as ParameterModal,
+} from "../";
+import ProtectionItem from "./protectionItem";
 
 const Complex = ({ complex, onClose }) => {
-    const isNewComplex = complex.id ? false : true;
-    const [current, setCurrent] = useState(complex);
+    const [current, setCurrent] = useImmer(complex);
+    const isNewComplex = current.id ? false : true;
     const [visible, setVisible] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [pathArray, setPathArray] = useState([]);
+    const [index, setIndex] = useState();
     const { addUpdateComplex } = useBay();
+    const [selectedObject, setSelectedObject] = useState();
+    const [typeModal, setTypeModal] = useState("");
+    const emptyProtection = {
+        id: null,
+        name: "",
+        description: "",
+        isRoot: true,
+        parent: null,
+        protAction: "NONE",
+        complex: { id: current.id, name: current.name },
+        children: [],
+        parameterSettings: [],
+        isDeleted: false,
+    };
 
-    const handleChange = ({ target }) => {
-        setCurrent((prevState) => ({
-            ...prevState,
-            [target.name]: target.value,
-        }));
+    const handleChange = (path, value) => {
+        console.log(path);
+        console.log(value);
+        setCurrent((draft) => {
+            set(draft, path, value);
+        });
     };
 
     const handleSubmit = async () => {
@@ -40,109 +65,157 @@ const Complex = ({ complex, onClose }) => {
     };
 
     const deleteComplex = () => {
-        // setCurrent((prevState) => {
-        //     const newProtections = [...prevState.protections];
-        //     newProtections[0] = {
-        //         ...newProtections[0],
-        //         description: "1",
-        //     };
-        //     return {
-        //         ...prevState,
-        //         protections: newProtections,
-        //     };
-        // });
-
         console.log("Delete");
-        console.log(complex);
+        console.log(current);
     };
 
     const getChangedValues = () => {
         return {
             id: current.id,
             bay: current.bay,
-            ...getDiferencies(current, complex),
+            ...getDifferences(current, complex),
         };
     };
 
-    function getDiferencies(source, base) {
-        return _.transform(source, (result, value, key) => {
-            if (!_.isEqual(value, base[key])) {
-                if (
-                    (_.isPlainObject(value) && _.isPlainObject(base[key])) ||
-                    (_.isArray(value) && _.isArray(base[key]))
-                ) {
-                    const deepDiff = getDiferencies(value, base[key]);
-                    if (!_.isEmpty(deepDiff)) {
-                        console.log(value, " ", key);
+    function getDifferences(source, base) {
+        return transform(source, (result, value, key) => {
+            if (!isEqual(value, base[key])) {
+                if (isObject(value) && isObject(base[key])) {
+                    const deepDiff = getDifferences(value, base[key]);
+                    if (!isEmpty(deepDiff)) {
                         if (value.id) deepDiff.id = value.id;
-                        if (value.isRoot) deepDiff.isRoot = value.isRoot;
                         result[key] = deepDiff;
                     }
+                    // } else if (isArray(value) && isArray(base[key])) {
+                    //     const deepDiff = getDifferences(value, base[key]);
+                    //     if (!isEmpty(deepDiff)) {
+                    //         if (value.id) deepDiff.id = value.id;
+                    //         result[key] = deepDiff;
+                    //     }
                 } else {
-                    // Если примитив  — берем новое значение
-                    result["id"] = source.id;
                     result[key] = value;
                 }
             }
         });
     }
 
+    const openModal = (prot, array, ind, type) => {
+        setSelectedObject(prot);
+        setModalOpen(true);
+        setPathArray(array);
+        setIndex(ind);
+        setTypeModal(type);
+    };
+
     return (
-        <ComplexContainer>
-            <ComplexWrapper>
-                <ComplexHeader>
-                    <h3>
-                        {isNewComplex
-                            ? "Новая подстанция:"
-                            : "Редактор подстанции:"}
-                    </h3>
-                </ComplexHeader>
-                <ComplexBody>
-                    <TextField
-                        label="Название комплекса"
-                        name="name"
-                        value={current.name}
-                        onChange={handleChange}
-                    />
-                    <TextAreaField
-                        label="Описание комплекса"
-                        name="description"
-                        value={current.description}
-                        onChange={handleChange}
-                    />
-                    <SettingsButton onClick={changeComplexForm}>
-                        <img
-                            src={visible ? MinusLogo : PlusLogo}
-                            alt={visible ? "Collapse group" : "Expland group"}
+        <>
+            <ComplexContainer $isModalOpen={isModalOpen}>
+                <ComplexWrapper>
+                    <ComplexHeader>
+                        <h3>
+                            {isNewComplex
+                                ? "Добавить новый комплекс защит:"
+                                : "Редактор комплекса защит:"}
+                        </h3>
+                    </ComplexHeader>
+                    <ComplexBody>
+                        <TextField
+                            label="Название комплекса"
+                            name="name"
+                            value={current.name}
+                            onChange={handleChange}
                         />
-                        <p>Уставки</p>
-                    </SettingsButton>
-                    {visible && (
-                        <>
-                            {complex.protections?.map((prot) => (
-                                <ProtectionItem key={prot.id} prot={prot} />
-                            ))}
-                        </>
-                    )}
-                </ComplexBody>
-                <ComplexBottom>
-                    <button className="closeButton" onClick={closeForm}>
-                        Закрыть
-                    </button>
-                    {!isNewComplex && (
-                        <button
-                            className="deleteButton"
-                            onClick={deleteComplex}
-                        >
-                            Удалить
+                        <TextAreaField
+                            label="Описание комплекса"
+                            name="description"
+                            value={current.description}
+                            onChange={handleChange}
+                        />
+                        <SettingsRow>
+                            <SettingsButton onClick={changeComplexForm}>
+                                <img
+                                    src={visible ? MinusLogo : PlusLogo}
+                                    alt={
+                                        visible
+                                            ? "Collapse group"
+                                            : "Expland group"
+                                    }
+                                />
+                                <p>Уставки</p>
+                            </SettingsButton>
+                            <SettingsEdit>
+                                {visible && (
+                                    <img
+                                        className="folderlogo"
+                                        src={FolderPlusLogo}
+                                        alt="Add root protection folder"
+                                        onClick={() =>
+                                            openModal(
+                                                emptyProtection,
+                                                ["protections"],
+                                                current.protections.length,
+                                                "prot",
+                                            )
+                                        }
+                                    />
+                                )}
+                            </SettingsEdit>
+                        </SettingsRow>
+                        {visible && (
+                            <>
+                                {current.protections?.map((prot, protIndex) => (
+                                    <ProtectionItem
+                                        key={prot.id + prot.name}
+                                        protection={prot}
+                                        index={protIndex}
+                                        pathArray={["protections"]}
+                                        openModal={openModal}
+                                    />
+                                ))}
+                            </>
+                        )}
+                    </ComplexBody>
+                    <ComplexBottom>
+                        <button className="closeButton" onClick={closeForm}>
+                            Закрыть
                         </button>
+                        {!isNewComplex && (
+                            <button
+                                className="deleteButton"
+                                onClick={deleteComplex}
+                            >
+                                Удалить
+                            </button>
+                        )}
+                        <button onClick={handleSubmit}>
+                            {/* {isNewComplex ? "Добавить" : "Изменить"} */}
+                            Сохранить
+                        </button>
+                    </ComplexBottom>
+                </ComplexWrapper>
+            </ComplexContainer>
+            {isModalOpen && (
+                <>
+                    {typeModal === "prot" ? (
+                        <ProtectionModal
+                            onClose={() => setModalOpen(false)}
+                            addUpdateFolder={handleChange}
+                            protection={selectedObject}
+                            pathArray={pathArray}
+                            index={index}
+                        />
+                    ) : (
+                        <ParameterModal
+                            onClose={() => setModalOpen(false)}
+                            addUpdateParameter={handleChange}
+                            parameter={selectedObject}
+                            pathArray={pathArray}
+                            index={index}
+                        />
                     )}
-                    <button onClick={handleSubmit}>
-                        {isNewComplex ? "Добавить" : "Изменить"}
-                    </button>
-                </ComplexBottom>
-            </ComplexWrapper>
-        </ComplexContainer>
+                </>
+            )}
+        </>
     );
 };
 

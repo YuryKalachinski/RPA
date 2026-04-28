@@ -13,7 +13,7 @@ export const ComplexItemBody = styled.div`
     padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    /* gap: 8px; */
 `;
 
 export const SettingsButton = styled.button`
@@ -85,7 +85,7 @@ export const ComplexItemEdit = styled.button`
 `;
 
 export const ComplexItemType = styled.div`
-    padding-top: 12px;
+    padding: 12px 0;
     font-weight: 400;
     font-size: 14px;
     line-height: 120%;

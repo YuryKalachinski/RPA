@@ -20,7 +20,7 @@ public class BayServiceImpl implements BayService {
     private final BayMapper mapper;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public BayDto getById(Long id) {
 
         //todo handle ResponseStatusException
@@ -43,10 +43,10 @@ public class BayServiceImpl implements BayService {
                     .getById(id)
                     .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                             String.format("Unable to find resource with requested id=%d", id)));
-            mapper.updateEntityFromDto(dto, current);
+            current = mapper.toEntity(dto, current);
             return mapper.toDtoWithoutComplexes(current);
         }
-        current = mapper.toEntity(dto);
+        current = mapper.toEntity(dto, new Bay());
         return mapper.toDtoWithoutComplexes(repo.save(current));
     }
 }

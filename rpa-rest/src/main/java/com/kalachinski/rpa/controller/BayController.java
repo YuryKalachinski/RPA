@@ -2,6 +2,7 @@ package com.kalachinski.rpa.controller;
 
 import com.kalachinski.rpa.dto.bay.BayDto;
 import com.kalachinski.rpa.dto.substation.SubstationDto;
+import com.kalachinski.rpa.model.substation.Bay;
 import com.kalachinski.rpa.service.BayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -48,6 +49,8 @@ public class BayController {
             @Parameter(description = "Bay id", example = "1")
             @PathVariable("id") Long id) {
         return ResponseEntity.ok().body(service.getById(id));
+//        Bay byId = service.getById(id);
+//        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/")

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const ComplexContainer = styled.div`
+    filter: ${({ $isModalOpen }) =>
+        $isModalOpen ? "brightness(0.5) blur(2px)" : "none"};
+    transition: filter 0.3s ease;
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -21,7 +24,7 @@ export const ComplexWrapper = styled.div`
     border-radius: 20px;
     margin: 24px 0;
     width: 100%;
-    max-width: 480px;
+    max-width: 720px;
 `;
 
 export const ComplexHeader = styled.div`
@@ -42,11 +45,14 @@ export const ComplexHeader = styled.div`
 `;
 
 export const ComplexBody = styled.div`
+    width: 85%;
     padding: 0 24px;
+    display: flex;
+    flex-direction: column;
 `;
 
 export const ComplexBottom = styled.div`
-    margin-bottom: 24px;
+    margin: 24px 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -74,12 +80,19 @@ export const ComplexBottom = styled.div`
     }
 `;
 
+export const SettingsRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
 export const SettingsButton = styled.button`
+    height: 24px;
     background: transparent;
     color: var(--color-link-hover);
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 120%;
     text-align: center;
@@ -96,15 +109,100 @@ export const SettingsButton = styled.button`
     }
 
     & img {
-        width: 20px;
+        width: 22px;
         position: absolute;
         top: 0%;
         left: 10px;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 
     & p {
         margin: 0;
         padding-left: 30px;
         text-align: left;
+    }
+`;
+
+export const SettingsEdit = styled.div`
+    margin: 0 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & img {
+        width: 24px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+`;
+
+export const ProtectionItemContainer = styled.div``;
+
+export const ProtectionItemWrapper = styled.div`
+    background: var(--color-bg-medium);
+    border-radius: var(--border-10);
+    color: var(--color-text);
+`;
+
+export const ProtectionItemBody = styled.div`
+    margin: ${({ $visible }) => ($visible ? "8px 0 0 0" : "0")};
+    padding: ${({ $visible }) => ($visible ? "8px 0 0 12px" : "0 0 0 12px")};
+    display: flex;
+    flex-direction: column;
+    border: ${({ $visible }) => ($visible ? "solid 1px" : "none")};
+    border-radius: 10px;
+`;
+
+export const ProtectionItemTitle = styled.div`
+    padding-left: 30px;
+    text-align: left;
+`;
+
+export const ParameterListConteiner = styled.div``;
+
+export const ParameterListWrapper = styled.div`
+    margin: 8px;
+    background: var(--color-bg-light);
+`;
+
+export const ParameterListBody = styled.div`
+    & table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    & th,
+    & td {
+        border: 1px solid;
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 120%;
+        text-align: left;
+        color: var(--color-link-hover);
+        font-weight: 400;
+    }
+
+    & td {
+        position: relative;
+        & img {
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            display: block;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 8px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
     }
 `;

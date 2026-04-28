@@ -52,7 +52,7 @@ public class Bay extends BaseEntity {
     private Set<Complex> complexes;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {
