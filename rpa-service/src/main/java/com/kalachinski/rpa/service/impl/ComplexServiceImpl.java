@@ -29,9 +29,9 @@ public class ComplexServiceImpl implements ComplexService {
                     .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                             String.format("Unable to find resource with requested id=%d", id)));
             current = mapper.toEntity(dto, current);
-            return mapper.toDto(current);
+        } else {
+            current = mapper.toEntity(dto, new Complex());
         }
-        current = mapper.toEntity(dto, new Complex());
         return mapper.toDto(repo.save(current));
     }
 }

@@ -25,6 +25,7 @@ export const ComplexWrapper = styled.div`
     margin: 24px 0;
     width: 100%;
     max-width: 720px;
+    max-height: 80vh;
 `;
 
 export const ComplexHeader = styled.div`
@@ -45,6 +46,8 @@ export const ComplexHeader = styled.div`
 `;
 
 export const ComplexBody = styled.div`
+    flex: 1;
+    overflow-y: auto;
     width: 85%;
     padding: 0 24px;
     display: flex;
@@ -96,6 +99,7 @@ export const SettingsButton = styled.button`
     font-weight: 400;
     line-height: 120%;
     text-align: center;
+    width: fit-content;
     cursor: pointer;
     position: relative;
 
@@ -109,7 +113,7 @@ export const SettingsButton = styled.button`
     }
 
     & img {
-        width: 22px;
+        width: 24px;
         position: absolute;
         top: 0%;
         left: 10px;
@@ -120,8 +124,9 @@ export const SettingsButton = styled.button`
     }
 
     & p {
+        width: fit-content;
         margin: 0;
-        padding-left: 30px;
+        padding: 0 30px;
         text-align: left;
     }
 `;
@@ -151,7 +156,7 @@ export const ProtectionItemWrapper = styled.div`
 `;
 
 export const ProtectionItemBody = styled.div`
-    margin: ${({ $visible }) => ($visible ? "8px 0 0 0" : "0")};
+    margin: 8px 0 0;
     padding: ${({ $visible }) => ($visible ? "8px 0 0 12px" : "0 0 0 12px")};
     display: flex;
     flex-direction: column;
@@ -160,7 +165,7 @@ export const ProtectionItemBody = styled.div`
 `;
 
 export const ProtectionItemTitle = styled.div`
-    padding-left: 30px;
+    padding: 0 30px;
     text-align: left;
 `;
 

@@ -35,7 +35,9 @@ const Protection = ({
             <ProtectionWrapper>
                 <ProtectionHeader>
                     <h3>
-                        {isNewProtection ? "Новая папка:" : "Редактор папки:"}
+                        {isNewProtection
+                            ? "Добавить защиту:"
+                            : "Редактировать защиту:"}
                     </h3>
                 </ProtectionHeader>
                 <ProtectionBody>

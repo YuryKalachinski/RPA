@@ -17,6 +17,7 @@ import { SUBSTATION_ROUTE } from "../../utils/constants";
 import { Substation as SubstationModal } from "../modal";
 import { DeleteLogo, EditLogo, PlusLogo } from "../common/images";
 import { useSubList } from "../../context/subListProvider";
+import { Tooltip } from "../common/styledTooltip/styledTooltip";
 
 const SubstationList = () => {
     const { subs } = useSubList();
@@ -54,6 +55,8 @@ const SubstationList = () => {
         console.log(substation);
     };
 
+    console.log(subs);
+
     return (
         <>
             <SubstationListContainer $isModalOpen={isModalOpen}>
@@ -79,23 +82,31 @@ const SubstationList = () => {
                                 <SubstationListItem
                                     onClick={() => navigateToSubstation(sub)}
                                 >
-                                    <p>{sub.name},</p> <p>{sub.branch}</p>
+                                    <Tooltip content={sub.description}>
+                                        <p>
+                                            {sub.name}, {sub.branch}
+                                        </p>
+                                    </Tooltip>
                                 </SubstationListItem>
                                 <SubstationListItemButton
                                     onClick={() => editSubstation(sub)}
                                 >
-                                    <img
-                                        src={EditLogo}
-                                        alt="Edit current substation"
-                                    />
+                                    <Tooltip content="Редактировать подстанцию">
+                                        <img
+                                            src={EditLogo}
+                                            alt="Edit current substation"
+                                        />
+                                    </Tooltip>
                                 </SubstationListItemButton>
                                 <SubstationListItemButton
                                     onClick={() => deleteSubstation(sub)}
                                 >
-                                    <img
-                                        src={DeleteLogo}
-                                        alt="Delete current substation"
-                                    />
+                                    <Tooltip content="Удалить подстанцию">
+                                        <img
+                                            src={DeleteLogo}
+                                            alt="Delete current substation"
+                                        />
+                                    </Tooltip>
                                 </SubstationListItemButton>
                             </SubstationListRow>
                         ))}

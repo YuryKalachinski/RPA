@@ -16,6 +16,7 @@ import {
     PlusLogo,
 } from "../../common/images/";
 import ParameterList from "./parameterList";
+import { Tooltip } from "../../common/styledTooltip/styledTooltip";
 
 const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
     const [visible, setVisible] = useState(false);
@@ -58,64 +59,76 @@ const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
                 <ProtectionItemBody $visible={visible}>
                     <SettingsRow>
                         <SettingsButton onClick={changeComplexForm}>
-                            <img
-                                src={visible ? MinusLogo : PlusLogo}
-                                alt={
-                                    visible ? "Collapse group" : "Expland group"
-                                }
-                            />
-                            <ProtectionItemTitle>
-                                {protection.name}
-                            </ProtectionItemTitle>
+                            <Tooltip content={protection.description}>
+                                <div>
+                                    <img
+                                        src={visible ? MinusLogo : PlusLogo}
+                                        alt={
+                                            visible
+                                                ? "Collapse group"
+                                                : "Expland group"
+                                        }
+                                    />
+                                    <ProtectionItemTitle>
+                                        {protection.name}
+                                    </ProtectionItemTitle>
+                                </div>
+                            </Tooltip>
                         </SettingsButton>
                         <SettingsEdit>
                             {visible && (
                                 <>
-                                    <img
-                                        src={DocumentPlusLogo}
-                                        alt="Add parameter setting"
-                                        onClick={() =>
-                                            openModal(
-                                                emptyParameter,
-                                                [
-                                                    ...pathArray,
+                                    <Tooltip content="Добавить уставку">
+                                        <img
+                                            src={DocumentPlusLogo}
+                                            alt="Add parameter setting"
+                                            onClick={() =>
+                                                openModal(
+                                                    emptyParameter,
+                                                    [
+                                                        ...pathArray,
+                                                        index,
+                                                        "parameterSettings",
+                                                    ],
+                                                    protection.parameterSettings
+                                                        .length,
+                                                    "param",
+                                                )
+                                            }
+                                        />
+                                    </Tooltip>
+                                    <Tooltip content="Добавить защиту">
+                                        <img
+                                            src={FolderPlusLogo}
+                                            alt="Add protection folder"
+                                            onClick={() =>
+                                                openModal(
+                                                    emptyProtection,
+                                                    [
+                                                        ...pathArray,
+                                                        index,
+                                                        "children",
+                                                    ],
+                                                    protection.children.length,
+                                                    "prot",
+                                                )
+                                            }
+                                        />
+                                    </Tooltip>
+                                    <Tooltip content="Редактировать защиту">
+                                        <img
+                                            src={EditLogo}
+                                            alt="Edit protection folder"
+                                            onClick={() =>
+                                                openModal(
+                                                    protection,
+                                                    pathArray,
                                                     index,
-                                                    "parameterSettings",
-                                                ],
-                                                protection.parameterSettings
-                                                    .length,
-                                                "param",
-                                            )
-                                        }
-                                    />
-                                    <img
-                                        src={FolderPlusLogo}
-                                        alt="Add protection folder"
-                                        onClick={() =>
-                                            openModal(
-                                                emptyProtection,
-                                                [
-                                                    ...pathArray,
-                                                    index,
-                                                    "children",
-                                                ],
-                                                protection.children.length,
-                                                "prot",
-                                            )
-                                        }
-                                    />
-                                    <img
-                                        src={EditLogo}
-                                        alt="Edit protection folder"
-                                        onClick={() =>
-                                            openModal(
-                                                protection,
-                                                pathArray,
-                                                index,
-                                                "prot",
-                                            )
-                                        }
-                                    />
+                                                    "prot",
+                                                )
+                                            }
+                                        />
+                                    </Tooltip>
                                 </>
                             )}
                         </SettingsEdit>

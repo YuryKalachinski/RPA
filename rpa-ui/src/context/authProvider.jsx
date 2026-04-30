@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
     const getUserData = async () => {
         try {
             const { data } = await userApi.getCurrentUser();
+            console.log(data);
             setCurrentUser(data);
         } catch (e) {
             alert(e.response.data.message);

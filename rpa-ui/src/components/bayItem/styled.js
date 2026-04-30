@@ -11,6 +11,7 @@ export const BayItemWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 12px 24px;
+    max-height: 80vh;
 `;
 
 export const BayItemTop = styled.div`
@@ -42,6 +43,8 @@ export const BayItemHeader = styled.div`
 `;
 
 export const BayItemBody = styled.div`
+    flex: 1;
+    overflow-y: auto;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

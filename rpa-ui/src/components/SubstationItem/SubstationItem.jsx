@@ -16,6 +16,7 @@ import { BAY_ROUTE } from "../../utils/constants";
 import { useSub } from "../../context/subProvider";
 import { DeleteLogo, EditLogo, PlusLogo } from "../common/images/";
 import { Bay as BayModal } from "../modal/";
+import { Tooltip } from "../common/styledTooltip/styledTooltip";
 
 const SubstationItem = () => {
     const { sub } = useSub();
@@ -73,21 +74,29 @@ const SubstationItem = () => {
                         {sortedBays.map((bay) => (
                             <BayListItemRow key={bay.id}>
                                 <BayListItem onClick={() => navigateToBay(bay)}>
-                                    {bay.name}
+                                    <Tooltip
+                                        content={`Присоединение ${bay.voltageLevel} ${bay.name}`}
+                                    >
+                                        <p>{bay.name}</p>
+                                    </Tooltip>
                                 </BayListItem>
                                 <BayListItemButton onClick={() => editBay(bay)}>
-                                    <img
-                                        src={EditLogo}
-                                        alt="Edit current substation"
-                                    />
+                                    <Tooltip content="Редактировать присоединение">
+                                        <img
+                                            src={EditLogo}
+                                            alt="Edit current substation"
+                                        />
+                                    </Tooltip>
                                 </BayListItemButton>
                                 <BayListItemButton
                                     onClick={() => deleteBay(bay)}
                                 >
-                                    <img
-                                        src={DeleteLogo}
-                                        alt="Delete current substation"
-                                    />
+                                    <Tooltip content="Удалить присоединение">
+                                        <img
+                                            src={DeleteLogo}
+                                            alt="Delete current substation"
+                                        />
+                                    </Tooltip>
                                 </BayListItemButton>
                             </BayListItemRow>
                         ))}

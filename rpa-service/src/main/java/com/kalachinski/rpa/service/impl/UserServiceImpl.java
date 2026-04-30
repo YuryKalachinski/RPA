@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getCurrentUser() {
         var user = getUserFromContext();
-        return userMapper.userToDto(user);
+        return userMapper.toDto(user);
     }
 
     private static User getUserFromContext() {

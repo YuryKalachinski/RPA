@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authProvider";
 import { MAIN_ROUTE } from "../../utils/constants";
@@ -11,17 +10,18 @@ import {
 } from "./styled";
 import { EmailLogo, PasswordLogo } from "../common/images/";
 import { TextField } from "../form/";
+import { useImmer } from "use-immer";
+import { set } from "lodash";
 
 const LoginForm = ({ toggleFormType }) => {
     const { logIn } = useAuth();
     const navigate = useNavigate();
-    const [user, setUser] = useState({ email: "", password: "" });
+    const [user, setUser] = useImmer({ email: "", password: "" });
 
-    const handleChange = ({ target }) => {
-        setUser((prevState) => ({
-            ...prevState,
-            [target.name]: target.value,
-        }));
+    const handleChange = (path, value) => {
+        setUser((draft) => {
+            set(draft, path, value);
+        });
     };
 
     const handleSubmit = async (event) => {

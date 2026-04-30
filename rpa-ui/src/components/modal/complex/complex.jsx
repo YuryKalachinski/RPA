@@ -19,6 +19,7 @@ import {
     Parameter as ParameterModal,
 } from "../";
 import ProtectionItem from "./protectionItem";
+import { Tooltip } from "../../common/styledTooltip/styledTooltip";
 
 const Complex = ({ complex, onClose }) => {
     const [current, setCurrent] = useImmer(complex);
@@ -44,8 +45,6 @@ const Complex = ({ complex, onClose }) => {
     };
 
     const handleChange = (path, value) => {
-        console.log(path);
-        console.log(value);
         setCurrent((draft) => {
             set(draft, path, value);
         });
@@ -133,41 +132,53 @@ const Complex = ({ complex, onClose }) => {
                         />
                         <SettingsRow>
                             <SettingsButton onClick={changeComplexForm}>
-                                <img
-                                    src={visible ? MinusLogo : PlusLogo}
-                                    alt={
+                                <Tooltip
+                                    content={
                                         visible
-                                            ? "Collapse group"
-                                            : "Expland group"
+                                            ? "Скрыть уставки"
+                                            : "Показать уставки"
                                     }
-                                />
-                                <p>Уставки</p>
+                                >
+                                    <div>
+                                        <img
+                                            src={visible ? MinusLogo : PlusLogo}
+                                            alt={
+                                                visible
+                                                    ? "Collapse group"
+                                                    : "Expland group"
+                                            }
+                                        />
+                                        <p>Уставки</p>
+                                    </div>
+                                </Tooltip>
                             </SettingsButton>
                             <SettingsEdit>
                                 {visible && (
-                                    <img
-                                        className="folderlogo"
-                                        src={FolderPlusLogo}
-                                        alt="Add root protection folder"
-                                        onClick={() =>
-                                            openModal(
-                                                emptyProtection,
-                                                ["protections"],
-                                                current.protections.length,
-                                                "prot",
-                                            )
-                                        }
-                                    />
+                                    <Tooltip content="Добавить защиту">
+                                        <img
+                                            className="folderlogo"
+                                            src={FolderPlusLogo}
+                                            alt="Add root protection folder"
+                                            onClick={() =>
+                                                openModal(
+                                                    emptyProtection,
+                                                    ["protections"],
+                                                    current.protections.length,
+                                                    "prot",
+                                                )
+                                            }
+                                        />
+                                    </Tooltip>
                                 )}
                             </SettingsEdit>
                         </SettingsRow>
                         {visible && (
                             <>
-                                {current.protections?.map((prot, protIndex) => (
+                                {current.protections?.map((prot, protIndx) => (
                                     <ProtectionItem
-                                        key={prot.id + prot.name}
+                                        key={protIndx}
                                         protection={prot}
-                                        index={protIndex}
+                                        index={protIndx}
                                         pathArray={["protections"]}
                                         openModal={openModal}
                                     />

@@ -25,6 +25,7 @@ export const SettingsButton = styled.button`
     font-weight: 400;
     line-height: 120%;
     text-align: center;
+    width: fit-content;
     cursor: pointer;
     position: relative;
 
@@ -45,8 +46,9 @@ export const SettingsButton = styled.button`
     }
 
     & p {
+        width: fit-content;
         margin: 0;
-        padding-left: 30px;
+        padding: 0 30px;
         text-align: left;
     }
 `;

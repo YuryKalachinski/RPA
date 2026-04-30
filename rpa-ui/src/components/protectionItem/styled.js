@@ -9,7 +9,7 @@ export const ProtectionItemWrapper = styled.div`
 `;
 
 export const ProtectionItemBody = styled.div`
-    margin: ${({ $visible }) => ($visible ? "8px 0 0 0" : "0")};
+    margin: 8px 0 0;
     padding: ${({ $visible }) => ($visible ? "8px 0 0 12px" : "0 0 0 12px")};
     display: flex;
     flex-direction: column;
@@ -26,6 +26,7 @@ export const SettingsButton = styled.button`
     font-size: 14px;
     line-height: 120%;
     text-align: center;
+    width: fit-content;
     cursor: pointer;
     position: relative;
 
@@ -46,13 +47,6 @@ export const SettingsButton = styled.button`
 `;
 
 export const ProtectionItemTitle = styled.div`
-    padding-left: 30px;
+    padding: 0 30px;
     text-align: left;
 `;
-
-// export const ProtActionItemTitle = styled.div`
-//     padding-top: 12px;
-//     font-size: 14px;
-//     line-height: 120%;
-//     margin-bottom: 4px;
-// `;

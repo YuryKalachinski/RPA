@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 public enum VoltageLevel {
-    THREE_HUNDRED_THIRTY("330 kV"),
-    TWO_HUNDRED_TWENTY("220 kV"),
-    ONE_HUNDRED_TEN("110 kV"),
-    THIRTY_FIVE("35 kV"),
-    TEN("10 kV"),
-    SIX("6 kV"),
-    ZERO_FOUR("0,4 kV");
+    THREE_HUNDRED_THIRTY("330 кВ"),
+    TWO_HUNDRED_TWENTY("220 кВ"),
+    ONE_HUNDRED_TEN("110 кВ"),
+    THIRTY_FIVE("35 кВ"),
+    TEN("10 кВ"),
+    SIX("6 кВ"),
+    ZERO_FOUR("0,4 кВ");
 
     private final String value;
 

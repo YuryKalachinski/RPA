@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
     ComplexItemBody,
     ComplexItemConteiner,
@@ -10,9 +10,16 @@ import {
 } from "./styled";
 import { EditLogo, MinusLogo, PlusLogo } from "../common/images/";
 import ProtectionItem from "../protectionItem/protectionItem";
+import { Tooltip } from "../common/styledTooltip/styledTooltip";
 
 const ComplexItem = ({ complex, editComplex }) => {
     const [visible, setVisible] = useState(false);
+
+    const sortedProtections = useMemo(() => {
+        return [...complex.protections].sort((a, b) =>
+            a.name.localeCompare(b.name),
+        );
+    }, [complex]);
 
     const changeComplexForm = () => {
         setVisible((prevState) => !prevState);
@@ -25,24 +32,38 @@ const ComplexItem = ({ complex, editComplex }) => {
                     <ComplexItemTitle>
                         {complex.name}
                         <ComplexItemEdit onClick={editComplex}>
-                            <img
-                                src={EditLogo}
-                                alt="Edit parameters of complex"
-                            />
+                            <Tooltip content="Редактирование комплекса">
+                                <img
+                                    src={EditLogo}
+                                    alt="Edit parameters of complex"
+                                />
+                            </Tooltip>
                         </ComplexItemEdit>
                     </ComplexItemTitle>
                     <ComplexItemType>{complex.description}</ComplexItemType>
                     <SettingsButton onClick={changeComplexForm}>
-                        <img
-                            src={visible ? MinusLogo : PlusLogo}
-                            alt={visible ? "Collapse group" : "Expland group"}
-                        />
-                        <p>Уставки</p>
+                        <Tooltip
+                            content={
+                                visible ? "Скрыть уставки" : "Показать уставки"
+                            }
+                        >
+                            <div>
+                                <img
+                                    src={visible ? MinusLogo : PlusLogo}
+                                    alt={
+                                        visible
+                                            ? "Collapse group"
+                                            : "Expland group"
+                                    }
+                                />
+                                <p>Уставки</p>
+                            </div>
+                        </Tooltip>
                     </SettingsButton>
                     {visible && (
                         <>
-                            {complex.protections?.map((prot) => (
-                                <ProtectionItem key={prot.id} prot={prot} />
+                            {sortedProtections?.map((prot, protIndx) => (
+                                <ProtectionItem key={protIndx} prot={prot} />
                             ))}
                         </>
                     )}

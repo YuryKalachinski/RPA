@@ -19,29 +19,25 @@ const ParameterList = ({ psl, pathArray, openModal }) => {
                         </thead>
                         <tbody>
                             {psl.map((parameter, paramIndx) => (
-                                <>
-                                    <tr key={parameter.id + parameter.key}>
-                                        <td>{parameter.key}</td>
-                                        <td>
-                                            {parameter.value}
-                                            <img
-                                                key={
-                                                    parameter.id + parameter.key
-                                                }
-                                                src={EditLogo}
-                                                alt="Edit parameter setting"
-                                                onClick={() =>
-                                                    openModal(
-                                                        parameter,
-                                                        pathArray,
-                                                        paramIndx,
-                                                        "param",
-                                                    )
-                                                }
-                                            />
-                                        </td>
-                                    </tr>
-                                </>
+                                <tr key={paramIndx}>
+                                    <td>{parameter.key}</td>
+                                    <td>
+                                        {parameter.value}
+                                        <img
+                                            key={parameter.id + parameter.key}
+                                            src={EditLogo}
+                                            alt="Edit parameter setting"
+                                            onClick={() =>
+                                                openModal(
+                                                    parameter,
+                                                    pathArray,
+                                                    paramIndx,
+                                                    "param",
+                                                )
+                                            }
+                                        />
+                                    </td>
+                                </tr>
                             ))}
                         </tbody>
                     </table>
