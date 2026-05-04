@@ -43,19 +43,6 @@ export const BayHeader = styled.div`
 
 export const BayBody = styled.div`
     padding: 0 48px;
-
-    & button {
-        background-color: var(--color-primary);
-        color: var(--color-text);
-        border: none;
-        border-radius: 10px;
-        padding: 12px 24px;
-        font-size: 18px;
-        line-height: 120%;
-        text-align: center;
-        width: 100%;
-        cursor: pointer;
-    }
 `;
 
 export const BayButtons = styled.div`
@@ -64,21 +51,4 @@ export const BayButtons = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 40px;
-
-    & button {
-        background-color: var(--color-primary);
-        color: var(--color-text);
-        border: none;
-        border-radius: 10px;
-        padding: 12px 24px;
-        font-size: 18px;
-        line-height: 120%;
-        text-align: center;
-        width: 100%;
-        cursor: pointer;
-    }
-
-    & .closeButton {
-        background-color: var(--color-stroke);
-    }
 `;

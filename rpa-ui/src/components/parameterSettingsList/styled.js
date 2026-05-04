@@ -20,7 +20,11 @@ export const ParameterSettingsListBody = styled.div`
         font-size: 12px;
         line-height: 120%;
         text-align: left;
-        color: var(--color-link-hover);
+        color: var(--color-text);
         font-weight: 400;
+    }
+
+    & th {
+        font-weight: 700;
     }
 `;

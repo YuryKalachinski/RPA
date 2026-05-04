@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useImmer } from "use-immer";
 import {
     ComplexBody,
@@ -19,7 +19,8 @@ import {
     Parameter as ParameterModal,
 } from "../";
 import ProtectionItem from "./protectionItem";
-import { Tooltip } from "../../common/styledTooltip/styledTooltip";
+import { Tooltip } from "../../common/styledTooltip";
+import { Button } from "../../common/button";
 
 const Complex = ({ complex, onClose }) => {
     const [current, setCurrent] = useImmer(complex);
@@ -43,6 +44,12 @@ const Complex = ({ complex, onClose }) => {
         parameterSettings: [],
         isDeleted: false,
     };
+
+    const sortedProtections = useMemo(() => {
+        return [...complex.protections].sort((a, b) =>
+            a.name.localeCompare(b.name),
+        );
+    }, [complex]);
 
     const handleChange = (path, value) => {
         setCurrent((draft) => {
@@ -174,7 +181,7 @@ const Complex = ({ complex, onClose }) => {
                         </SettingsRow>
                         {visible && (
                             <>
-                                {current.protections?.map((prot, protIndx) => (
+                                {sortedProtections.map((prot, protIndx) => (
                                     <ProtectionItem
                                         key={protIndx}
                                         protection={prot}
@@ -187,21 +194,15 @@ const Complex = ({ complex, onClose }) => {
                         )}
                     </ComplexBody>
                     <ComplexBottom>
-                        <button className="closeButton" onClick={closeForm}>
+                        <Button onClick={closeForm} variant="close">
                             Закрыть
-                        </button>
+                        </Button>
                         {!isNewComplex && (
-                            <button
-                                className="deleteButton"
-                                onClick={deleteComplex}
-                            >
+                            <Button onClick={deleteComplex} variant="delete">
                                 Удалить
-                            </button>
+                            </Button>
                         )}
-                        <button onClick={handleSubmit}>
-                            {/* {isNewComplex ? "Добавить" : "Изменить"} */}
-                            Сохранить
-                        </button>
+                        <Button onClick={handleSubmit}>Сохранить</Button>
                     </ComplexBottom>
                 </ComplexWrapper>
             </ComplexContainer>

@@ -9,11 +9,14 @@ import {
     SettingsButton,
 } from "./styled";
 import { EditLogo, MinusLogo, PlusLogo } from "../common/images/";
-import ProtectionItem from "../protectionItem/protectionItem";
+import { ProtectionItem } from "../protectionItem";
 import { Tooltip } from "../common/styledTooltip/styledTooltip";
+import { useAuth } from "../../context/authProvider";
+import { ROLE_ADMIN } from "../../utils/constants";
 
 const ComplexItem = ({ complex, editComplex }) => {
     const [visible, setVisible] = useState(false);
+    const { permission } = useAuth();
 
     const sortedProtections = useMemo(() => {
         return [...complex.protections].sort((a, b) =>
@@ -31,14 +34,16 @@ const ComplexItem = ({ complex, editComplex }) => {
                 <ComplexItemBody>
                     <ComplexItemTitle>
                         {complex.name}
-                        <ComplexItemEdit onClick={editComplex}>
-                            <Tooltip content="Редактирование комплекса">
-                                <img
-                                    src={EditLogo}
-                                    alt="Edit parameters of complex"
-                                />
-                            </Tooltip>
-                        </ComplexItemEdit>
+                        {permission === ROLE_ADMIN && (
+                            <ComplexItemEdit onClick={editComplex}>
+                                <Tooltip content="Редактирование комплекса">
+                                    <img
+                                        src={EditLogo}
+                                        alt="Edit parameters of complex"
+                                    />
+                                </Tooltip>
+                            </ComplexItemEdit>
+                        )}
                     </ComplexItemTitle>
                     <ComplexItemType>{complex.description}</ComplexItemType>
                     <SettingsButton onClick={changeComplexForm}>

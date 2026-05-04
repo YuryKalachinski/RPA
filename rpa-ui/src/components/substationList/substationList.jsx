@@ -13,14 +13,16 @@ import {
     SubstationListRow,
 } from "./styled";
 import { useNavigate, generatePath } from "react-router-dom";
-import { SUBSTATION_ROUTE } from "../../utils/constants";
+import { ROLE_ADMIN, SUBSTATION_ROUTE } from "../../utils/constants";
 import { Substation as SubstationModal } from "../modal";
 import { DeleteLogo, EditLogo, PlusLogo } from "../common/images";
 import { useSubList } from "../../context/subListProvider";
 import { Tooltip } from "../common/styledTooltip/styledTooltip";
+import { useAuth } from "../../context/authProvider";
 
 const SubstationList = () => {
     const { subs } = useSubList();
+    const { permission } = useAuth();
     const emptySub = { name: "", branch: "", description: "" };
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedSub, setSelectedSub] = useState(emptySub);
@@ -55,8 +57,6 @@ const SubstationList = () => {
         console.log(substation);
     };
 
-    console.log(subs);
-
     return (
         <>
             <SubstationListContainer $isModalOpen={isModalOpen}>
@@ -69,12 +69,19 @@ const SubstationList = () => {
                             filter={filter}
                             setFilter={setFilter}
                         />
-                        <NewSubstationListItem>
-                            <button onClick={() => editSubstation(emptySub)}>
-                                <p>Добавить новую подстанцию</p>
-                                <img src={PlusLogo} alt="add new substation" />
-                            </button>
-                        </NewSubstationListItem>
+                        {permission === ROLE_ADMIN && (
+                            <NewSubstationListItem>
+                                <button
+                                    onClick={() => editSubstation(emptySub)}
+                                >
+                                    <p>Добавить новую подстанцию</p>
+                                    <img
+                                        src={PlusLogo}
+                                        alt="add new substation"
+                                    />
+                                </button>
+                            </NewSubstationListItem>
+                        )}
                     </SubstationListTop>
                     <SubstationListBody>
                         {sortedSearchedSub.map((sub) => (
@@ -88,26 +95,32 @@ const SubstationList = () => {
                                         </p>
                                     </Tooltip>
                                 </SubstationListItem>
-                                <SubstationListItemButton
-                                    onClick={() => editSubstation(sub)}
-                                >
-                                    <Tooltip content="Редактировать подстанцию">
-                                        <img
-                                            src={EditLogo}
-                                            alt="Edit current substation"
-                                        />
-                                    </Tooltip>
-                                </SubstationListItemButton>
-                                <SubstationListItemButton
-                                    onClick={() => deleteSubstation(sub)}
-                                >
-                                    <Tooltip content="Удалить подстанцию">
-                                        <img
-                                            src={DeleteLogo}
-                                            alt="Delete current substation"
-                                        />
-                                    </Tooltip>
-                                </SubstationListItemButton>
+                                {permission === ROLE_ADMIN && (
+                                    <>
+                                        <SubstationListItemButton
+                                            onClick={() => editSubstation(sub)}
+                                        >
+                                            <Tooltip content="Редактировать подстанцию">
+                                                <img
+                                                    src={EditLogo}
+                                                    alt="Edit current substation"
+                                                />
+                                            </Tooltip>
+                                        </SubstationListItemButton>
+                                        <SubstationListItemButton
+                                            onClick={() =>
+                                                deleteSubstation(sub)
+                                            }
+                                        >
+                                            <Tooltip content="Удалить подстанцию">
+                                                <img
+                                                    src={DeleteLogo}
+                                                    alt="Delete current substation"
+                                                />
+                                            </Tooltip>
+                                        </SubstationListItemButton>
+                                    </>
+                                )}
                             </SubstationListRow>
                         ))}
                     </SubstationListBody>

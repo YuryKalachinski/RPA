@@ -56,6 +56,11 @@ export const BayItemBottom = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+
+    & button {
+        width: fit-content;
+    }
+
     & hr {
         background-color: var(--color-link-hover);
         width: 100%;

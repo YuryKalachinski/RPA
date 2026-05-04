@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
     ProtectionItemContainer,
     ProtectionItemWrapper,
@@ -48,6 +48,12 @@ const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
         },
         isDeleted: false,
     };
+
+    const sortedChildren = useMemo(() => {
+        return [...protection.children].sort((a, b) =>
+            a.name.localeCompare(b.name),
+        );
+    }, [protection]);
 
     const changeComplexForm = () => {
         setVisible((prevState) => !prevState);
@@ -146,7 +152,7 @@ const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
                                     openModal={openModal}
                                 />
                             )}
-                            {protection.children?.map((el, elIndx) => (
+                            {sortedChildren.map((el, elIndx) => (
                                 <ProtectionItem
                                     key={el.id + el.name}
                                     protection={el}

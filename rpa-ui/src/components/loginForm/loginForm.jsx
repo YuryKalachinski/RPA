@@ -12,6 +12,7 @@ import { EmailLogo, PasswordLogo } from "../common/images/";
 import { TextField } from "../form/";
 import { useImmer } from "use-immer";
 import { set } from "lodash";
+import { Button } from "../common/button";
 
 const LoginForm = ({ toggleFormType }) => {
     const { logIn } = useAuth();
@@ -48,26 +49,24 @@ const LoginForm = ({ toggleFormType }) => {
                     <p>Sign in to your account</p>
                 </LoginHeader>
                 <LoginFormGroup>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
-                            imgSrc={EmailLogo}
-                            imgAlt="email address"
-                            label="Email"
-                            name="email"
-                            value={user.email}
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            imgSrc={PasswordLogo}
-                            imgAlt="password"
-                            label="Password"
-                            name="password"
-                            type="password"
-                            value={user.password}
-                            onChange={handleChange}
-                        />
-                        <button>Sign In</button>
-                    </form>
+                    <TextField
+                        imgSrc={EmailLogo}
+                        imgAlt="email address"
+                        label="Email"
+                        name="email"
+                        value={user.email}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        imgSrc={PasswordLogo}
+                        imgAlt="password"
+                        label="Password"
+                        name="password"
+                        type="password"
+                        value={user.password}
+                        onChange={handleChange}
+                    />
+                    <Button onClick={handleSubmit}>Sign In</Button>
                 </LoginFormGroup>
                 <SignUpLink>
                     <p>

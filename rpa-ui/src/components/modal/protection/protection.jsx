@@ -8,6 +8,7 @@ import {
     ProtectionButtons,
 } from "./styled";
 import { TextField } from "../../form";
+import { Button } from "../../common/button";
 
 const Protection = ({
     protection,
@@ -25,7 +26,8 @@ const Protection = ({
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         addUpdateFolder([...pathArray, index], current);
         onClose();
     };
@@ -54,12 +56,12 @@ const Protection = ({
                         onChange={handleChange}
                     />
                     <ProtectionButtons>
-                        <button className="closeButton" onClick={onClose}>
+                        <Button onClick={onClose} variant="close">
                             Закрыть
-                        </button>
-                        <button onClick={handleSubmit}>
+                        </Button>
+                        <Button onClick={handleSubmit}>
                             {isNewProtection ? "Добавить" : "Изменить"}
-                        </button>
+                        </Button>
                     </ProtectionButtons>
                 </ProtectionBody>
             </ProtectionWrapper>

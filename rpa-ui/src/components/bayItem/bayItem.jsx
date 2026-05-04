@@ -13,9 +13,13 @@ import { useBay } from "../../context/bayProvider";
 import { useMemo, useState } from "react";
 import { PlusLogo } from "../common/images";
 import { Complex as ComplexModal } from "../modal";
+import { ROLE_ADMIN } from "../../utils/constants";
+import { useAuth } from "../../context/authProvider";
+import { Button } from "../common/button";
 
 const BayItem = () => {
     const { bay } = useBay();
+    const { permission } = useAuth();
     const emptyComplex = {
         name: "",
         description: "",
@@ -55,21 +59,24 @@ const BayItem = () => {
                                 editComplex={() => editComplex(el)}
                             />
                         ))}
-                        <NewComplexItem
-                            onClick={() => editComplex(emptyComplex)}
-                        >
-                            <img src={PlusLogo} alt="add new complex" />
-                        </NewComplexItem>
+                        {permission === ROLE_ADMIN && (
+                            <NewComplexItem
+                                onClick={() => editComplex(emptyComplex)}
+                            >
+                                <img src={PlusLogo} alt="add new complex" />
+                            </NewComplexItem>
+                        )}
                     </BayItemBody>
                     <BayItemBottom>
                         <hr />
-                        <button
+                        <Button
                             onClick={() => {
                                 navigate(-1);
                             }}
+                            variant="back"
                         >
                             Назад
-                        </button>
+                        </Button>
                     </BayItemBottom>
                 </BayItemWrapper>
             </BayItemContainer>

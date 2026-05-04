@@ -3,6 +3,7 @@ import localStorageServive from "../utils/localStorageService";
 import userApi from "../http/userAPI";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_ROUTE } from "../utils/constants";
+import { isExpired } from "../utils/methods";
 
 const AuthContext = createContext();
 
@@ -12,13 +13,14 @@ export const useAuth = () => {
 
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
+    const [permission, setPermission] = useState();
     const navigate = useNavigate();
 
     const getUserData = async () => {
         try {
             const { data } = await userApi.getCurrentUser();
-            console.log(data);
             setCurrentUser(data);
+            setPermission(data.role.code);
         } catch (e) {
             alert(e.response.data.message);
         }
@@ -42,13 +44,18 @@ const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        if (localStorageServive.getAccessToken()) {
+        if (
+            localStorageServive.getRefreshToken() &&
+            !isExpired(localStorageServive.getRefreshToken())
+        ) {
             getUserData();
         }
     }, []);
 
     return (
-        <AuthContext.Provider value={{ currentUser, logIn, logOut }}>
+        <AuthContext.Provider
+            value={{ currentUser, logIn, logOut, permission }}
+        >
             {children}
         </AuthContext.Provider>
     );

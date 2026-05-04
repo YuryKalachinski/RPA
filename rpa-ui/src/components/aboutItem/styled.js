@@ -6,4 +6,8 @@ export const AboutContainer = styled.div`
     & p {
         margin: 16px;
     }
+
+    & .strikethrough {
+        text-decoration: line-through;
+    }
 `;

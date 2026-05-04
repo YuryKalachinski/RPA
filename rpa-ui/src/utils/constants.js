@@ -10,3 +10,5 @@ export const ACCESS_TOKEN = "access_token";
 export const REFRESH_TOKEN = "refresh_token";
 export const EXPIRATION_TIME = "expiration";
 export const TOKEN = "Bearer_";
+export const ROLE_ADMIN = "ROLE_ADMIN";
+export const ROLE_VIEWER = "ROLE_VIEWER";

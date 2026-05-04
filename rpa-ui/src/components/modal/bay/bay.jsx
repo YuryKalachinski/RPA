@@ -10,6 +10,7 @@ import {
 import { SelectField, TextAreaField, TextField } from "../../form";
 import { useSub } from "../../../context/subProvider";
 import { useUtility } from "../../../context/utilityProvider";
+import { Button } from "../../common/button";
 
 const Bay = ({ bay, onClose }) => {
     const isNewBay = bay.id ? false : true;
@@ -57,42 +58,40 @@ const Bay = ({ bay, onClose }) => {
                     </h3>
                 </BayHeader>
                 <BayBody>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
-                            label="Название присоединения"
-                            name="name"
-                            value={current.name}
-                            onChange={handleChange}
-                        />
-                        <SelectField
-                            optionsArray={voltageLevelList}
-                            defaultOption="Класс напряжения"
-                            label="Класс напряжения"
-                            name="voltageLevel"
-                            value={current.voltageLevel}
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            label="Номер присоединения"
-                            name="cellNumber"
-                            value={current.cellNumber}
-                            onChange={handleChange}
-                        />
-                        <TextAreaField
-                            label="Описание присоединения"
-                            name="description"
-                            value={current.description}
-                            onChange={handleChange}
-                        />
-                        <BayButtons>
-                            <button className="closeButton" onClick={closeForm}>
-                                Закрыть
-                            </button>
-                            <button>
-                                {isNewBay ? "Добавить" : "Изменить"}
-                            </button>
-                        </BayButtons>
-                    </form>
+                    <TextField
+                        label="Название присоединения"
+                        name="name"
+                        value={current.name}
+                        onChange={handleChange}
+                    />
+                    <SelectField
+                        optionsArray={voltageLevelList}
+                        defaultOption="Класс напряжения"
+                        label="Класс напряжения"
+                        name="voltageLevel"
+                        value={current.voltageLevel}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        label="Номер присоединения"
+                        name="cellNumber"
+                        value={current.cellNumber}
+                        onChange={handleChange}
+                    />
+                    <TextAreaField
+                        label="Описание присоединения"
+                        name="description"
+                        value={current.description}
+                        onChange={handleChange}
+                    />
+                    <BayButtons>
+                        <Button onClick={closeForm} variant="close">
+                            Закрыть
+                        </Button>
+                        <Button onClick={handleSubmit}>
+                            {isNewBay ? "Добавить" : "Изменить"}
+                        </Button>
+                    </BayButtons>
                 </BayBody>
             </BayWrapper>
         </BayContainer>

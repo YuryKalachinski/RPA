@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TOKEN } from "../utils/constants";
 import localStorageService from "../utils/localStorageService";
-import { getExpirationFromJwtToken } from "../utils/methods";
+import { isExpired } from "../utils/methods";
 import userApi from "./userAPI";
 
 export const http = axios.create({
@@ -16,8 +16,7 @@ const httpInterceptor = async (config) => {
     if (
         config.headers &&
         localStorageService.getRefreshToken() &&
-        getExpirationFromJwtToken(localStorageService.getRefreshToken()) <=
-            Date.now()
+        isExpired(localStorageService.getRefreshToken())
     ) {
         localStorageService.logOut();
         return config;
@@ -26,8 +25,7 @@ const httpInterceptor = async (config) => {
     if (
         config.headers &&
         localStorageService.getAccessToken() &&
-        getExpirationFromJwtToken(localStorageService.getAccessToken()) <=
-            Date.now()
+        isExpired(localStorageService.getAccessToken())
     ) {
         try {
             const { data } = await userApi.refreshToken();
@@ -40,8 +38,7 @@ const httpInterceptor = async (config) => {
     if (
         config.headers &&
         localStorageService.getAccessToken() &&
-        getExpirationFromJwtToken(localStorageService.getAccessToken()) >
-            Date.now()
+        !isExpired(localStorageService.getAccessToken())
     ) {
         config.headers.authorization = `${TOKEN}${localStorageService.getAccessToken()}`;
     }

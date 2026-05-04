@@ -8,6 +8,7 @@ import {
     ParameterButtons,
 } from "./styled";
 import { TextAreaField, TextField } from "../../form";
+import { Button } from "../../common/button";
 
 const Parameter = ({
     parameter,
@@ -25,7 +26,8 @@ const Parameter = ({
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         addUpdateParameter([...pathArray, index], current);
         onClose();
     };
@@ -66,12 +68,12 @@ const Parameter = ({
                         onChange={handleChange}
                     />
                     <ParameterButtons>
-                        <button className="closeButton" onClick={onClose}>
+                        <Button onClick={onClose} variant="close">
                             Закрыть
-                        </button>
-                        <button onClick={handleSubmit}>
+                        </Button>
+                        <Button onClick={handleSubmit}>
                             {isNewParameter ? "Добавить" : "Изменить"}
-                        </button>
+                        </Button>
                     </ParameterButtons>
                 </ParameterBody>
             </ParameterWrapper>

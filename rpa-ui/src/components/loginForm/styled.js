@@ -38,18 +38,6 @@ export const LoginHeader = styled.div`
 
 export const LoginFormGroup = styled.div`
     padding: 0 48px;
-    & button {
-        background-color: var(--color-primary);
-        color: var(--color-text);
-        border: none;
-        border-radius: 10px;
-        padding: 12px 24px;
-        font-size: 18px;
-        line-height: 120%;
-        text-align: center;
-        width: 100%;
-        cursor: pointer;
-    }
 `;
 
 export const SignUpLink = styled.div`

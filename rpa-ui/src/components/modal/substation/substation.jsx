@@ -10,6 +10,7 @@ import {
 import { useSubList } from "../../../context/subListProvider";
 import { TextAreaField, TextField, SelectField } from "../../form";
 import { useUtility } from "../../../context/utilityProvider";
+import { Button } from "../../common/button";
 
 const Substation = ({ substation, onClose }) => {
     const isNewSub = substation.id ? false : true;
@@ -57,36 +58,34 @@ const Substation = ({ substation, onClose }) => {
                     </h3>
                 </SubstationHeader>
                 <SubstationBody>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
-                            label="Имя подстанции"
-                            name="name"
-                            value={current.name}
-                            onChange={handleChange}
-                        />
-                        <SelectField
-                            optionsArray={branches}
-                            defaultOption="Выберете филиал"
-                            label="Филиал"
-                            name="branch"
-                            value={current.branch}
-                            onChange={handleChange}
-                        />
-                        <TextAreaField
-                            label="Описание подстанции"
-                            name="description"
-                            value={current.description}
-                            onChange={handleChange}
-                        />
-                        <SubstationButtons>
-                            <button className="closeButton" onClick={closeForm}>
-                                Закрыть
-                            </button>
-                            <button>
-                                {isNewSub ? "Добавить" : "Изменить"}
-                            </button>
-                        </SubstationButtons>
-                    </form>
+                    <TextField
+                        label="Имя подстанции"
+                        name="name"
+                        value={current.name}
+                        onChange={handleChange}
+                    />
+                    <SelectField
+                        optionsArray={branches}
+                        defaultOption="Выберете филиал"
+                        label="Филиал"
+                        name="branch"
+                        value={current.branch}
+                        onChange={handleChange}
+                    />
+                    <TextAreaField
+                        label="Описание подстанции"
+                        name="description"
+                        value={current.description}
+                        onChange={handleChange}
+                    />
+                    <SubstationButtons>
+                        <Button onClick={closeForm} variant="close">
+                            Закрыть
+                        </Button>
+                        <Button onClick={handleSubmit}>
+                            {isNewSub ? "Добавить" : "Изменить"}
+                        </Button>
+                    </SubstationButtons>
                 </SubstationBody>
             </SubstationWrapper>
         </SubstationContainer>
