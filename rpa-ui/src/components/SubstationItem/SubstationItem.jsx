@@ -12,14 +12,17 @@ import {
     BayListItemButton,
 } from "./styled";
 import { useNavigate, generatePath } from "react-router-dom";
-import { BAY_ROUTE } from "../../utils/constants";
+import { BAY_ROUTE, ROLE_ADMIN } from "../../utils/constants";
 import { useSub } from "../../context/subProvider";
 import { DeleteLogo, EditLogo, PlusLogo } from "../common/images/";
 import { Bay as BayModal } from "../modal/";
 import { Tooltip } from "../common/styledTooltip/styledTooltip";
+import { useAuth } from "../../context/authProvider";
+import { Button } from "../common/button";
 
 const SubstationItem = () => {
     const { sub } = useSub();
+    const { permission } = useAuth();
     const emptyBay = {
         name: "",
         description: "",
@@ -63,12 +66,14 @@ const SubstationItem = () => {
                             <h4>{sub.description}</h4>
                             <p>Присоединения:</p>
                         </SubstationItemHeader>
-                        <NewBayItem>
-                            <button onClick={() => editBay(emptyBay)}>
-                                <p>Добавить новое присоединение</p>
-                                <img src={PlusLogo} alt="add new bay" />
-                            </button>
-                        </NewBayItem>
+                        {permission === ROLE_ADMIN && (
+                            <NewBayItem>
+                                <button onClick={() => editBay(emptyBay)}>
+                                    <p>Добавить новое присоединение</p>
+                                    <img src={PlusLogo} alt="add new bay" />
+                                </button>
+                            </NewBayItem>
+                        )}
                     </SubstationItemTop>
                     <SubstationItemBody>
                         {sortedBays.map((bay) => (
@@ -80,36 +85,43 @@ const SubstationItem = () => {
                                         <p>{bay.name}</p>
                                     </Tooltip>
                                 </BayListItem>
-                                <BayListItemButton onClick={() => editBay(bay)}>
-                                    <Tooltip content="Редактировать присоединение">
-                                        <img
-                                            src={EditLogo}
-                                            alt="Edit current substation"
-                                        />
-                                    </Tooltip>
-                                </BayListItemButton>
-                                <BayListItemButton
-                                    onClick={() => deleteBay(bay)}
-                                >
-                                    <Tooltip content="Удалить присоединение">
-                                        <img
-                                            src={DeleteLogo}
-                                            alt="Delete current substation"
-                                        />
-                                    </Tooltip>
-                                </BayListItemButton>
+                                {permission === ROLE_ADMIN && (
+                                    <>
+                                        <BayListItemButton
+                                            onClick={() => editBay(bay)}
+                                        >
+                                            <Tooltip content="Редактировать присоединение">
+                                                <img
+                                                    src={EditLogo}
+                                                    alt="Edit current substation"
+                                                />
+                                            </Tooltip>
+                                        </BayListItemButton>
+                                        <BayListItemButton
+                                            onClick={() => deleteBay(bay)}
+                                        >
+                                            <Tooltip content="Удалить присоединение">
+                                                <img
+                                                    src={DeleteLogo}
+                                                    alt="Delete current substation"
+                                                />
+                                            </Tooltip>
+                                        </BayListItemButton>
+                                    </>
+                                )}
                             </BayListItemRow>
                         ))}
                     </SubstationItemBody>
                     <SubstationItemBottom>
                         <hr />
-                        <button
+                        <Button
                             onClick={() => {
                                 navigate(-1);
                             }}
+                            variant="back"
                         >
                             Назад
-                        </button>
+                        </Button>
                     </SubstationItemBottom>
                 </SubstationItemWrapper>
             </SubstationItemContainer>

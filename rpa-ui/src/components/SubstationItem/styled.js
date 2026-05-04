@@ -152,6 +152,10 @@ export const SubstationItemBottom = styled.div`
     align-items: center;
     width: 100%;
 
+    & button {
+        width: fit-content;
+    }
+
     & hr {
         background-color: var(--color-link-hover);
         width: 100%;
