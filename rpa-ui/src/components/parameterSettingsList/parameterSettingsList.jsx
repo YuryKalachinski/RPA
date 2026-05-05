@@ -19,7 +19,12 @@ const ParameterSettingsList = ({ psl }) => {
                         <tbody>
                             {psl.map((setting) => (
                                 <tr key={setting.id}>
-                                    <td>{setting.key}</td>
+                                    <td>
+                                        {setting.key}{" "}
+                                        {setting.unit
+                                            ? `, ${setting.unit}`
+                                            : ""}
+                                    </td>
                                     <td>{setting.value}</td>
                                 </tr>
                             ))}

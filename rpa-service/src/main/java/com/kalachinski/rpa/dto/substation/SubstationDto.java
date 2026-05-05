@@ -33,7 +33,4 @@ public class SubstationDto {
     private Set<BayDto> bays;
 
     private Boolean isDeleted;
-
-//    @Schema(description = "Bays of the substation")
-//    private Set<CrapDto> craps;
 }

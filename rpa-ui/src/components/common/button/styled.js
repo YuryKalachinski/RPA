@@ -6,7 +6,7 @@ export const StyledButton = styled.button`
             case "delete":
                 return "var(--color-alarm)";
             case "back":
-                return "var(--color-secondary)";
+                return "var(--color-stroke)";
             case "close":
                 return "var(--color-stroke)";
             default:

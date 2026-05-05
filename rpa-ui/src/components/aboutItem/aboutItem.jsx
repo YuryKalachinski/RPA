@@ -4,12 +4,13 @@ const AboutItem = () => {
     return (
         <AboutContainer>
             <p>Лист задач:</p>
-            <p>-кнопка как отдельный компонент</p>
-            <p>-кнопка "назад"</p>
+            <p className="strikethrough">-кнопка как отдельный компонент</p>
+            <p className="strikethrough">-кнопка "назад"</p>
             <p>-паспорта на устройства РЗА</p>
             <p>-наполнение БД</p>
             <p className="strikethrough">-mode режим для admin/viewer</p>
             <p>-шаблоны устройств РЗА</p>
+            <p>-приоритет защит/параметров</p>
             <p>-фильтрация по филиалам</p>
         </AboutContainer>
     );

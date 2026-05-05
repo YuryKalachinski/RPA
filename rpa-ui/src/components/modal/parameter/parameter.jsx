@@ -26,8 +26,7 @@ const Parameter = ({
         });
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = () => {
         addUpdateParameter([...pathArray, index], current);
         onClose();
     };
@@ -47,6 +46,12 @@ const Parameter = ({
                         label="Параметер"
                         name="key"
                         value={current.key}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        label="Единица измерения"
+                        name="unit"
+                        value={current.unit}
                         onChange={handleChange}
                     />
                     <TextField

@@ -20,7 +20,12 @@ const ParameterList = ({ psl, pathArray, openModal }) => {
                         <tbody>
                             {psl.map((parameter, paramIndx) => (
                                 <tr key={paramIndx}>
-                                    <td>{parameter.key}</td>
+                                    <td>
+                                        {parameter.key}{" "}
+                                        {parameter.unit
+                                            ? `, ${parameter.unit}`
+                                            : ""}
+                                    </td>
                                     <td>
                                         {parameter.value}
                                         <img

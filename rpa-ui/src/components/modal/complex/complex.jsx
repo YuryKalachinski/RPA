@@ -46,10 +46,10 @@ const Complex = ({ complex, onClose }) => {
     };
 
     const sortedProtections = useMemo(() => {
-        return [...complex.protections].sort((a, b) =>
+        return [...current.protections].sort((a, b) =>
             a.name.localeCompare(b.name),
         );
-    }, [complex]);
+    }, [current]);
 
     const handleChange = (path, value) => {
         setCurrent((draft) => {
@@ -57,12 +57,12 @@ const Complex = ({ complex, onClose }) => {
         });
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         addUpdateComplex(isNewComplex ? current : getChangedValues());
         onClose();
     };
 
-    const closeForm = async () => {
+    const closeForm = () => {
         onClose();
     };
 

@@ -26,8 +26,8 @@ const Protection = ({
         });
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = () => {
+        // event.preventDefault();
         addUpdateFolder([...pathArray, index], current);
         onClose();
     };
