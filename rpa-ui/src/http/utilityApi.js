@@ -7,3 +7,11 @@ export const getAllVoltageLevels = async () => {
 export const getAllBranches = async () => {
     return await http.get("/utility/branch");
 };
+
+export const getProtDictionary = async () => {
+    return await http.get("/dictionary/protection");
+};
+
+export const getParamDictionary = async () => {
+    return await http.get("/dictionary/parameter");
+};

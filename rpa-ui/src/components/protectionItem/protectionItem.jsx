@@ -10,13 +10,19 @@ import {
 import { MinusLogo, PlusLogo } from "../common/images/";
 import { ParameterSettingsList } from "../parameterSettingsList";
 import { Tooltip } from "../common/styledTooltip/styledTooltip";
+import { useUtility } from "../../context/utilityProvider";
+import { sortFromDictionary } from "../../utils/methods";
 
 const ProtectionItem = ({ prot }) => {
     const [visible, setVisible] = useState(false);
+    const { protectionDictionary } = useUtility();
 
     const sortedChildren = useMemo(() => {
-        return [...prot.children].sort((a, b) => a.name.localeCompare(b.name));
-    }, [prot]);
+        if (!prot?.children) return [];
+        return [...prot?.children].sort((a, b) => {
+            return sortFromDictionary(a.name, b.name, protectionDictionary);
+        });
+    }, [prot?.children, protectionDictionary]);
 
     const changeComplexForm = () => {
         setVisible((prevState) => !prevState);

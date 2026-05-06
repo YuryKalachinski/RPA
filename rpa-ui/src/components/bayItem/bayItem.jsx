@@ -31,8 +31,10 @@ const BayItem = () => {
     const navigate = useNavigate();
 
     const sortedComplexes = useMemo(() => {
-        return [...bay.complexes].sort((a, b) => a.name.localeCompare(b.name));
-    }, [bay]);
+        return [...bay?.complexes].sort((a, b) =>
+            a.name.localeCompare(b.name, undefined, { numeric: true }),
+        );
+    }, [bay?.complexes]);
 
     const editComplex = (complex) => {
         setSelectedComplex(complex);

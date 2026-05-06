@@ -21,6 +21,8 @@ import {
 import ProtectionItem from "./protectionItem";
 import { Tooltip } from "../../common/styledTooltip";
 import { Button } from "../../common/button";
+import { sortFromDictionary } from "../../../utils/methods";
+import { useUtility } from "../../../context/utilityProvider";
 
 const Complex = ({ complex, onClose }) => {
     const [current, setCurrent] = useImmer(complex);
@@ -44,12 +46,14 @@ const Complex = ({ complex, onClose }) => {
         parameterSettings: [],
         isDeleted: false,
     };
+    const { protectionDictionary } = useUtility();
 
     const sortedProtections = useMemo(() => {
-        return [...current.protections].sort((a, b) =>
-            a.name.localeCompare(b.name),
-        );
-    }, [current]);
+        if (!current?.protections) return [];
+        return [...current?.protections].sort((a, b) => {
+            return sortFromDictionary(a.name, b.name, protectionDictionary);
+        });
+    }, [current, protectionDictionary]);
 
     const handleChange = (path, value) => {
         setCurrent((draft) => {
@@ -152,7 +156,7 @@ const Complex = ({ complex, onClose }) => {
                                             alt={
                                                 visible
                                                     ? "Collapse group"
-                                                    : "Expland group"
+                                                    : "Expand group"
                                             }
                                         />
                                         <p>Уставки</p>
@@ -185,7 +189,9 @@ const Complex = ({ complex, onClose }) => {
                                     <ProtectionItem
                                         key={protIndx}
                                         protection={prot}
-                                        index={protIndx}
+                                        index={current.protections.indexOf(
+                                            prot,
+                                        )}
                                         pathArray={["protections"]}
                                         openModal={openModal}
                                     />

@@ -17,6 +17,8 @@ import {
 } from "../../common/images/";
 import ParameterList from "./parameterList";
 import { Tooltip } from "../../common/styledTooltip/styledTooltip";
+import { sortFromDictionary } from "../../../utils/methods";
+import { useUtility } from "../../../context/utilityProvider";
 
 const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
     const [visible, setVisible] = useState(false);
@@ -48,12 +50,14 @@ const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
         },
         isDeleted: false,
     };
+    const { protectionDictionary } = useUtility();
 
     const sortedChildren = useMemo(() => {
-        return [...protection.children].sort((a, b) =>
-            a.name.localeCompare(b.name),
-        );
-    }, [protection]);
+        if (!protection?.children) return [];
+        return [...protection?.children].sort((a, b) => {
+            return sortFromDictionary(a.name, b.name, protectionDictionary);
+        });
+    }, [protection, protectionDictionary]);
 
     const changeComplexForm = () => {
         setVisible((prevState) => !prevState);
@@ -65,7 +69,7 @@ const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
                 <ProtectionItemBody $visible={visible}>
                     <SettingsRow>
                         <SettingsButton onClick={changeComplexForm}>
-                            <Tooltip content={protection.description}>
+                            <Tooltip content={protection?.description}>
                                 <div>
                                     <img
                                         src={visible ? MinusLogo : PlusLogo}
@@ -154,9 +158,9 @@ const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
                             )}
                             {sortedChildren.map((el, elIndx) => (
                                 <ProtectionItem
-                                    key={el.id + el.name}
+                                    key={elIndx}
                                     protection={el}
-                                    index={elIndx}
+                                    index={protection.children.indexOf(el)}
                                     pathArray={[
                                         ...pathArray,
                                         index,

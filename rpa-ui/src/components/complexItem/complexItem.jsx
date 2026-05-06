@@ -13,16 +13,20 @@ import { ProtectionItem } from "../protectionItem";
 import { Tooltip } from "../common/styledTooltip/styledTooltip";
 import { useAuth } from "../../context/authProvider";
 import { ROLE_ADMIN } from "../../utils/constants";
+import { useUtility } from "../../context/utilityProvider";
+import { sortFromDictionary } from "../../utils/methods";
 
 const ComplexItem = ({ complex, editComplex }) => {
     const [visible, setVisible] = useState(false);
     const { permission } = useAuth();
+    const { protectionDictionary } = useUtility();
 
     const sortedProtections = useMemo(() => {
-        return [...complex.protections].sort((a, b) =>
-            a.name.localeCompare(b.name),
-        );
-    }, [complex]);
+        if (!complex?.protections) return [];
+        return [...complex?.protections].sort((a, b) => {
+            return sortFromDictionary(a.name, b.name, protectionDictionary);
+        });
+    }, [complex?.protections, protectionDictionary]);
 
     const changeComplexForm = () => {
         setVisible((prevState) => !prevState);
@@ -58,7 +62,7 @@ const ComplexItem = ({ complex, editComplex }) => {
                                     alt={
                                         visible
                                             ? "Collapse group"
-                                            : "Expland group"
+                                            : "Expand group"
                                     }
                                 />
                                 <p>Уставки</p>
@@ -67,7 +71,7 @@ const ComplexItem = ({ complex, editComplex }) => {
                     </SettingsButton>
                     {visible && (
                         <>
-                            {sortedProtections?.map((prot, protIndx) => (
+                            {sortedProtections.map((prot, protIndx) => (
                                 <ProtectionItem key={protIndx} prot={prot} />
                             ))}
                         </>

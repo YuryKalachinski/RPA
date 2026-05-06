@@ -30,15 +30,15 @@ const SubstationList = () => {
     const [filter, setFilter] = useState({ query: "" });
     const navigate = useNavigate();
 
-    const searchedSub = useMemo(() => {
-        return subs.filter((s) =>
-            s.name.toLowerCase().includes(filter.query.toLowerCase()),
+    const sortedSearchedSub = useMemo(() => {
+        const query = filter.query.toLowerCase();
+        const filtered = subs.filter((s) =>
+            s.name.toLowerCase().includes(query),
+        );
+        return filtered.sort((a, b) =>
+            a.name.localeCompare(b.name, undefined, { numeric: true }),
         );
     }, [filter.query, subs]);
-
-    const sortedSearchedSub = useMemo(() => {
-        return [...searchedSub].sort((a, b) => a.name.localeCompare(b.name));
-    }, [searchedSub]);
 
     const navigateToSubstation = (substation) => {
         const path = generatePath(SUBSTATION_ROUTE, {
