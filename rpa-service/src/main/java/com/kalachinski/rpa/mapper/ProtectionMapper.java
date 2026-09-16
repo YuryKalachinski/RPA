@@ -57,10 +57,8 @@ public interface ProtectionMapper {
     @AfterMapping
     default void linkProtectionsAndChildren(@MappingTarget Protection protection) {
         if (protection.getParameterSettings() != null) {
-            protection.getParameterSettings().forEach(protection::addParameterSetting);
-        }
-        if (protection.getChildren() != null) {
-            protection.getChildren().forEach(protection::addChild);
+            protection.getParameterSettings()
+                    .forEach(parameterSetting -> parameterSetting.setProtection(protection));
         }
     }
 

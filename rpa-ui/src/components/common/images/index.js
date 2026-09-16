@@ -10,3 +10,4 @@ export { default as EditLogo } from "./edit.svg";
 export { default as DeleteLogo } from "./delete.svg";
 export { default as FolderPlusLogo } from "./folder-plus.svg";
 export { default as DocumentPlusLogo } from "./document-plus.svg";
+export { default as TemplateLogo } from "./template.svg";

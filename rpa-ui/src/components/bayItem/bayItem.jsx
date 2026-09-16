@@ -18,7 +18,7 @@ import { useAuth } from "../../context/authProvider";
 import { Button } from "../common/button";
 
 const BayItem = () => {
-    const { bay } = useBay();
+    const { bay, addUpdateComplex } = useBay();
     const { permission } = useAuth();
     const emptyComplex = {
         name: "",
@@ -86,6 +86,7 @@ const BayItem = () => {
                 <ComplexModal
                     onClose={() => setModalOpen(false)}
                     complex={selectedComplex}
+                    addUpdateComplex={addUpdateComplex}
                 />
             )}
         </>

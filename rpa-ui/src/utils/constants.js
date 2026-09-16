@@ -1,5 +1,5 @@
 export const USERS_ROUTE = "/users";
-export const ABOUT_ROUTE = "/about";
+export const TEMPLATES_ROUTE = "/templates";
 export const LOGIN_ROUTE = "/login";
 export const MAIN_ROUTE = "/main";
 export const SUBSTATIONS_ROUTE = "/substations";

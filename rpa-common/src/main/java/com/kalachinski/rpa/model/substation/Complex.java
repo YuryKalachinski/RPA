@@ -42,11 +42,6 @@ public class Complex extends BaseEntity {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    public void addProtection(Protection protection) {
-//        protections.add(protection);
-        protection.setComplex(this);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

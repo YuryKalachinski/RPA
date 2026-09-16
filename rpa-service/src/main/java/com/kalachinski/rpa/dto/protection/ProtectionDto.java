@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.dto.protection;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kalachinski.rpa.dto.ParameterSettingDto;
 import com.kalachinski.rpa.dto.complex.ComplexSimpleDto;
 import com.kalachinski.rpa.model.substation.ProtAction;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 public class ProtectionDto {
 

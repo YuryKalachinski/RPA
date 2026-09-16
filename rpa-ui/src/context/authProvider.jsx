@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import localStorageServive from "../utils/localStorageService";
-import userApi from "../http/userAPI";
+import userApi from "../http/userApi";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_ROUTE } from "../utils/constants";
 import { isExpired } from "../utils/methods";

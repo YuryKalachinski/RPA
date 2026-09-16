@@ -1,11 +1,23 @@
+import { useMemo } from "react";
+import { useUtility } from "../../../context/utilityProvider";
 import { EditLogo } from "../../common/images";
 import {
     ParameterListBody,
     ParameterListConteiner,
     ParameterListWrapper,
 } from "./styled";
+import { sortFromDictionary } from "../../../utils/methods";
 
 const ParameterList = ({ psl, pathArray, openModal }) => {
+    const { parameterDictionary } = useUtility();
+
+    const sortedList = useMemo(() => {
+        if (!psl) return [];
+        return [...psl].sort((a, b) => {
+            return sortFromDictionary(a.key, b.key, parameterDictionary);
+        });
+    }, [psl, parameterDictionary]);
+
     return (
         <ParameterListConteiner>
             <ParameterListWrapper>
@@ -18,7 +30,7 @@ const ParameterList = ({ psl, pathArray, openModal }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {psl.map((parameter, paramIndx) => (
+                            {sortedList.map((parameter, paramIndx) => (
                                 <tr key={paramIndx}>
                                     <td>
                                         {parameter.key}{" "}
@@ -29,14 +41,14 @@ const ParameterList = ({ psl, pathArray, openModal }) => {
                                     <td>
                                         {parameter.value}
                                         <img
-                                            key={parameter.id + parameter.key}
+                                            key={paramIndx}
                                             src={EditLogo}
                                             alt="Edit parameter setting"
                                             onClick={() =>
                                                 openModal(
                                                     parameter,
                                                     pathArray,
-                                                    paramIndx,
+                                                    psl.indexOf(parameter),
                                                     "param",
                                                 )
                                             }

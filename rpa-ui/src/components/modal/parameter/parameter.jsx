@@ -10,15 +10,9 @@ import {
 import { TextAreaField, TextField } from "../../form";
 import { Button } from "../../common/button";
 
-const Parameter = ({
-    parameter,
-    onClose,
-    addUpdateParameter,
-    pathArray,
-    index,
-}) => {
-    const isNewParameter = parameter.id ? false : true;
-    const [current, setCurrent] = useImmer(parameter);
+const Parameter = ({ unit, onClose, addUpdateUnit, pathArray, index }) => {
+    const isNewParameter = unit.id ? false : true;
+    const [current, setCurrent] = useImmer(unit);
 
     const handleChange = (path, value) => {
         setCurrent((draft) => {
@@ -27,7 +21,7 @@ const Parameter = ({
     };
 
     const handleSubmit = () => {
-        addUpdateParameter([...pathArray, index], current);
+        addUpdateUnit([...pathArray, index], current);
         onClose();
     };
 

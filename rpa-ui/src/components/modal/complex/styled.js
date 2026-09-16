@@ -117,7 +117,8 @@ export const SettingsEdit = styled.div`
     justify-content: space-between;
 
     & img {
-        width: 24px;
+        margin-right: 8px;
+        width: 28px;
         cursor: pointer;
 
         &:hover {

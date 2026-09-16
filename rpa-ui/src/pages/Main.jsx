@@ -1,14 +1,7 @@
-import { useAuth } from "../context/authProvider";
+import AboutItem from "../components/aboutItem/aboutItem";
 
 const Main = () => {
-    const { currentUser } = useAuth();
-
-    return (
-        <div>
-            <div>Main page</div>
-            <div>{currentUser.firstName} entered the system!!!</div>
-        </div>
-    );
+    return <AboutItem />;
 };
 
 export default Main;

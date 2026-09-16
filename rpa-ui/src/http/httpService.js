@@ -2,7 +2,7 @@ import axios from "axios";
 import { TOKEN } from "../utils/constants";
 import localStorageService from "../utils/localStorageService";
 import { isExpired } from "../utils/methods";
-import userApi from "./userAPI";
+import userApi from "./userApi";
 
 export const http = axios.create({
     baseURL: process.env.REACT_APP_API_URL,

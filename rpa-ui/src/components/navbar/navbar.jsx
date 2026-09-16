@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authProvider";
 import {
-    ABOUT_ROUTE,
+    TEMPLATES_ROUTE,
     USERS_ROUTE,
     MAIN_ROUTE,
     SUBSTATIONS_ROUTE,
@@ -37,8 +37,8 @@ const Navbar = () => {
                         <button onClick={() => navigate(USERS_ROUTE)}>
                             Пользователи
                         </button>
-                        <button onClick={() => navigate(ABOUT_ROUTE)}>
-                            О программе
+                        <button onClick={() => navigate(TEMPLATES_ROUTE)}>
+                            Шаблоны защит
                         </button>
                     </NavbarMenu>
 

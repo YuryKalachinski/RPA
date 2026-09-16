@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./routers/appRouter";
 import { Navbar } from "./components/navbar";
-import { AuthProvider } from "./context";
+import { AuthProvider, TemplateProvider } from "./context";
 import UtilityProvider from "./context/utilityProvider";
 
 function App() {
@@ -9,8 +9,10 @@ function App() {
         <BrowserRouter>
             <AuthProvider>
                 <UtilityProvider>
-                    <Navbar />
-                    <AppRouter />
+                    <TemplateProvider>
+                        <Navbar />
+                        <AppRouter />
+                    </TemplateProvider>
                 </UtilityProvider>
             </AuthProvider>
         </BrowserRouter>

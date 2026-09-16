@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.dto.user;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kalachinski.rpa.model.user.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 public class UserDto {
 

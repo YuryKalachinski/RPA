@@ -39,7 +39,7 @@ public class SubstationController {
 
     private final SubstationService service;
 
-    @GetMapping(produces = APPLICATION_JSON_VALUE)
+    @GetMapping(produces = APPLICATION_JSON_VALUE, value = "/")
     @Operation(summary = "Get all available substations",
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200",

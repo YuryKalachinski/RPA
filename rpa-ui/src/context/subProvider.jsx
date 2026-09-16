@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getSubstationById } from "../http/substationAPI";
+import { getSubstationById } from "../http/substationApi";
 import { addBay } from "../http/bayApi";
 import { useParams } from "react-router-dom";
-import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
+import { LoadingAnimation } from "../components/loadingAnimation";
 
 const SubContext = createContext();
 

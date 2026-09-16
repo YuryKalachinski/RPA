@@ -35,8 +35,10 @@ const SubstationItem = () => {
     const navigate = useNavigate();
 
     const sortedBays = useMemo(() => {
-        return [...sub.bays].sort((a, b) => a.name.localeCompare(b.name));
-    }, [sub]);
+        return [...sub.bays].sort((a, b) =>
+            a.name.localeCompare(b.name, undefined, { numeric: true }),
+        );
+    }, [sub?.bays]);
 
     const navigateToBay = (bay) => {
         const path = generatePath(BAY_ROUTE, {

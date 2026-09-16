@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.dto.complex;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kalachinski.rpa.dto.bay.BaySimpleDto;
 import com.kalachinski.rpa.dto.protection.ProtectionDto;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 public class ComplexDto {
 

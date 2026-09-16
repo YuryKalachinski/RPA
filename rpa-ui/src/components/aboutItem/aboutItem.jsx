@@ -1,17 +1,20 @@
-import { AboutContainer } from "./styled";
+import { AboutContainer, Resolved } from "./styled";
 
 const AboutItem = () => {
     return (
         <AboutContainer>
             <p>Лист задач:</p>
-            <p className="strikethrough">-кнопка как отдельный компонент</p>
-            <p className="strikethrough">-кнопка "назад"</p>
+            <hr />
+            <p>-заполнение Postman</p>
+            <p>-заменить class на record</p>
             <p>-паспорта на устройства РЗА</p>
             <p>-наполнение БД</p>
-            <p className="strikethrough">-mode режим для admin/viewer</p>
             <p>-шаблоны устройств РЗА</p>
-            <p>-приоритет защит/параметров</p>
             <p>-фильтрация по филиалам</p>
+            <Resolved>-кнопка как отдельный компонент</Resolved>
+            <Resolved>-кнопка "назад"</Resolved>
+            <Resolved>-mode режим для admin/viewer</Resolved>
+            <Resolved>-приоритет защит/параметров</Resolved>
         </AboutContainer>
     );
 };

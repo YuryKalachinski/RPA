@@ -64,16 +64,6 @@ public class Protection extends BaseEntity {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    public void addChild(Protection child) {
-//        children.add(child);
-        child.setParent(this);
-    }
-
-    public void addParameterSetting(ParameterSetting parameterSetting) {
-//        parameterSettings.add(parameterSetting);
-        parameterSetting.setProtection(this);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

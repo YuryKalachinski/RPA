@@ -57,7 +57,7 @@ const ProtectionItem = ({ protection, index, pathArray, openModal }) => {
         return [...protection?.children].sort((a, b) => {
             return sortFromDictionary(a.name, b.name, protectionDictionary);
         });
-    }, [protection, protectionDictionary]);
+    }, [protection?.children, protectionDictionary]);
 
     const changeComplexForm = () => {
         setVisible((prevState) => !prevState);

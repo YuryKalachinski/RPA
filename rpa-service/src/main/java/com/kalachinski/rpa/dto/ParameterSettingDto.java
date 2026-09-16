@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kalachinski.rpa.dto.protection.ProtectionSimpleDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 public class ParameterSettingDto {
 

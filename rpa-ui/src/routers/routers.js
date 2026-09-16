@@ -1,5 +1,5 @@
 import {
-    About,
+    Templates,
     Bay,
     Login,
     Main,
@@ -8,7 +8,7 @@ import {
     Users,
 } from "../pages";
 import {
-    ABOUT_ROUTE,
+    TEMPLATES_ROUTE,
     LOGIN_ROUTE,
     USERS_ROUTE,
     MAIN_ROUTE,
@@ -18,7 +18,7 @@ import {
 } from "../utils/constants";
 
 export const privateRoutes = [
-    { path: ABOUT_ROUTE, Component: About },
+    { path: TEMPLATES_ROUTE, Component: Templates },
     { path: USERS_ROUTE, Component: Users },
     { path: MAIN_ROUTE, Component: Main },
     { path: SUBSTATIONS_ROUTE, Component: Substations },

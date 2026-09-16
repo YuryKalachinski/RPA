@@ -1,5 +1,6 @@
 package com.kalachinski.rpa.dto.substation;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kalachinski.rpa.dto.bay.BayDto;
 import com.kalachinski.rpa.model.substation.Branch;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,10 +11,11 @@ import lombok.Setter;
 
 import java.util.Set;
 
-@NoArgsConstructor
+@Schema(description = "Substation DTO layer")
 @Getter
 @Setter
-@Schema(description = "Substation DTO layer")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 public class SubstationDto {
 
     @Schema(description = "Substation identifier")

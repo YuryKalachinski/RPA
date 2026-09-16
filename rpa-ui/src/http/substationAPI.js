@@ -1,7 +1,7 @@
 import { http } from "./httpService";
 
 export const getAllSubstations = async () => {
-    return await http.get("/substation");
+    return await http.get("/substation/");
 };
 
 export const getSubstationById = async (id) => {

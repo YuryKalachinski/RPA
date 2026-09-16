@@ -10,15 +10,9 @@ import {
 import { TextField } from "../../form";
 import { Button } from "../../common/button";
 
-const Protection = ({
-    protection,
-    onClose,
-    addUpdateFolder,
-    pathArray,
-    index,
-}) => {
-    const isNewProtection = protection.id ? false : true;
-    const [current, setCurrent] = useImmer(protection);
+const Protection = ({ unit, onClose, addUpdateUnit, pathArray, index }) => {
+    const isNewProtection = unit.id ? false : true;
+    const [current, setCurrent] = useImmer(unit);
 
     const handleChange = (path, value) => {
         setCurrent((draft) => {
@@ -27,8 +21,7 @@ const Protection = ({
     };
 
     const handleSubmit = () => {
-        // event.preventDefault();
-        addUpdateFolder([...pathArray, index], current);
+        addUpdateUnit([...pathArray, index], current);
         onClose();
     };
 

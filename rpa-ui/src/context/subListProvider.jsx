@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAllSubstations, addSubstation } from "../http/substationAPI";
-import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
+import { getAllSubstations, addSubstation } from "../http/substationApi";
+import { LoadingAnimation } from "../components/loadingAnimation";
 
 const SubListContext = createContext();
 

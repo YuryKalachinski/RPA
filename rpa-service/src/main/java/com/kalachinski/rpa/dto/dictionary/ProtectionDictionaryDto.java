@@ -1,15 +1,17 @@
 package com.kalachinski.rpa.dto.dictionary;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
+@Schema(description = "Protection dictionary DTO layer")
 @Getter
 @Setter
-@Schema(description = "Protection dictionary DTO layer")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 public class ProtectionDictionaryDto {
 
     @Schema(description = "Protection identifier")

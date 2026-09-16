@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import LoadingAnimation from "../components/loadingAnimation/loadingAnimation";
+import { LoadingAnimation } from "../components/loadingAnimation";
 import { useParams } from "react-router-dom";
 import { addComplex } from "../http/complexApi";
 import { getBayById } from "../http/bayApi";

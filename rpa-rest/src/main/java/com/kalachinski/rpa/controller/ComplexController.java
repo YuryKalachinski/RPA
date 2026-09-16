@@ -24,8 +24,7 @@ public class ComplexController {
     public ResponseEntity<ComplexDto> saveOrUpdate(
             @RequestBody ComplexDto complexDto
     ) {
-        ComplexDto complexDto1 = service.saveOrUpdate(complexDto);
-        return ResponseEntity.ok().body(complexDto1);
+        return ResponseEntity.ok().body(service.saveOrUpdate(complexDto));
     }
 }
 

@@ -11,12 +11,17 @@ import {
     SettingsRow,
 } from "./styled";
 import { TextAreaField, TextField } from "../../form";
-import { useBay } from "../../../context/bayProvider";
 import { isEmpty, isEqual, isObject, set, transform } from "lodash";
-import { FolderPlusLogo, MinusLogo, PlusLogo } from "../../common/images/";
+import {
+    FolderPlusLogo,
+    MinusLogo,
+    PlusLogo,
+    TemplateLogo,
+} from "../../common/images/";
 import {
     Protection as ProtectionModal,
     Parameter as ParameterModal,
+    Template as TemplateModal,
 } from "../";
 import ProtectionItem from "./protectionItem";
 import { Tooltip } from "../../common/styledTooltip";
@@ -24,14 +29,13 @@ import { Button } from "../../common/button";
 import { sortFromDictionary } from "../../../utils/methods";
 import { useUtility } from "../../../context/utilityProvider";
 
-const Complex = ({ complex, onClose }) => {
+const Complex = ({ complex, onClose, addUpdateComplex }) => {
     const [current, setCurrent] = useImmer(complex);
     const isNewComplex = current.id ? false : true;
     const [visible, setVisible] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
     const [pathArray, setPathArray] = useState([]);
     const [index, setIndex] = useState();
-    const { addUpdateComplex } = useBay();
     const [selectedObject, setSelectedObject] = useState();
     const [typeModal, setTypeModal] = useState("");
     const emptyProtection = {
@@ -53,7 +57,7 @@ const Complex = ({ complex, onClose }) => {
         return [...current?.protections].sort((a, b) => {
             return sortFromDictionary(a.name, b.name, protectionDictionary);
         });
-    }, [current, protectionDictionary]);
+    }, [current?.protections, protectionDictionary]);
 
     const handleChange = (path, value) => {
         setCurrent((draft) => {
@@ -111,10 +115,38 @@ const Complex = ({ complex, onClose }) => {
 
     const openModal = (prot, array, ind, type) => {
         setSelectedObject(prot);
-        setModalOpen(true);
         setPathArray(array);
         setIndex(ind);
         setTypeModal(type);
+        setModalOpen(true);
+    };
+
+    const renderModal = () => {
+        const commonProps = {
+            onClose: () => setModalOpen(false),
+            pathArray: pathArray,
+            index: index,
+            unit: selectedObject,
+            addUpdateUnit: handleChange,
+        };
+
+        switch (typeModal) {
+            case "prot":
+                return <ProtectionModal {...commonProps} />;
+            case "param":
+                return <ParameterModal {...commonProps} />;
+            case "template":
+                return (
+                    // <TemplateModal
+                    //     onClose={() => setModalOpen(false)}
+                    //     unit={current}
+                    //     setUnit={setCurrent}
+                    // />
+                    <TemplateModal {...commonProps} />
+                );
+            default:
+                setModalOpen(false);
+        }
     };
 
     return (
@@ -165,21 +197,38 @@ const Complex = ({ complex, onClose }) => {
                             </SettingsButton>
                             <SettingsEdit>
                                 {visible && (
-                                    <Tooltip content="Добавить защиту">
-                                        <img
-                                            className="folderlogo"
-                                            src={FolderPlusLogo}
-                                            alt="Add root protection folder"
-                                            onClick={() =>
-                                                openModal(
-                                                    emptyProtection,
-                                                    ["protections"],
-                                                    current.protections.length,
-                                                    "prot",
-                                                )
-                                            }
-                                        />
-                                    </Tooltip>
+                                    <>
+                                        <Tooltip content="Добавить защиту">
+                                            <img
+                                                src={FolderPlusLogo}
+                                                alt="Add root protection folder"
+                                                onClick={() =>
+                                                    openModal(
+                                                        emptyProtection,
+                                                        ["protections"],
+                                                        current.protections
+                                                            .length,
+                                                        "prot",
+                                                    )
+                                                }
+                                            />
+                                        </Tooltip>
+                                        <Tooltip content="Вставить из шаблона">
+                                            <img
+                                                src={TemplateLogo}
+                                                alt="Add from template"
+                                                onClick={() =>
+                                                    openModal(
+                                                        emptyProtection,
+                                                        ["protections"],
+                                                        current.protections
+                                                            .length,
+                                                        "template",
+                                                    )
+                                                }
+                                            />
+                                        </Tooltip>
+                                    </>
                                 )}
                             </SettingsEdit>
                         </SettingsRow>
@@ -212,27 +261,7 @@ const Complex = ({ complex, onClose }) => {
                     </ComplexBottom>
                 </ComplexWrapper>
             </ComplexContainer>
-            {isModalOpen && (
-                <>
-                    {typeModal === "prot" ? (
-                        <ProtectionModal
-                            onClose={() => setModalOpen(false)}
-                            addUpdateFolder={handleChange}
-                            protection={selectedObject}
-                            pathArray={pathArray}
-                            index={index}
-                        />
-                    ) : (
-                        <ParameterModal
-                            onClose={() => setModalOpen(false)}
-                            addUpdateParameter={handleChange}
-                            parameter={selectedObject}
-                            pathArray={pathArray}
-                            index={index}
-                        />
-                    )}
-                </>
-            )}
+            {isModalOpen && renderModal()}
         </>
     );
 };
