@@ -32,6 +32,9 @@ public class Complex extends BaseEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "manufacturer")
+    private String manufacturer;
+
     @OneToMany(mappedBy = "complex", cascade = CascadeType.ALL)
     private Set<Protection> protections = new HashSet<>();
 

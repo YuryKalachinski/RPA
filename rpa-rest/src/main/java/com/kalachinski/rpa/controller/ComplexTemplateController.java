@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,10 +36,25 @@ public class ComplexTemplateController {
                             content = @Content(schema = @Schema(implementation = ComplexTemplateDto.class),
                                     mediaType = MediaType.APPLICATION_JSON_VALUE)),
                     @ApiResponse(description = "Unauthorized/Invalid token", responseCode = "403", content = @Content),
-                    @ApiResponse(description = "Substations not found", responseCode = "404", content = @Content)
+                    @ApiResponse(description = "Template not found", responseCode = "404", content = @Content)
             })
     @PreAuthorize("hasAuthority('VIEWER')")
     public ResponseEntity<List<ComplexTemplateDto>> getAllComplexTemplates() {
         return ResponseEntity.ok().body(service.getAll());
+    }
+
+    @PostMapping(produces = APPLICATION_JSON_VALUE, value = "/")
+    @Operation(summary = "Add a new template or update an existed template",
+            responses = {
+                    @ApiResponse(description = "Success", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = ComplexTemplateDto.class),
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE)),
+                    @ApiResponse(description = "Unauthorized/Invalid token", responseCode = "403", content = @Content),
+            })
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<ComplexTemplateDto> saveOrUpdate(
+            @RequestBody ComplexTemplateDto complexTemplateDto
+    ) {
+        return ResponseEntity.ok().body(service.saveOrUpdate(complexTemplateDto));
     }
 }

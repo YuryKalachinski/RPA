@@ -18,6 +18,7 @@ public class ComplexDto {
     private Long id;
     private String name;
     private String description;
+    private String manufacturer;
     private BaySimpleDto bay;
     private Set<ProtectionDto> protections;
     private Boolean isDeleted;

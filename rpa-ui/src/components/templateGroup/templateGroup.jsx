@@ -7,12 +7,15 @@ import {
     TemplateItem,
 } from "./styled";
 import { MinusLogo, PlusLogo } from "../common/images/";
-// import { useAuth } from "../../context/authProvider";
 import Tooltip from "../common/styledTooltip/styledTooltip";
 
-const TemplateGroup = ({ manufacturer, temps }) => {
+const TemplateGroup = ({
+    manufacturer,
+    temps,
+    selectTemplate,
+    selectedTemplate,
+}) => {
     const [visible, setVisible] = useState(false);
-    // const { permission } = useAuth();
 
     const changeGroupForm = () => {
         setVisible((prevState) => !prevState);
@@ -46,7 +49,11 @@ const TemplateGroup = ({ manufacturer, temps }) => {
                     {visible && (
                         <>
                             {temps.map((temp, itemIndx) => (
-                                <TemplateItem key={itemIndx}>
+                                <TemplateItem
+                                    key={itemIndx}
+                                    $isActive={temp === selectedTemplate}
+                                    onClick={() => selectTemplate(temp)}
+                                >
                                     {temp.name}
                                 </TemplateItem>
                             ))}

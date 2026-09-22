@@ -11,7 +11,8 @@ import { TextField } from "../../form";
 import { Button } from "../../common/button";
 
 const Protection = ({ unit, onClose, addUpdateUnit, pathArray, index }) => {
-    const isNewProtection = unit.id ? false : true;
+    // const isNewProtection = unit.id ? false : true;
+    const isNewProtection = unit.name ? false : true;
     const [current, setCurrent] = useImmer(unit);
 
     const handleChange = (path, value) => {

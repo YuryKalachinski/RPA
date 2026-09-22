@@ -23,11 +23,17 @@ export const StyledButton = styled.button`
     width: 100%;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
         opacity: 0.9;
     }
 
-    &:active {
+    &:active:not(:disabled) {
         transform: scale(0.98);
+    }
+
+    &:disabled {
+        opacity: 0.4; /* Делаем кнопку блеклой */
+        cursor: not-allowed; /* Курсор запрета (перечеркнутый круг) */
+        pointer-events: none; /* Полностью отключаем любые hover/click события JS */
     }
 `;

@@ -11,7 +11,8 @@ import { TextAreaField, TextField } from "../../form";
 import { Button } from "../../common/button";
 
 const Parameter = ({ unit, onClose, addUpdateUnit, pathArray, index }) => {
-    const isNewParameter = unit.id ? false : true;
+    // const isNewParameter = unit.id ? false : true;
+    const isNewParameter = unit.key ? false : true;
     const [current, setCurrent] = useImmer(unit);
 
     const handleChange = (path, value) => {

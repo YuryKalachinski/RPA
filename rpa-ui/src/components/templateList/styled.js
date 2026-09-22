@@ -65,6 +65,46 @@ export const NewTemplateItem = styled.div`
 `;
 
 export const TemplateListBody = styled.div`
+    width: 100%;
+    align-items: flex-start;
+    display: flex;
+`;
+
+export const TemplateListBodyItem = styled.div`
+    flex: 2;
+    display: flex;
+    align-self: center;
+`;
+
+export const TemplateComplexItem = styled.div`
+    min-width: 50%;
+    padding: 24px;
+    position: relative;
+    border-radius: 12px;
+    background-color: var(--color-bg-light);
+`;
+
+export const TemplateComplexItemClose = styled.button`
+    background: transparent;
+    color: var(--color-link-hover);
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 2%;
+    right: 0%;
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+    & img {
+        width: 20px;
+    }
+`;
+
+export const TemplateListBodyGroup = styled.div`
+    flex: 1;
     align-self: flex-start;
     margin-left: 12px;
     display: flex;

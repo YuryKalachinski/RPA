@@ -43,8 +43,30 @@ const Template = ({ unit, onClose, addUpdateUnit, pathArray }) => {
     }, [current, templateGroups]);
 
     const handleSubmit = () => {
-        addUpdateUnit([...pathArray], selectedTemplate.complex.protections);
+        if (!selectedTemplate?.complex) return;
+
+        const complex = structuredClone(selectedTemplate.complex);
+        addUpdateUnit([...pathArray], resetChildId(complex.protections));
         onClose();
+    };
+
+    const resetChildId = (children) => {
+        if (!children) return children;
+
+        for (const child of children) {
+            child.id = null;
+            if (child.complex) {
+                child.complex.id = null;
+            }
+            if (child.protection) {
+                child.protection.id = null;
+            }
+            resetChildId(child.children);
+            if (child.parameterSettings) {
+                resetChildId(child.parameterSettings);
+            }
+        }
+        return children;
     };
 
     const modelsOptions = useMemo(() => {
@@ -69,7 +91,7 @@ const Template = ({ unit, onClose, addUpdateUnit, pathArray }) => {
                         label="Производитель"
                         defaultOption="-- Выберите бренд --"
                         value={current.manufacturer}
-                        optionsArray={Object.keys(templateGroups) || []}
+                        optionsArray={Object.keys(templateGroups)}
                         onChange={handleChange}
                     />
 
@@ -89,7 +111,12 @@ const Template = ({ unit, onClose, addUpdateUnit, pathArray }) => {
                         <Button onClick={onClose} variant="close">
                             Закрыть
                         </Button>
-                        <Button onClick={handleSubmit}>Добавить</Button>
+                        <Button
+                            onClick={handleSubmit}
+                            disabled={!selectedTemplate}
+                        >
+                            Добавить
+                        </Button>
                     </TemplateButtons>
                 </TemplateBody>
             </TemplateWrapper>

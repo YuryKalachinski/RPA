@@ -7,4 +7,6 @@ import java.util.List;
 public interface ComplexTemplateService {
 
     List<ComplexTemplateDto> getAll();
+
+    ComplexTemplateDto saveOrUpdate(ComplexTemplateDto dto);
 }

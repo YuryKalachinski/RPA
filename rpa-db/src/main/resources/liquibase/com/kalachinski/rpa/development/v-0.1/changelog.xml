@@ -25,6 +25,7 @@
     <include file="2026-05-05-00_create_table_protection_dictionary.xml" relativeToChangelogFile="true"/>
     <include file="2026-05-05-01_create_table_parameter_dictionary.xml" relativeToChangelogFile="true"/>
     <include file="2026-05-07-00_create_table_complex_template.xml" relativeToChangelogFile="true"/>
+    <include file="2026-09-17-00_add_column_manufacturer_in_table_complex.xml" relativeToChangelogFile="true"/>
 
     <include file="insert_default_user.xml" relativeToChangelogFile="true"/>
     <include file="insert_default_values.xml" relativeToChangelogFile="true"/>

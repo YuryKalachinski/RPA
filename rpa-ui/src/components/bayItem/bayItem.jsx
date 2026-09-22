@@ -24,6 +24,7 @@ const BayItem = () => {
         name: "",
         description: "",
         bay: { id: bay.id, name: bay.name },
+        manufacturer: "",
         protections: [],
     };
     const [selectedComplex, setSelectedComplex] = useState(emptyComplex);

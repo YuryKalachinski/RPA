@@ -26,7 +26,6 @@ public interface ComplexMapper {
     @AfterMapping
     default void linkProtections(@MappingTarget Complex complex) {
         if (complex.getProtections() != null) {
-//            complex.getProtections().forEach(complex::addProtection);
             complex.getProtections().forEach(protection -> {
                 protection.setComplex(complex);
                 linkProtectionTree(protection, complex);
@@ -37,10 +36,8 @@ public interface ComplexMapper {
     default void linkProtectionTree(Protection current, Complex complex) {
         if (current.getChildren() != null) {
             current.getChildren().forEach(child -> {
-                child.setParent(current); // Гарантируем связь с родителем
-                child.setComplex(complex); // Передаем ссылку на Complex вглубь дерева
-
-                // Идем глубже по дереву (для бесконечной вложенности защит)
+                child.setParent(current);
+                child.setComplex(complex);
                 linkProtectionTree(child, complex);
             });
         }

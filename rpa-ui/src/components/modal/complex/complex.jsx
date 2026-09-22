@@ -31,7 +31,8 @@ import { useUtility } from "../../../context/utilityProvider";
 
 const Complex = ({ complex, onClose, addUpdateComplex }) => {
     const [current, setCurrent] = useImmer(complex);
-    const isNewComplex = current.id ? false : true;
+    // const isNewComplex = current.id ? false : true;
+    const isNewComplex = complex.name ? false : true;
     const [visible, setVisible] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
     const [pathArray, setPathArray] = useState([]);
@@ -136,14 +137,7 @@ const Complex = ({ complex, onClose, addUpdateComplex }) => {
             case "param":
                 return <ParameterModal {...commonProps} />;
             case "template":
-                return (
-                    // <TemplateModal
-                    //     onClose={() => setModalOpen(false)}
-                    //     unit={current}
-                    //     setUnit={setCurrent}
-                    // />
-                    <TemplateModal {...commonProps} />
-                );
+                return <TemplateModal {...commonProps} />;
             default:
                 setModalOpen(false);
         }
@@ -165,6 +159,12 @@ const Complex = ({ complex, onClose, addUpdateComplex }) => {
                             label="Название комплекса"
                             name="name"
                             value={current.name}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Производитель"
+                            name="manufacturer"
+                            value={current.manufacturer}
                             onChange={handleChange}
                         />
                         <TextAreaField
@@ -213,21 +213,23 @@ const Complex = ({ complex, onClose, addUpdateComplex }) => {
                                                 }
                                             />
                                         </Tooltip>
-                                        <Tooltip content="Вставить из шаблона">
-                                            <img
-                                                src={TemplateLogo}
-                                                alt="Add from template"
-                                                onClick={() =>
-                                                    openModal(
-                                                        emptyProtection,
-                                                        ["protections"],
-                                                        current.protections
-                                                            .length,
-                                                        "template",
-                                                    )
-                                                }
-                                            />
-                                        </Tooltip>
+                                        {current.protections.length === 0 && (
+                                            <Tooltip content="Вставить из шаблона">
+                                                <img
+                                                    src={TemplateLogo}
+                                                    alt="Add from template"
+                                                    onClick={() =>
+                                                        openModal(
+                                                            emptyProtection,
+                                                            ["protections"],
+                                                            current.protections
+                                                                .length,
+                                                            "template",
+                                                        )
+                                                    }
+                                                />
+                                            </Tooltip>
+                                        )}
                                     </>
                                 )}
                             </SettingsEdit>

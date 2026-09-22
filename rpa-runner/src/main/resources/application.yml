@@ -13,8 +13,8 @@ spring:
     driver-class-name: ${DATABASE_DRIVER}
   jpa:
     open-in-view: false
-    generate-ddl: true
-#    generate-ddl: false
+#    generate-ddl: true
+    generate-ddl: false
     show-sql: true
 #    show-sql: false
     hibernate:

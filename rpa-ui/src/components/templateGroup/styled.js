@@ -57,6 +57,9 @@ export const TemplateListItem = styled.button`
 export const TemplateItem = styled.button`
     margin-left: 30px;
     background: transparent;
+    background-color: ${(props) =>
+        props.$isActive ? "var(--color-bg-light)" : "transparent"};
+    border-radius: 10px;
     color: var(--color-link-hover);
     border: none;
     outline: none;
@@ -72,7 +75,6 @@ export const TemplateItem = styled.button`
 
     &:hover {
         background-color: var(--color-bg-light);
-        border-radius: 10px;
     }
 
     &:focus:not(:focus-visible) {

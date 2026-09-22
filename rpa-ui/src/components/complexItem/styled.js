@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const ComplexItemConteiner = styled.div``;
+export const ComplexItemConteiner = styled.div`
+    min-width: 25%;
+`;
 
 export const ComplexItemWrapper = styled.div`
     background: var(--color-bg-medium);
@@ -63,6 +65,7 @@ export const ComplexItemTitle = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 `;
 
 export const ComplexItemEdit = styled.button`
@@ -72,6 +75,9 @@ export const ComplexItemEdit = styled.button`
     outline: none;
     text-align: center;
     cursor: pointer;
+    position: absolute;
+    top: 30%;
+    right: 0%;
 
     &:hover {
         background-color: var(--color-bg-light);

@@ -31,6 +31,7 @@ const BayProvider = ({ children }) => {
 
     const addUpdateComplex = async (complex) => {
         try {
+            console.log(complex);
             const { data } = await addComplex(complex);
             setBay((prev) => {
                 const isExist = prev.complexes.some(
